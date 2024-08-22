@@ -1,0 +1,200 @@
+\chapter{Aug.~22 --- Topology, Basis, Continuity}
+
+\section{Topological Spaces}
+\begin{definition}
+  A \emph{topology} $\mathcal{T} \subseteq \mathcal{P}(X)$ is a
+  collection of sets such that
+  \begin{enumerate}[(i)]
+    \item $\varnothing, X \in \mathcal{T}$,
+    \item for any index set $I$, if $\{s_i\}_{i \in I} \subseteq \mathcal{T}$,
+      then $\bigcup_{i \in I} s_i \in \mathcal{T}$ (closure under arbitrary union),
+    \item and if $\{s_i\}_{i = 1}^n \subseteq \mathcal{T}$, then
+      $\bigcap_{i = 1}^n s_i \in \mathcal{T}$ (closure under finite intersection).
+  \end{enumerate}
+  A set with a topology, i.e. a pair
+  $(X, \mathcal{T})$,
+  is called a \emph{topological space}.
+  Elements of $\mathcal{T}$ are called
+  \emph{open sets}.
+\end{definition}
+
+\begin{example}
+  The following are examples of topologies on a set $X$:
+  \begin{itemize}
+    \item The trivial topology: $\mathcal{T} = \{\varnothing, X\}$.
+    \item The discrete topology: $\mathcal{T} = \mathcal{P}(X)$.\footnote{Note that the discrete topology is induced by the discrete metric.}
+    \item If $(X, d)$ is a metric space, then
+      $\mathcal{T} = \{\text{collection of metrically open sets}\}$
+      is a topology on $X$.
+  \end{itemize}
+\end{example}
+
+\begin{remark}
+  Not every topology is induced by a metric.
+  For instance consider the trivial topology
+  on $\R$.
+\end{remark}
+
+\section{Basis for a Topology}
+\begin{definition}
+  A collection $\mathcal{B} \subseteq \mathcal{P}(X)$
+  is called a \emph{basis} if
+  \begin{enumerate}[(i)]
+    \item $\bigcup_{b \in \mathcal{B}} b = X$, i.e.
+      $\mathcal{B}$ is a covering of $X$,
+    \item and if $x \in b_1 \cap b_2$ for any
+      $b_1, b_2 \in B$, then there exists $b_3 \in \mathcal{B}$
+      such that $x \in b_3$
+      and $b_3 \subseteq b_1 \cap b_2$.
+  \end{enumerate}
+\end{definition}
+
+\begin{theorem}
+  Given a set $X$ and a basis $\mathcal{B}$, define
+  \[
+    \mathcal{T}_\mathcal{B} = \left\{\bigcup_{i \in I} s_i \mid \text{$I$ is any index set and $\{s_i\}_{i \in I} \subseteq \mathcal{B}$}\right\}.
+  \]
+  Then $\mathcal{T}_\mathcal{B}$ is a topology on $X$.
+\end{theorem}
+
+\begin{proof}
+  First observe that $\varnothing, X \in \mathcal{T}_\mathcal{B}$:
+  Picking $I = \varnothing$ gives
+  $\bigcup_{i \in I} s_i = \varnothing \in \mathcal{T}_\mathcal{B}$
+  and picking $I = \mathcal{B}$ gives
+  $\bigcup_{b \in \mathcal{B}} b = X \in \mathcal{T}_\mathcal{B}$
+  by the covering property of a basis.
+
+  Now assume $\{s_i\}_{i \in I} \subseteq \mathcal{T}_\mathcal{B}$.
+  For each $i \in I$, we have $s_i \in \mathcal{T}_\mathcal{B}$
+  and so there exists an index set $J_i$
+  such that $s_i = \bigcup_{j \in J_i} b_j$, where
+  the $b_j \in \mathcal{B}$. Then
+  \[
+    \bigcup_{i \in I} s_i = \bigcup_{i \in I} \bigcup_{j \in J_i} b_j,
+  \]
+  which is a union of elements of
+  $\mathcal{B}$ and hence is in
+  $\mathcal{T}_{\mathcal{B}}$.
+
+  Finally assume $\{s_i\}_{i = 1}^n \subseteq \mathcal{T}_\mathcal{B}$.
+  Now as each $s_i \in \mathcal{T}_\mathcal{B}$,
+  there exists $J_i$ such that
+  $s_i = \bigcup_{j \in J_i} b_j$.
+  Then
+  \[
+    \bigcap_{i = 1}^n s_i = \bigcap_{i = 1}^n \bigcup_{j \in J_i} b_j.
+  \]
+  Now assume $x \in \bigcap_{i = 1}^n s_i = \bigcap_{i = 1}^n \bigcup_{j \in J_i} b_j$.
+  For each $1 \le i \le n$, there exists
+  $j_i \in J_i$ such that $x \in b_{j_i}$.
+  Hence $x \in \bigcap_{i = 1}^n b_{j_i}$.
+  Now by induction on the intersection property of a basis,
+  we can find $b_x \in \B$ with
+  \[
+    x \in b_x \subseteq \bigcap_{i = 1}^n b_{j_i}
+  \]
+  Also observe that
+  \[\bigcap_{i = 1}^n b_{j_i} \subseteq \bigcap_{i = 1}^n \bigcup_{j \in J_i} b_j
+    = \bigcap_{i = 1}^n s_i
+  \]
+  by construction,
+  so we may write
+  \[
+    \bigcap_{i = 1}^n s_i = \bigcup_{x \in \bigcap_{i = 1}^n s_i} b_x \in \mathcal{T}_\mathcal{B}
+  \]
+  as a union of elements of $\mathcal{B}$.
+\end{proof}
+
+\begin{definition}
+  A \emph{subbasis} $\mathcal{B} \subseteq \mathcal{P}(X)$ is a collection
+  of sets such that
+  $\bigcup_{b \in \mathcal{B}} b = X$.
+\end{definition}
+
+\begin{remark}
+  One may define a basis $\widetilde{\mathcal{B}}$ from a
+  subbasis $\mathcal{B}$ by adding all finite intersections
+  of elements of $\mathcal{B}$.
+  We get the covering property for free and adding
+  the finite intersections gives us the
+  intersection property of a basis.
+\end{remark}
+
+\begin{example}
+  For $\R$ with the Euclidean metric, the following
+  are bases for the standard topology:
+  \begin{itemize}
+    \item $\{B_R(x) \mid x \in \R, R > 0\}$.
+    \item $\{B_R(x) \mid x \in \R, R > 0, R \in \Q\}$.
+      For this use the fact that $\Q$ is dense in $\R$.
+  \end{itemize}
+  In particular this shows that a basis for a topology
+  is not unique in general.
+\end{example}
+
+\section{Continuous Functions}
+
+\begin{definition}
+  Let $(X, \mathcal{T}_X)$ and $(Y, \mathcal{T}_Y)$
+  be two topological spaces. A function $f : X \to Y$
+  is called \emph{continuous} if for any
+  $O \in \mathcal{T}_Y$, we have
+  $f^{-1}(O) \in \mathcal{T}_X$, i.e. the
+  preimage of an open set is open.\footnote{Recall that $f^{-1}(O) = \{x \in X \mid f(x) \in O\}$.}
+\end{definition}
+
+\begin{example}
+  Let $X$ be equipped with the trivial
+  topology $\{\varnothing, X\}$ and let
+  $\R$ be equipped with the standard topology.
+  Then the only continuous functions $f : X \to \R$
+  are the constant functions $f : x \mapsto c$
+  for fixed $c \in \R$. To see this, observe that
+  \begin{itemize}
+    \item $x \mapsto c$ is continuous since
+      any open set in $\R$ either contains $c$ or does not,
+      and so the preimage is either $X$ or $\varnothing$.
+    \item Suppose $f(x_1) = y_1$ and $f(x_2) = y_2$.
+      Let $\epsilon = |y_1 - y_2|$ and observe that
+      $x_1 \in f^{-1}(B_\epsilon(y_1))$ while
+      $x_2 \notin f^{-1}(B_\epsilon(y_1))$, so
+      $f^{-1}(B_\epsilon(y_1))$ is not open
+      in $X$ despite $B_\epsilon(y_1)$ being open in $\R$.
+  \end{itemize}
+\end{example}
+
+\begin{example}
+  Let $X$ have the discrete topology
+  $\mathcal{T} = \mathcal{P}(X)$ and let
+  $\R$ have the standard topology.
+  Then all functions $X \to \R$ are continuous
+  since any preimage is a subset of $X$ and thus
+  in $\mathcal{P}(X)$.
+\end{example}
+
+\begin{remark}
+  In a way, the trivial topology has too few
+  open sets while the discrete topology has too many.
+\end{remark}
+
+\begin{definition}
+  Two topological spaces $(X, \mathcal{T}_X)$ and
+  $(Y, \mathcal{T}_Y)$ are
+  \emph{topologically equivalent} or
+  \emph{homeomorphic} if there exists a
+  bijection $f : X \to Y$ such that
+  $f$ and $f^{-1}$ are continuous.
+\end{definition}
+
+\begin{remark}
+  A bijective function $f$ being continuous does
+  not necessarily imply that its inverse $f^{-1}$ is.
+\end{remark}
+
+\begin{example}
+  Consider $(-\pi / 2, \pi / 2)$ equipped with the
+  Euclidean metric. This is homeomorphic to $\R$
+  equipped with the Euclidean metric.\footnote{Note that $(-\pi / 2, \pi / 2)$ is bounded while $\R$ is not.} One
+  homeomorphism is given by $\tan : (-\pi / 2, \pi / 2) \to \R$.
+\end{example}

@@ -1,0 +1,140 @@
+\chapter{Aug.~20 --- Review of Metric Spaces}
+
+\section{Metric Spaces}
+Recall the definition of a \emph{metric space}:
+
+\begin{definition}
+  Given a set $X$, a function $d : X \times X \to \R$
+  is called a \emph{metric} if
+  \begin{enumerate}[(i)]
+    \item (strong positivity)
+      $d(x, y) \ge 0$ for all
+      $x, y \in X$, and $d(x, y) = 0$ if and only if
+      $x = y$,
+    \item (symmetry) $d(x, y) = d(y, x)$,
+    \item and (triangle inequality)
+      $d(x, z) \le d(x, y) + d(y, z)$
+      for all $x, y, z \in X$.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  For any set $X$, we can define the
+  \emph{discrete metric}
+  by
+  \[
+    d(x, y) =
+    \begin{cases}
+      1 & \text{if $x \ne y$}, \\
+      0 & \text{otherwise}.
+    \end{cases}
+  \]
+  Verify as an exercise that this satisfies
+  the triangle inequality.
+\end{example}
+
+\begin{example}
+  The Euclidean metric in $\R^n$ is
+  \[
+    d(\overline{x}, \overline{y})
+    = \sqrt{\sum_{i = 1}^n (x_i - y_i)^2}
+  \]
+  where $\overline{x} = (x_1, \ldots, x_n)$
+  and $\overline{y} = (y_1, \ldots, y_n)$.
+\end{example}
+
+\section{Open Sets}
+\begin{definition}
+  The \emph{open ball} of radius $R > 0$ around
+  $x_0 \in X$ is
+  \[
+    B_R(x_0) = \{y \in X \mid d(x_0, y) < R\}
+  .\]
+  Given a set $S \subseteq X$, a point $x_0$
+  is called an interior point of $S$ if there exists
+  $r > 0$ such that $B_r(x_0) \subseteq S$.
+  The set $S$ is called \emph{open} if all of its
+  points are interior points.
+\end{definition}
+
+\begin{prop}
+  The open ball $B_R(x)$ is open.
+\end{prop}
+
+\begin{proof}
+  Fix an arbitrary $y \in B_R(x)$, and observe that
+  it suffices to show that $y$ is an interior point.
+  Take $r = R - d(x, y)$, and
+  first note that $r > 0$ since
+  $d(x, y) < R$. Now note that for all $z \in B_r(y)$,
+  we have
+  \[
+    d(x, z) \le d(x, y) + d(y, z)
+    < d(x, y) + (R - d(x, y))
+    = R,
+  \]
+  so that $z \in B_R(x)$.
+  Thus $B_r(y) \subseteq B_R(x)$, and so $y$ is an interior point.
+\end{proof}
+
+\begin{corollary}
+  $B_R(x) = \bigcup_{y \in B_R(x)} B_{r_y}(y)$,
+  where $r_y = R - d(x, y)$.
+\end{corollary}
+
+\begin{proof}
+  We have $B_{r_y}(y) \subseteq B_R(x)$
+  for each $y \in B_R(x)$,\footnote{Using the argument from the previous proposition.}
+  and so
+  $\bigcup_{y \in B_R(x)} B_{r_y}(y) \subseteq B_R(x)$.
+  For the reverse inclusion simply observe that
+  $y \in B_{r_y}(y) \subseteq \bigcup_{y \in B_R(x)} B_{r_y}(y)$ for
+  each $y \in B_R(x)$.
+\end{proof}
+
+\begin{prop}
+  In a metric space $(X, d)$, the following
+  are true:
+  \begin{enumerate}[(i)]
+    \item $\varnothing, X$ are open,
+    \item if $\{S_i\}_{i \in I}$ are open, then
+      $\bigcup_{i \in I} S_i$ is open,
+    \item and if $\{S_i\}_{i = 1}^n$ are open, then
+      $\bigcap_{i = 1}^n S_i$ is open.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  $(i)$ The empty set is open vacuously.
+  To see that $X$ is open, simply take $R = 1$
+  for any $x \in X$.
+
+  $(ii)$ Fix $x \in \bigcup_{i \in I} S_i$
+  arbitrary, so there exists $i_0 \in I$ with
+  $x \in S_{i_0}$. Since $S_{i_0}$ is open,
+  $x$ is an interior point and thus there exists
+  $r > 0$ such that $B_r(x) \subseteq S_{i_0}$.
+  But then $B_r(x) \subseteq S_{i_0} \subseteq \bigcup_{i \in I} S_i$,
+  so $x$ is an interior point of
+  $\bigcup_{i \in I} S_i$ also and thus
+  $\bigcup_{i \in I} S_i$ is open.
+
+  $(iii)$ Now assume $x \in \bigcap_{i = 1}^n S_i$.
+  Then for each $1 \le i \le n$, there exists
+  $r_i > 0$ such that $B_{r_i}(x) \subseteq S_i$.
+  Then we can choose
+  \[
+    r = \min\{r_1, \ldots, r_n\} > 0,
+  \]
+  so that $B_r(x) \subseteq B_{r_i}(x) \subseteq S_i$
+  for each $1 \le i \le n$. Thus
+  $B_r(x) \subseteq \bigcap_{i = 1}^n S_i$
+  and $\bigcap_{i = 1}^n S_i$ is open.
+\end{proof}
+
+\begin{remark}
+  The above argument for the finite intersection
+  property requires that there are only finitely
+  many $r_i$. Otherwise it may very well be that
+  $r = \inf\{r_i\} = 0$ and the argument fails.
+\end{remark}
