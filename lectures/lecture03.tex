@@ -1,0 +1,302 @@
+\chapter{Aug.~27 --- Closed Sets, Continuity, the Subspace Topology}
+
+\section{Closed Sets}
+\begin{definition}
+  A set $S \subseteq X$ is called a \emph{closed set}
+  if $S^c = X \setminus S$ is open.
+\end{definition}
+
+\begin{example}
+  In $\R$, observe that
+  $[a, b]^c = (-\infty, a) \cup (b, \infty)$,
+  which is a union of open sets and thus open.
+  Thus the closed intervals $[a, b] \subseteq \R$ are closed.
+\end{example}
+
+\begin{remark}
+  This is not a dichotomy. Sets can be
+  both open and closed (\emph{clopen}), or even neither.
+  Trivially, if $X$ is any topological space,
+  then $\varnothing$ and $X$ are both open and closed.
+\end{remark}
+
+\begin{example}
+  Let $X = \{0, 1\}$ and $\mathcal{T} = \mathcal{P}(X)$.
+  Then $\{0\}$ is both open and closed.
+\end{example}
+
+\begin{example}
+  Let $X = \{1, 2, 3\}$ and
+  $\mathcal{T} = \{\varnothing, X, \{1\}, \{1, 2\}\}$.
+  Then $\{2\}$ is neither open nor closed.
+\end{example}
+
+Recall the following De Morgan's laws from set theory:
+\begin{prop}[De Morgan's laws]
+  Let $I$ be an index set and $\{A_i\}_{i \in I}$
+  be sets. Then
+  \[\left( \bigcup_{i \in I} A_i \right)^c = \bigcap_{i \in I} A_i^c
+    \quad \text{and} \quad
+    \left( \bigcap_{i \in I} A_i \right)^c = \bigcup_{i \in I} A_i^c.
+  \]
+\end{prop}
+
+\begin{corollary}
+  In a topological space $(X, \mathcal{T})$, we have:
+  \begin{enumerate}[(i)]
+    \item $\varnothing, X$ are closed.
+    \item if $\{A_i\}_{i \in I}$ are closed,
+      then $\bigcap_{i \in I} A_i$ is closed,
+    \item and if $\{A_i\}_{i = 1}^n$ are closed,
+      then so is $\bigcup_{i = 1}^n A_i$.
+  \end{enumerate}
+  This gives a dual characterization of a topology.
+\end{corollary}
+
+\begin{proof}
+  $(i)$ We have $\varnothing^c = X \in \mathcal{T}$
+  and $X^c = \varnothing \in \mathcal{T}$.
+
+  $(ii)$ Note that
+  \[
+    \left( \bigcap_{i \in I} A_i \right)^c
+    = \bigcup_{i \in I} A_i^c.
+  \]
+  As each $A_i$ is closed, we have
+  $A_i^c \in \mathcal{T}$ is open, and hence
+  $\bigcup_{i \in I} A_i^c \in \mathcal{T}$ is open.
+  So $\bigcap_{i \in I} A_i$ is closed.
+
+  $(iii)$ Observe that
+  \[
+    \left( \bigcup_{i = 1}^n A_i \right)^c
+    = \bigcap_{i = 1}^n A_i^c.
+  \]
+  Each $A_i$ is closed, so $A_i^c$ is open.
+  Thus $\bigcap_{i = 1}^n A_i^c$ is open,
+  and so $\bigcup_{i = 1}^n A_i$ is closed.
+\end{proof}
+
+\section{Properties of Continuity}
+Recall that a function $f : (X, \mathcal{T}_X) \to (Y, \mathcal{T}_Y)$
+is continuous if for every
+$O \in \mathcal{T}_Y$, we have $f^{-1}(O) \in \mathcal{T}_X$.
+
+\begin{theorem}
+  A function $f : X \to Y$ is continuous if and
+  only if for every $C$ closed in $Y$,
+  $f^{-1}(C)$ is closed in $X$.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$ Let $C \subseteq Y$ be closed.
+  Note that
+  \[
+    f^{-1}(C) = \{x \in X \mid f(x) \in C\},
+  \]
+  so we have
+  \[
+    (f^{-1}(C))^c = \{x \in X \mid f(x) \notin C\}
+    = \{x \in X \mid f(x) \in C^c\}
+    = f^{-1}(C^c)
+  .\]
+  Since $C$ is closed, $C^c$ is open and so
+  $f^{-1}(C^c) = (f^{-1}(C))^c$ is open. Thus $f^{-1}(C)$ is closed.
+
+  $(\Leftarrow)$ Assume $S \subseteq Y$ is open.
+  Note that
+  \[
+    (f^{-1}(S))^c
+    = \{x \in X \mid f(x) \in S\}^c
+    = \{x \in X \mid f(x) \notin S\}
+    = \{x \in X \mid f(x) \in S^c\}
+    = f^{-1}(S^c).
+  \]
+  Since $S$ is open, $S^c$ is closed and
+  so $f^{-1}(S^c) = (f^{-1}(S))^c$ is closed by
+  assumption.
+  Thus $f^{-1}(S)$ is open, and so we see that
+  $f$ is continuous.
+\end{proof}
+
+\begin{theorem}[Composition theorem]
+  Let $(X, \mathcal{T}_X)$, $(Y, \mathcal{T}_Y)$,
+  and $(Z, \mathcal{T}_Z)$ be topological spaces.
+  Let
+  \[f : X \to Y \quad \text{and} \quad g : Y \to Z\]
+  be continuous
+  functions. Then $g \circ f : X \to Z$
+  is continuous.
+\end{theorem}
+
+\begin{proof}
+  Let $S \subseteq Z$ be open. It suffices to
+  show that $(g \circ f)^{-1}(S) \subseteq X$ is open.
+  Note that
+  \begin{align*}
+    (g \circ f)^{-1}(S)
+    = \{x \in X \mid (g \circ f)(x) \in S\}
+    &= \{x \in X \mid f(x) \in g^{-1}(S)\} \\
+    &= \{x \in X \mid x \in f^{-1}(g^{-1}(S))\}
+    = f^{-1}(g^{-1}(S)).
+  \end{align*}
+  Now as $g$ is continuous, $g^{-1}(S)$ is open in $Y$.
+  Finally as $f$ is continuous, $f^{-1}(g^{-1}(S))$ is
+  open in $X$.
+\end{proof}
+
+\begin{theorem}
+  Assume $X = \bigcup_{\alpha \in I} U_\alpha$
+  for open sets $U_\alpha$ and let $f : X \to Y$.
+  Assume that $f|_{U_\alpha} : U_\alpha \to Y$
+  is continuous for each $\alpha \in I$.
+  Then $f$ is continuous.
+\end{theorem}
+
+\begin{proof}
+  Let $S \subseteq Y$ be open, and it suffices
+  to show that $f^{-1}(S)$ is open. Observe that
+  \[
+    f^{-1}(S) = f^{-1}(S) \cap X
+    = f^{-1}(S) \cap \left( \bigcup_{\alpha \in I} U_\alpha \right)
+    = \bigcup_{\alpha \in I} (f^{-1}(S) \cap U_\alpha)
+    = \bigcup_{\alpha \in I} f|_{U_\alpha}^{-1}(S).
+  \]
+  The $f|_{U_\alpha}$ are continuous,
+  so each $f|_{U_\alpha}^{-1}(S)$ is open. Thus
+  $f^{-1}(S)$ is open as a union of open sets.
+\end{proof}
+
+\begin{theorem}[Gluing]
+  Assume $X, Y$ are topological spaces and
+  $A, B \subseteq X$ are open. Suppose $f_1 : A \to Y$
+  and $f_2 : B \to Y$ are continuous, and that
+  $f_1 \equiv f_2$ on $A \cap B$. Then
+  $f : A \cup B \to Y$ defined by
+  \[
+    f(x) =
+    \begin{cases}
+      f_1(x) & \text{if } x \in A, \\
+      f_2(x) & \text{if } x \in B
+    \end{cases}
+  \]
+  is continuous.
+\end{theorem}
+
+\begin{proof}
+  Let $S \subseteq Y$ be open, it suffices
+  to show that $f^{-1}(S)$ is open. Observe that
+  \[
+    f^{-1}(S) = f_1^{-1}(S) \cup f_2^{-1}(S).
+  \]
+  Both $f_1^{-1}(S)$ and $f_2^{-1}(S)$ are open
+  since $f_1$ and $f_2$ are continuous, so
+  $f^{-1}(S)$ is open as their union.
+\end{proof}
+
+\section{Subspace Topology}
+
+\begin{definition}
+  Let $(X, \mathcal{T}_X)$ be a topological space
+  and $S \subseteq X$ a set. The \emph{subspace topology}
+  on $S$ is defined as follows:
+  $O \subseteq S$ is open if there exists $U \subseteq X$
+  open in $X$ such that $U = O \cap S$.
+\end{definition}
+
+\begin{example}
+  Let $\R$ be given the metric topology and
+  $S = [0, 1]$.
+  \begin{itemize}
+    \item The set $[0, 1]$ is not open
+      in $\R$, but it is open in the subspace
+      topology on $S$ since
+      $[0, 1] = S \cap (-1, 2)$.
+    \item The set $[0, 1 / 2)$ is neither open nor closed
+      in $\R$, but
+      $[0, 1 / 2) = S \cap (-1 / 2, 1 / 2)$,
+      so it is open in $S$.
+  \end{itemize}
+\end{example}
+
+\begin{theorem}
+  The subspace topology is indeed a topology.
+\end{theorem}
+
+\begin{proof}
+  Let $(X, \mathcal{T}_X)$ be a topological
+  space and $S \subseteq X$ be given the subspace
+  topology.
+
+  $(i)$ We have $S = S \cap X$ and
+  $\varnothing = \varnothing \cap X$, so
+  $S, \varnothing$ are open in $S$.
+
+  $(ii)$ Let $\{U_\alpha\}_{\alpha \in I}$
+  be open in the subspace topology. Then
+  for every $\alpha \in I$, there exists
+  $O_\alpha \in \mathcal{T}$
+  such that $U_\alpha = S \cap O_\alpha$. Then
+  \[
+    \bigcup_{\alpha \in I} U_\alpha
+    = \bigcup_{\alpha \in I} (S \cap O_\alpha)
+    = S \cap \left( \bigcup_{\alpha \in I} O_\alpha \right).
+  \]
+  The $\{O_\alpha\}_{\alpha \in I}$ are
+  open in $X$, so their union is open in $X$.
+  Thus $\bigcup_{\alpha \in I} U_\alpha$ is open
+  in the subspace topology.
+
+  $(iii)$ Let $\{U_i\}_{i = 1}^n $ be open in the
+  subspace topology. Then there are
+  $O_i$ for $1 \le i \le n$ with
+  $U_i = S \cap O_i$. Then we have
+  \[
+    \bigcap_{i = 1}^n U_i
+    = \bigcap_{i = 1}^n (S \cap O_i)
+    = S \cap \left( \bigcap_{i = 1}^n O_i \right).
+  \]
+  As the $O_i \in \mathcal{T}$ are open,
+  $\bigcap_{i = 1}^n O_i$ is open in $X$.
+  Thus $\bigcap_{i = 1}^n U_i$ is open in the
+  subspace topology.
+\end{proof}
+
+\begin{theorem}
+  Assume $f : X \to Y$ is a continuous function and
+  $S \subseteq X$ a subspace. Then
+  $f|_S : S \to Y$ is continuous, where
+  $S$ is equipped with the subspace topology.
+\end{theorem}
+
+\begin{proof}
+  Let $O \subseteq Y$ be an open set, it suffices
+  to show that $f|_S^{-1}(O)$ is open in the subspace
+  topology. But observing that
+  $f|_S^{-1}(O) = f^{-1}(O) \cap S$
+  immediately shows that $f|_S^{-1}(O)$ is open in $S$
+  since $f^{-1}(O)$ is open in $X$ due to the
+  continuity of $f$.
+\end{proof}
+
+\begin{remark}
+  The subspace topology is the smallest topology
+  on $S$ such that the inclusion map
+  $i : S \to X$ given by
+  $i(s) = s$ is a continuous function.
+\end{remark}
+
+\begin{remark}
+  Let $X$ be a topological space with subspaces
+  $Y \subseteq X$ and $Z \subseteq Y$. Then
+  the subspace topology on $Z$ induced by the
+  subspace $Y$ is the same as the
+  subspace topology on $Z$ induced directly by $X$.
+\end{remark}
+
+\begin{remark}
+  A topological space can have a subspace
+  homeomorphic to itself. For instance, consider
+  $\R$ and $(-\pi / 2, \pi / 2)$ with
+  a homemorphism given by the tangent function.
+\end{remark}
