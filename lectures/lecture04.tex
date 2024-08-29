@@ -1,0 +1,241 @@
+\chapter{Aug.~29 --- Connectedness}
+
+\section{Connected Spaces}
+\begin{definition}
+  A \emph{separation} of a topological space $X$
+  is two open, nonempty sets $U, V \subseteq X$ such
+  that $X = U \cup V$ and $U \cap V = \varnothing$.
+  A space is called \emph{connected}
+  if there is no separation of the space.
+\end{definition}
+
+\begin{prop}
+  If $X$ is separated, i.e.
+  $X = U \cup V$ with $U, V$ open and disjoint,
+  then $U$ and $V$ are both open and closed.
+\end{prop}
+
+\begin{proof}
+  Observe that $U$ is open by assumption, and we have
+  \[
+    U^c = X \setminus U = V,
+  \]
+  which is also open by assumption. Hence
+  $U$ is closed. The case for $V$ is identical.
+\end{proof}
+
+\begin{example}
+  Consider the following:
+  \begin{itemize}
+    \item The singleton space $\{x\}$ is connected. There
+      are no two nonempty, disjoint open sets.
+    \item Consider the space $X = \{0, 1\}$. This
+      case depends on the choice of topology:
+      \begin{enumerate}
+        \item With the trivial topology
+          $\mathcal{T} = \{\varnothing, X\}$, the
+          space is connected.
+        \item With the discrete topology
+          $\mathcal{T} = \{\varnothing, X, \{1\}, \{0\}\}$,
+          $X$ is disconnected since
+          $X = \{0\} \cup \{1\}$.
+        \item With the topology
+          $\mathcal{T} = \{\varnothing, X, \{1\}\}$,
+          the space is connected. The only
+          nonempty sets $\{1\}, X$ are not disjoint
+          and thus there can be no separation.
+      \end{enumerate}
+  \end{itemize}
+\end{example}
+
+\begin{theorem}
+  A space $X$ is disconnected if and only if
+  there exists a surjective map
+  $f : X \to \{0, 1\}$ with the discrete topology.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$
+  If $X$ is disconnected, then we may write
+  $X = U \cup V$ with $U, V$ open, disjoint, and
+  nonempty. Then define
+  \[
+    f(x) = \begin{cases}
+      0 & x \in U, \\
+      1 & x \in V,
+    \end{cases}
+  \]
+  which is surjective as $U, V$ are nonempty. To
+  see that $f$ is continuous, observe that
+  \[
+    f^{-1}(\varnothing) = \varnothing, \quad
+    f^{-1}(\{0, 1\}) = X, \quad
+    f^{-1}(\{0\}) = U, \quad
+    f^{-1}(\{1\}) = V,
+  \]
+  each of which are open. These are all of
+  the open sets in the discrete topology, so $f$ is
+  continuous.
+
+  $(\Leftarrow)$ Assume there exists a surjective
+  and continuous map $f : X \to \{0, 1\}$. Define
+  \[
+    U = f^{-1}(\{0\}) \quad \text{and} \quad
+    V = f^{-1}(\{1\}),
+  \]
+  which are open since $f$ is continuous. Observe
+  that $U, V \ne \varnothing$ since $f$ is surjective.
+  Also $U \cap V = \varnothing$ since if there is
+  any $x \in U \cap V$, then
+  $f(x) = 0$ as $x \in U$ and $f(x) = 1$ as $x \in V$,
+  a contradiction.
+  Finally, $X = U \cup V$ since $f(x) = 0$ or
+  $f(x) = 1$ for every $x \in X$, i.e.
+  $x \in U$ or $x \in V$. So $X$ is disconnected.
+\end{proof}
+
+\section{Connected Sets}
+\begin{definition}
+  Let $X$ be a topological space and $S \subseteq X$.
+  Then $S$ is called
+  \emph{connected} if it is connected in the
+  subspace topology.
+\end{definition}
+
+\begin{theorem}
+  If $A, B$ are connected sets and
+  $A \cap B \ne \varnothing$, then $A \cup B$
+  is connected.
+\end{theorem}
+
+\begin{proof}
+  Assume not. Then there exists a continuous,
+  surjective map
+  $f : A \cup B \to \{0, 1\}$ with the discrete
+  topology. Consider $f|_A : A \to \{0, 1\}$,
+  which is continuous in the subspace topology.
+  Notice that $f(A)$ cannot be $\{0, 1\}$ since
+  otherwise $A$ is disconnected. Without
+  loss of generality, assume $f(A) = \{0\}$ since
+  $A$ is nonempty. Now consider
+  $f|_B : B \to \{0, 1\}$, which is also
+  continuous. Similarly, notice that
+  $f(B)$ cannot be $\{0, 1\}$. But
+  there exists
+  $p \in A \cap B$, and $f(p) = 0$ as $p \in A$.
+  Then since $p \in B$, we must have $f(B) = \{0\}$.
+  But then we get that $f(A \cup B) = \{0\} \ne \{0, 1\}$,
+  a contradiction to surjectivity.
+\end{proof}
+
+\begin{corollary}
+  \label{cor:union-connected}
+  A union of connected sets with
+  ``common points'' is connected.
+\end{corollary}
+
+\begin{proof}
+  Run induction (transfinite if the union is infinite)
+  using the previous theorem.
+\end{proof}
+
+\begin{theorem}
+  Closed intervals in $[a, b] \subseteq \R$
+  with the metric topology are connected.
+\end{theorem}
+
+\begin{proof}
+  Assume otherwise that $[a, b] = U \cup V$
+  with $U, V$ disjoint, open, and nonempty.
+  Assume without loss of generality that
+  $a \in U$. Since $V$ is nonempty, there exists
+  $c > a$ such that $c \in V$. Now consider
+  $[a, c] \subseteq [a, b]$ with
+  $U_1 = U \cap [a, c]$ and $V_1 = V \cap [a, c]$.
+  By the least upper bound property of $\R$,
+  since $U_1$ is nonempty and bounded from above,
+  there exists $s = \sup U_1$ with
+  $s \le c$. Now either $s \in U_1$ or $s \notin U_1$.
+
+  If $s \in U_1$ (note this implies $s \ne c$), then $s$ is an interior point of
+  $U_1$ since $U_1$ is open. So one may find
+  a point $t$ such that $t > s$ and $t \in U_1$. But
+  then $s$ is no longer an upper bound of $U_1$,
+  a contradiction.
+
+  Otherwise $s \notin U_1$. Since $U_1, V_1$
+  cover $[a, c]$, we must then have $s \in V_1$ (note this implies $s \ne a$.
+  Since $V_1$ is open, $s$ is an interior point
+  of $V_1$, and thus there exists $t < s$
+  such that $t \in V_1$ and $t$ is an upper bound for
+  $U_1$. This contradicts $s$ being the
+  least upper bound of $U_1$.
+
+  Since both cases lead to contradictions, we
+  conclue that $[a, b]$ must be connected.
+\end{proof}
+
+\begin{corollary}
+  Open intervals in $\R$ are connected, and
+  $\R$ itself is connected.
+\end{corollary}
+
+\begin{proof}
+  For some $N_0 \ge 1$ (for instance choose
+  $N_0 \ge 2 / (b - a)$) we can write
+  \[
+    (a, b) = \bigcup_{n = N_0}^\infty \left[a + \frac{1}{n}, b - \frac{1}{n}\right],
+  \]
+  Each of these closed intervals is connected by
+  the previous theorem, and thus the union is connected
+  by Corollary \ref{cor:union-connected} since
+  they overlap.
+  Similarly writing $\R = \bigcup_{n = 1}^\infty [-n, n]$
+  shows that $\R$ is connected.
+\end{proof}
+
+\begin{corollary}[Intermediate value theorem]
+  Let $f : [a, b] \to \R$ be a continuous function.
+  Then
+  for any $f(a) < t < f(b)$, there exists
+  $c \in [a, b]$ such that $f(c) = t$.
+\end{corollary}
+
+\begin{proof}
+  Assume not. We can consider the open sets
+  $(-\infty, t)$ and $(t, \infty)$ in $\R$. Then
+  $f^{-1}((-\infty, t))$ and $f^{-1}((t, \infty))$
+  are open sets since $f$ is continuous. They
+  are clearly disjoint (since $f$ must be
+  well-defined),
+  and also nonempty since
+  $a \in f^{-1}((-\infty, t))$ and
+  $b \in f^{-1}((t, \infty))$. Also since
+  $f^{-1}(\{t\}) = \varnothing$ by assumption,
+  \[
+    [a, b] = f^{-1}((-\infty, t)) \cup f^{-1}((t, \infty)).
+  \]
+  But this is a separation of $[a, b]$, a
+  contradiction since $[a, b]$ is connected.
+\end{proof}
+
+\begin{prop}
+  The open interval $(0, 1)$ is not
+  homeomorphic to the closed interval $[0, 1]$.
+\end{prop}
+
+\begin{proof}
+  Removing any point from $(0, 1)$ disconnects
+  it, but $[0, 1) = [0, 1] \setminus \{1\}$
+  remains connected.\footnote{To see that $[0, 1)$ is connected, we can write $[0, 1) = \bigcup_{n = 2}^\infty [0, 1 - 1 / n]$.}
+\end{proof}
+
+\begin{prop}
+  The real line $\R$ is not homeomorphic
+  to the plane $\R^n$ for any $n \ge 2$.
+\end{prop}
+
+\begin{proof}
+  Removing a point from $\R$ disconnects it but
+  the same is not true for $\R^n$ when $n \ge 2$.
+\end{proof}
