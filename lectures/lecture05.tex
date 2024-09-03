@@ -1,0 +1,237 @@
+\chapter{Sept.~3 --- Path-Connectedness}
+
+\section{More on Connectedness}
+\begin{remark}
+  The intervals $[a, b] \subseteq \R$ are homeomorphic
+  to $[0, 1]$ for any $a < b$. We can take
+  $f : [a, b] \to [0, 1]$ defined by
+  \[
+    f(x) = \frac{1}{b - a}(x - a)
+  \]
+  for instance as a homemorphism.
+\end{remark}
+
+\begin{lemma}
+  \label{lem:image-connected}
+  If $X$ is connected and $f : X \to Y$
+  is continuous, then $f(X)$ is connected.
+\end{lemma}
+
+\begin{proof}
+  This is part of Homework 2.
+\end{proof}
+
+\begin{corollary}
+  The plane $\R^2$ is connected.
+\end{corollary}
+
+\begin{proof}
+  Express $\R^2$ as the union of
+  horizontal and vertical lines. Each line is the
+  image of $\R$ and is thus connected by
+  Lemma $\ref{lem:image-connected}$.
+  Also any pair of
+  horizontal and vertical lines must intersect,
+  so we can use Corollary \ref{cor:union-connected}
+  to conclude that the union $\R^2$ is connected.
+\end{proof}
+
+\begin{remark}
+  We can extend this to $\R^3$ by embedding
+  planes (copies of $\R^2$), and similarly for $\R^n$.
+\end{remark}
+
+\begin{prop}
+  The unit circle $\mathbb{S}^1 \subseteq \R^2$
+  is connected.
+\end{prop}
+
+\begin{proof}
+  Define $\gamma : [0, 2\pi] \to \R^2$
+  by $\gamma(t) = (\cos t, \sin t)$.
+  The image of $\gamma$ is precisely $\mathbb{S}^1$.
+\end{proof}
+
+\begin{prop}
+  \label{prop:equivalence-connected}
+  Define a relation $\sim$ on $X$ by $x \sim y$
+  if there exists a connected subset
+  $S \subseteq X$ such that $x, y \in S$.
+  Then $\sim$ is an equivalence relation.
+\end{prop}
+
+\begin{proof}
+  For reflexivity, fix $x \in X$ and let
+  $S$ be the largest connected set containing
+  $x$ (this exists since we know at least
+  $\{x\}$ must be
+  connected). Then $x \in S$, so $x \sim x$.
+
+  For symmetry, fix $x, y \in X$. If $x \sim y$,
+  then there exists a connected set $S$ such that
+  $x, y \in S$. But then $y, x \in S$, so we see that
+  $y \sim x$.
+
+  For transitivity, assume that $x \sim y$
+  and $y \sim z$. Then there exists $S_1$
+  connected such that $x, y \in S_1$ and $S_2$
+  connected such that $y, z \in S_2$. Notice
+  that $S_1 \cap S_2 \ne \varnothing$ since
+  $y \in S_1 \cap S_2$. Then $S_1 \cup S_2$ is
+  connected by Theorem \ref{thm:union-connected}
+  and $x, y, z \in S_1 \cap S_2$. In particular,
+  $x, z \in S_1 \cap S_2$ and thus $x \sim z$.
+
+  So we see that $\sim$ is an equivalence relation.
+\end{proof}
+
+\begin{definition}
+  Let the equivalence relation $\sim$ be defined
+  on $X$ as in Proposition \ref{prop:equivalence-connected}.
+  Then we can write $X$ as the disjoint union of
+  the equivalence classes of $\sim$.
+  These
+  equivalence classes are called
+  the \emph{connected components} of $X$.
+\end{definition}
+
+\begin{remark}
+  The connected components of a space are defined
+  solely
+  via topologies, so they must be invariant under
+  homeomorphism.
+\end{remark}
+
+\begin{example}
+  The letter $S$, sitting in $\R^2$, is not
+  homeomorphic to the letter $T$. There is a point
+  we can remove from $T$ to give three connected
+  components, but removing any point from $S$ gives
+  at most two such connected components.
+\end{example}
+
+\section{Path-Connectedness}
+
+\begin{remark}
+  Connectedness is usually a very difficult
+  property to verify. This motivates
+  \emph{path-connectedness}.
+\end{remark}
+
+\begin{definition}
+  A set $S$ is \emph{path-connected} if
+  for all $x, y \in S$, there exists a continuous
+  map $\gamma : [0, 1] \to S$ such that
+  $\gamma(0) = x$ and $\gamma(1) = y$. Here
+  $[0, 1]$ is given the usual metric topology.
+\end{definition}
+
+\begin{lemma}
+  If $S$ is path-connected, then $S$ is connected.
+\end{lemma}
+
+\begin{proof}
+  This is part of Homework 2.
+\end{proof}
+
+\begin{remark}
+  Unlike connectedness, it is immediately
+  obvious that $\R^n$ is path-connected. Simply
+  take the line segment between any two points.
+  Then we can conclude connectedness by the previous
+  lemma.
+\end{remark}
+
+\begin{example}
+  There are spaces which are connected but not
+  path-connected.
+  \begin{itemize}
+    \item Consider the
+      \emph{topologist's sine curve}, given by
+      the union of the vertical segment
+      $\{(0, y) \mid -1 \le y \le 1\}$ and the image of
+      $(0, \infty)$ under $x \mapsto (x, \sin(1/x))$, is
+      an example of such a space. See Homework 2
+      for more details.
+    \item Consider the \emph{cone} $C$ in
+      $\R^2$ defined by ($(0, 1)$ denotes an
+      open interval unless otherwise specified)
+      \[
+        C = ([0, 1] \times \{0\})
+        \cup (K \times [0, 1])
+        \cup (\{0\} \times [0, 1]),
+      \]
+      where $K = \{1 / n : n \in \N\}$.
+      Note that $C$ is clearly path-connected
+      and hence also connected.
+      Then define the space
+      \[
+        D = C \setminus (\{0\} \times (0, 1)),
+      \]
+      which is now not path-connected (consider
+      the point $(0, 1) \in D$)
+      but still connected.
+  \end{itemize}
+\end{example}
+
+\begin{remark}
+  Observe the following:
+  \begin{itemize}
+    \item One can define \emph{path-connected components} in a similar
+      manner as connected components.
+    \item A continuous image of a path-connected
+      space is path-connected. Simply compose
+      the curve with the continuous map, which is
+      now a path in the image.
+    \item The union of path-connected spaces
+      sharing a point is path-connected.
+      Take two curves to the common point
+      and concatenate them using the pasting lemma.
+    \item In $\R^n$, connectedness is equivalent
+      to path-connectedness. In general, this
+      holds if you can get a basis of only connected
+      sets.
+  \end{itemize}
+\end{remark}
+
+\begin{remark}
+  Recall from homework that if $f : [0, 1] \to [0, 1]$
+  is continuous, then $f$ has a fixed point,
+  i.e. there exists $c \in [0, 1]$ with $f(c) = c$.
+  This follows from a clever use of the intermediate
+  value theorem. Now consider a more topological
+  perspective. Consider the diagonal
+  $\{(x, x) \mid x \in [0, 1]\}$ and look at the
+  graph of $f$, which is contained in the closed
+  unit square. This graph is path-connected as the
+  image of a path-connected set and so
+  there is a path between the points $(0, f(0))$
+  and $(1, f(1))$. But then this path must
+  intersect the diagonal at some point, which
+  gives a fixed point.
+\end{remark}
+
+\begin{theorem}(Brouwer fixed point theorem)
+  Let $K$ be a closed, bounded, and convex
+  set in $\R$. Then any continuous map $f : K \to K$
+  has a fixed point, i.e. there exists $c \in K$
+  such that $f(c) = c$.
+\end{theorem}
+
+\begin{remark}
+  One can see the existence of the Nash equilibrium
+  as a consequence of this theorem.
+\end{remark}
+
+\begin{remark}
+  In $\R^2$, this theorem follows from the
+  following claim. Let $X = \maps(\sphere^1, \sphere^1)$ be the set of all
+  continuous maps from $\mathbb{S}^1$ to itself.
+  Then Brouwer's fixed point theorem in $\R^2$
+  follows from the following:
+\end{remark}
+
+\begin{theorem}
+  The space $\maps(\sphere^1, \sphere^1)$ is not
+  path connected.
+\end{theorem}
