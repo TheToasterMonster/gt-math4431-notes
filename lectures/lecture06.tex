@@ -1,0 +1,185 @@
+\chapter{Sept.~5 --- Compactness}
+
+\section{Note on the Subspace Topology}
+\begin{remark}
+  Let $X$ be a topological space with topology
+  $\T_X$, and let $Y \subseteq X$ be a subset
+  endowed with a topology $\tau$. Suppose that
+  for any continuous $f : X \to Z$, there exists
+  a continuous $\widetilde{f} : Y \to Z$
+  such that the following diagram commutes,
+  \[
+    \begin{tikzcd}
+      X \ar[r, "f"] & Z \\
+      Y \ar[ur, "\widetilde{f}"', dashed] \ar[u, "i"] &
+    \end{tikzcd}
+  \]
+  where $i : Y \to X$ is the inclusion map.\footnote{Note that at least set-theoretically, this immediately defines $\widetilde{f} = f|_Y$. But a priori we do not know that $\widetilde{f}$ is continuous.}
+  Then in Homework 2 we showed that
+  $\T_Y \subseteq \tau$. We can see this as a
+  \emph{universal property} for the subspace topology.
+\end{remark}
+
+\section{Compactness}
+\begin{definition}
+  A set $C \subseteq X$ is called \emph{compact}
+  if for any \emph{open cover}
+  \[
+    C \subseteq \bigcup_{\alpha \in I} U_\alpha,
+    \quad
+    \text{each $U_\alpha$ is open},
+  \]
+  there exists a finite subcover $C \subseteq \bigcup_{i = 1}^n U_{\alpha_i}$.
+\end{definition}
+
+\begin{example} Consider the following:
+  \begin{itemize}
+    \item In a finite topology, any set is compact.
+      This is because any open cover is already finite.
+    \item In a discrete space, i.e. $\mathcal{T} = \mathcal{P}(X)$,
+      compact sets are precisely the finite sets.
+      It is clear that finite sets are compact,
+      for each $x$ choose a single open set in the cover
+      containing $x$. Conversely, if a set is
+      compact, we can pick our open
+      cover to contain only singletons, and the
+      existence of a
+      finite subcover means that the set has
+      only finitely many elements.
+  \end{itemize}
+\end{example}
+
+\begin{theorem}[Heine-Borel]
+  Let $C \subseteq \R^n$ be a subset, where
+  $\R^n$ is given the metric topology. Then
+  $C$ is compact if and only if $C$ is closed and bounded.
+\end{theorem}
+
+\begin{proof}
+  We postpone this proof until later.
+\end{proof}
+
+\begin{lemma}
+  Let $X$ be compact. If $Y \subseteq X$ is closed,
+  then $Y$ is compact.
+\end{lemma}
+
+\begin{proof}
+  Let $Y \subseteq X$ closed be given, and assume that
+  $Y \subseteq \bigcup_{\alpha \in I} U_\alpha$
+  an open cover. Since $Y$ is closed,
+  its complement $Y^c$ is open. Then
+  \[
+    Y^c \cup \bigcup_{\alpha \in I} U_\alpha
+  \]
+  is an open cover of $X$ since $X = Y \cup Y^c$.
+  Since $X$ is compact, there exists a finite subcover
+  \[
+    X \subseteq Y^c \cup \bigcup_{i = 1}^n U_{\alpha_i}.
+  \]
+  Now observe that $Y \subseteq X$ and
+  $Y \cap Y^c = \varnothing$,
+  so actually $Y \subseteq \bigcup_{i = 1}^n U_{\alpha_i}$,
+  which is a finite subcover.
+\end{proof}
+
+\begin{theorem}
+  Let $X$ be compact and $f : X \to Y$
+  continuous. Then $f(X)$ is compact.
+\end{theorem}
+
+\begin{proof}
+  Consider $f(X) \subseteq Y$ and let
+  $f(X) \subseteq \bigcup_{\alpha \in I} V_\alpha$, an
+  open cover in $Y$. Notice that
+  \[
+    X = f^{-1}(f(X))
+    \subseteq f^{-1}\left(\bigcup_{\alpha \in I} V_\alpha\right)
+    = \bigcup_{\alpha \in I} f^{-1}(V_\alpha).
+  \]
+  Note that each $f^{-1}(V_\alpha)$ is open in $X$ since $f$ is
+  continuous and $V_\alpha$ is open in $Y$, so
+  this is in fact an open cover of $X$. Thus since $X$ is
+  compact, we may extract a finite subcover
+  \[
+    X \subseteq \bigcup_{i = 1}^n f^{-1}(V_{\alpha_i}).
+  \]
+  Then we see that
+  \[
+    f(X) \subseteq f\left(\bigcup_{i = 1}^n f^{-1}(V_{\alpha_i})\right)
+    \subseteq \bigcup_{i = 1}^n V_{\alpha_i},
+  \]
+  which is a finite subcover of $f(X)$. Therefore
+  $f(X)$ is compact.
+\end{proof}
+
+\begin{theorem}
+  Assume $\{C_j\}_{j = 1}^m$ are compact subsets
+  of $X$. Then $\bigcup_{j = 1}^m C_j$ is compact.
+\end{theorem}
+
+\begin{proof}
+  Assume $\bigcup_{j = 1}^m C_j \subseteq \bigcup_{\alpha \in I} U_\alpha$,
+  an open cover. Observe this is also an open
+  cover of $C_j$ for each $1 \le j \le m$, so
+  we can extract a finite subcover, i.e. we can
+  find $\alpha_{j, 1}, \dots, \alpha_{j, n_j}$
+  with
+  \[
+    C_j \subseteq \bigcup_{i = 1}^{n_j} U_{\alpha_{j, i}}.
+  \]
+  Then we see that
+  \[
+    \bigcup_{j = 1}^m C_j
+    \subseteq \bigcup_{j = 1}^m \bigcup_{i = 1}^{n_j} U_{\alpha_{j, i}},
+  \]
+  which is still a finite union. This is then a finite
+  subcover of $\bigcup_{j = 1}^m C_j$, so
+  $\bigcup_{j = 1}^m C_j$ is compact.
+\end{proof}
+
+\begin{theorem}[Weierstrass]
+  Let $f : [a, b] \to \R$ be continuous. Then
+  $f([a, b])$ is bounded, and moreover
+  there exist $x_{\mathrm{max}}, x_{\mathrm{min}} \in [a, b]$
+  such that $f(x_{\mathrm{max}}) \ge f(x) \ge f(x_{\mathrm{min}})$
+  for all $x \in [a, b]$.
+\end{theorem}
+
+\begin{proof}
+  Since $f$ is continuous and $[a, b]$ is compact
+  (by Heine-Borel), $f([a, b]) \subseteq \R$ is
+  compact. Thus by Heine-Borel, $f([a, b])$ is
+  bounded. In particular, we can find $M, m$
+  such that
+  \[
+    m \le f(x) \le M \quad \text{for all } x \in [a, b].
+  \]
+  For the second part, observe that $f([a, b])$
+  is bounded and nonempty, so $s = \sup f([a, b])$.
+  Since this is the supremum, there must exist
+  $y_i \in f([a, b])$ such that $y_i \to s$
+  as $i \to \infty$. Now observe that
+  $f([a, b])$ is closed by Heine-Borel, and in
+  particular it contains its limit points. Thus
+  we obtain $s \in f([a, b])$. Then pick
+  $x_{\mathrm{max}} \in f^{-1}(\{s\}) \subseteq [a, b]$,
+  which will satisfy
+  $f(x_{\mathrm{max}}) = s \ge f(x)$ for all $x \in [a, b]$.
+  by construction.
+
+  The argument for finding
+  $x_{\mathrm{min}} \in [a, b]$ is similar.
+\end{proof}
+
+\begin{theorem}
+  Let $X$ be a topological space, $K \subseteq X$
+  compact, and $f : K \to \R$ a continuous function.
+  Then $f$ is bounded over $K$
+  and attains its minimum and maximum on $K$.
+\end{theorem}
+
+\begin{proof}
+  The same argument goes through, replacing
+  $[a, b]$ by the compact set $K$.
+\end{proof}
