@@ -1,0 +1,219 @@
+\chapter{Sept.~10 --- More Compactness}
+
+\section{The Cantor Set}
+Define $I_0 = [0, 1]$ and remove the open middle-thirds
+interval to get
+\[
+  I_1 = [0, 1] \setminus (1 / 3, 2 / 3) = [0, 1 / 3] \cup [2 / 3, 1].
+\]
+Continue by removing the middle thirds of each interval
+to get $I_2, I_3, \ldots$. Then the
+\emph{Cantor set} is defined to be
+$K = \bigcap_{I \ge 0} I_n$. The Cantor set is
+compact and uncountable. See more on Homework 3.
+
+\section{The Heine-Borel Theorem}
+\begin{theorem}[Heine-Borel]
+  If $C \subseteq \R$, then $C$ is compact if
+  and only if $C$ is closed and bounded.
+\end{theorem}
+
+\begin{proof}
+  $(\Rightarrow)$ This direction is easy, see
+  Homework 3 for details.
+
+  $(\Leftarrow)$ First we show that
+  $[a, b] \subseteq \R$ is compact. Let
+  $\{U_\alpha\}_{\alpha \in I}$ be an open
+  cover for $[a, b]$, i.e.
+  $[a, b] \subseteq \bigcup_{\alpha \in I} U_\alpha$.
+  Now define
+  \[
+    R = \{x \in [a, b] \mid \text{$[a, x]$ has a finite subcover}\}
+  \]
+  Clearly $a \in R$ since
+  $a \in [a, b] \subseteq \bigcup_{\alpha \in I} U_\alpha$,
+  so picking any single $U_\alpha$ with $a \in U_\alpha$
+  gives a finite subcover for $[a, a] = \{a\}$. The
+  goal is now to show that $b \in R$. Observe that
+  $a \in R$ implies $R = \varnothing$, and $R \subseteq [a, b]$,
+  so
+  \[
+    s = \sup R
+  \]
+  exists by the completeness of $\R$. We proceed
+  to show that $s \in R$ and then $s = b$, which
+  will show that $b \in R$. As $s \in [a, b] \subseteq \bigcup_{\alpha \in I} U_\alpha$,
+  we can find $\alpha_s$ such that
+  $s \in U_{\alpha_s}$. Since $U_{\alpha_s}$ is
+  open, we can find $\delta > 0$ such that
+  $(s - \delta, s + \delta) \subseteq U_{\alpha_s}$.
+  Then since $s$ is a least upper bound of $R$,
+  we can find $r \in R$ such that
+  $s - \delta < r \le s$. Now since $r \in R$,
+  $[a, r]$ admits a finite subcover
+  $\{U_{\alpha_i}\}_{i = 1}^n$. Then
+  \[
+    [a, s] = [a, r] \cup (s - \delta, s]
+    \subseteq \left(\bigcup_{i = 1}^n U_{\alpha_i}\right) \cup U_{\alpha_s}
+  \]
+  is a finite subcover for $[a, s]$, so $s \in R$.
+  Now observe that we actually covered
+  \[
+    \left[a, s + \frac{\delta}{2}\right]
+    = [a, r] \cup (s - \delta, s + \delta)
+    \subseteq \left(\bigcup_{i = 1}^n U_{\alpha_i}\right) \cup U_{\alpha_s}
+  \]
+  in the previous construction. Then
+  $s + \delta / 2 \in R$, which contradicts the
+  minimality of $s$ unless $s = b$. Thus
+  $b \in R$, so $[a, b]$ admits a finite subcover
+  and thus $[a, b]$ is compact.
+
+  Now let $C \subseteq \R$ be an arbitrary
+  closed and bounded set. Since $C$ is bounded,
+  there exists $I = (a, b)$ such that $C \subseteq I$.
+  But then $C \subseteq I \subseteq \overline{I} = [a, b]$, so
+  $C$ is a closed subset of a compact set, hence
+  compact.
+\end{proof}
+
+\begin{remark}
+  The Heine-Borel theorem also holds more
+  generally in $\R^n$.
+  A later theorem will
+  say that the product of compact sets is compact in
+  the product topology,
+  and thus we can run the same argument as above but
+  with boxes in $\R^n$ instead of intervals.
+\end{remark}
+
+\section{The Bolzano-Weierstrass Theorem}
+\begin{definition}
+  A point $x$ is an \emph{accumulation point}
+  for a set $S$ if for all open sets $U$ containing
+  $x$, we have
+  $(U \setminus \{x\}) \cap S \ne \varnothing$.
+\end{definition}
+
+\begin{remark}
+  We disallow constant sequences when talking about
+  accumulation points.
+\end{remark}
+
+\begin{prop}
+  Let $\mathrm{Acc}(A)$ be the set of accumulation
+  points of a set $A$. Then $\overline{A} = A \cup \mathrm{Acc}(A)$.
+\end{prop}
+
+\begin{proof}
+  We show that $A \cup \mathrm{Acc}(A)$ is closed,
+  which will imply $\overline{A} \subseteq A \cup \mathrm{Acc}(A)$
+  by the minimality of the closure. Write
+  \[
+    (A \cup \mathrm{Acc}(A))^c = A^c \cap \mathrm{Acc}(A)^c.
+  \]
+  Now assume $x \in A^c \cap \mathrm{Acc}(A)^c$.
+  Since $x \notin \mathrm{Acc}(A)$, there exists
+  $U_x$ open such that $x \in U_x$ and
+  \[(A \setminus \{x\}) \cap U_x = \varnothing.\]
+  But also $x \notin A$, so $A \setminus \{x\} = A$
+  and $A \cap U_x = \varnothing$. Then we can write
+  \[
+    (A \cup \mathrm{Acc}(A))^c
+    = A^c \cap \mathrm{Acc}(A)^c
+    = \bigcup_{x \in A^c \cap \mathrm{Acc}(A)^c} U_x.
+  \]
+  This is a union of open sets, hence open, and
+  so $A \cup \mathrm{Acc}(A)$ is closed.
+
+  For the other direction, assume $x \in A \cup \mathrm{Acc}(A)$.
+  If $x \in A$, we are done, so assume
+  $x \in \mathrm{Acc}(A) \setminus A$. Now assume
+  otherwise that $x \notin \overline{A}$.
+  Then $x \in (\overline{A})^c$, which is open.
+  Set $U = (\overline{A})^c$, so that
+  \[
+    U \cap (A \setminus \{x\}) = U \cap A = \varnothing.
+  \]
+  But then this says that $x$ is not an accumulation
+  point, in contradiction.
+\end{proof}
+
+\begin{definition}
+  We say that a topological space $X$ is \emph{sequentially compact} if
+  every bounded sequence has a convergent
+  subsequence.
+\end{definition}
+
+\begin{theorem}[Bolzano-Weierstrass]
+  Any bounded infinite set $S \subseteq \R^n$ has an
+  accumulation point.
+\end{theorem}
+
+\begin{proof}
+  Since $S$ is bounded, find a compact set containing
+  $S$. Then apply the later Theorem \ref{thm:compact-bw}.
+\end{proof}
+
+\begin{remark}
+  In general,
+  compactness is \emph{not} equivalent to sequential
+  compactness, but both imply the Bolzano-Weierstrass
+  theorem. However, in many spaces (including
+  metric spaces, in particular), the two notions coincide (and are
+  also equivalent to the Bolzano-Weierstrass theorem).
+\end{remark}
+
+\begin{theorem}
+  A sequentially compact space has the Bolzano-Weierstrass
+  property, namely that any bounded infinite set has an
+  accumulation point.
+\end{theorem}
+
+\begin{proof}
+  This is easy, pick a countable subset
+  (i.e. a sequence)
+  and apply sequential compactness.
+\end{proof}
+
+\begin{theorem}
+  \label{thm:compact-bw}
+  A compact space has the Bolzano-Weierstrass property, namely
+  that any infinite set has an accumulation point.
+\end{theorem}
+
+\begin{proof}
+  Let $A$ be an infinite set in $X$, where $X$ is compact.
+  Assume otherwise that $A$ has no accumulation points in $X$.
+  Then there is no accumulation point for $A$
+  outside of $A$, so $\mathrm{Acc}(A) \subseteq A$. This
+  gives
+  \[
+    \overline{A} = A \cup \mathrm{Acc}(A) = A,
+  \]
+  so $A$ is closed. Thus $A$ is a closed subset
+  of a compact space, hence compact. Now for
+  any $a \in A$, pick an open set $U_a$
+  such that $a \in U_a$ and
+  $U_a \cap (A \setminus \{a\}) = \varnothing$.
+  Write $A \subseteq \bigcup_{a \in A} U_a$, and
+  by compactness we can find a finite
+  subcover $A \subseteq \bigcup_{i = 1}^n U_{a_i}$.
+  Then observe that
+  \[
+    A = A \cap \bigcup_{i = 1}^n U_{a_i}
+    = \bigcup_{i = 1}^n (A \cap U_{a_i})
+    = \bigcup_{i = 1}^n \{a_i\}
+    = \{a_1, \ldots, a_n\},
+  \]
+  This is in contradiction with $A$ being infinite.
+\end{proof}
+
+\begin{remark}
+  Usually, this proof goes by showing that compactness
+  implies sequential compactness, which then
+  implies the Bolzano-Weierstrass property.
+  But this proof avoids going through convergent
+  sequences.
+\end{remark}
