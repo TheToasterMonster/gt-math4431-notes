@@ -1,0 +1,183 @@
+\chapter{Sept.~12 --- Separation Axioms}
+
+\section{Separation Axioms}
+\begin{definition}
+  A topological space is said to satisfy the
+  \emph{$T_0$ axiom} if the following holds:
+  For every $a, b \in X$ with $a \ne b$, there exists
+  $U$ open such that either $a \in U$, $b \notin U$
+  or $b \in U$, $a \notin U$.
+\end{definition}
+
+\begin{remark}
+  With the $T_0$ axiom, we cannot choose which
+  point is in $U$ and which is not.
+  For instance take $X = \{a, b\}$ with topology
+  $\mathcal{T} = \{\varnothing, \{a\}, X\}$.
+  This space is $T_1$, but we can only choose
+  $U$ to contain $a$.
+\end{remark}
+
+\begin{definition}
+  A space is said to satisfy the \emph{$T_1$ axiom}
+  if for every $a, b \in X$ with $a \ne b$,
+  there exist $U_a, U_b$ open such that
+  $a \in U_a$, $b \notin U_a$ and
+  $b \in U_b$, $a \notin U_b$.
+\end{definition}
+
+\begin{remark}
+  With the $T_1$ axiom, $U_a$ and $U_b$
+  need not be disjoint.
+\end{remark}
+
+\begin{definition}
+  A space is said to be $T_2$ or \emph{Hausdorff}
+  if the following holds: For every $a, b \in X$
+  with $a \ne b$, there exist $U_a, U_b$ open
+  such that $a \in U_a$, $b \in U_b$ and
+  $U_a \cap U_b = \varnothing$.
+\end{definition}
+
+\begin{example}
+  Metric spaces are Hausdorff. For any $a \ne b$,
+  pick balls with radius $d(a, b) / 2$ around $a, b$.
+\end{example}
+
+\begin{theorem}
+  We have the proper inclusion
+  $T_2 \subsetneq T_1 \subsetneq T_0$.
+\end{theorem}
+
+\begin{proof}
+  Come up with the examples as an exercise.
+  Some of them were already discussed above.
+\end{proof}
+
+\begin{theorem}
+  In a $T_1$ space, every singleton $\{x\}$ is
+  closed.
+\end{theorem}
+
+\begin{proof}
+  Fix $x \in X$. For every $y \ne x$, by the
+  $T_1$ axiom we can find $U_y$ open such that
+  $y \in U_y$ and $x \notin U_y$. In particular,
+  this means that $U_y \subseteq \{x\}^c$. Then
+  we can write
+  \[
+    \{x\}^c \subseteq \bigcup_{y \in \{x\}^c} U_y
+    \subseteq \{x\}^c.
+  \]
+  So $\{x\}^c = \bigcup_{y \in \{x\}^c} U_y$,
+  which is open as a union of open sets.
+  Thus $\{x\}$ is closed.
+\end{proof}
+
+\section{Properties of Hausdorff Spaces}
+\begin{theorem}
+  In a Hausdorff space, a point
+  $x$ is an accumulation point of
+  a set $A$ if and only if every neighborhood
+  of $x$ contains infinitely many elements of $A$.
+\end{theorem}
+
+\begin{proof}
+  $(\Leftarrow)$ This is clear.
+
+  $(\Rightarrow)$ Pick $x$ an accumulation point
+  of $A$, and assume otherwise that there exists a
+  neighborhood $U$ of $x$ with only finitely
+  many elements of $A$, i.e.
+  $|(U \setminus \{x\}) \cap A| < \infty$. Then
+  we can write
+  \[
+    (U \setminus \{x\}) \cap A = \{a_1, \ldots, a_n\}
+    = \bigcup_{i = 1}^n \{a_i\}.
+  \]
+  Since our space is Hausdorff and thus also $T_1$,
+  these singletons $\{a_i\}$ are closed. Then
+  $(U \setminus \{x\}) \cap A$ is closed as a
+  finite union of closed sets. Now since
+  our space is Hausdorff, for every
+  $1 \le i \le n$ we can separate $a_i$ from $x$,
+  i.e. there exists $U_{x_i}, U_{a_i}$ open
+  such that $x \in U_{x_i}$, $a_i \in U_{a_i}$
+  and $U_{x_i} \cap U_{a_i} = \varnothing$. Then
+  \[
+    U' = U \cap \bigcap_{i = 1}^n U_{x_i}
+  \]
+  is open as a finite intersection of open sets.
+  Also $x \in U'$ since $x \in U$ and
+  $x \in U_{x_i}$ for each $i$. But
+  \[
+    (U \setminus\{x\}) \cap A
+    = \{a_1, \dots, a_n\}
+    \subseteq \bigcup_{i = 1}^n U_{a_i}
+  \]
+  and $U_{a_j} \cap \bigcap_{i = 1}^n U_{x_i} = \varnothing$
+  for all $j$, so
+  $(U' \setminus \{x\}) \cap A = \varnothing$.
+  Contradiction.
+\end{proof}
+
+\begin{remark}
+  Maybe just the $T_1$ axiom is enough for this
+  theorem. Think more about this.
+\end{remark}
+
+\begin{definition}
+  A sequence $\{x_n\}_{n = 1}^\infty \subseteq (X, T)$
+  \emph{converges} to a point $x \in X$, written
+  $x_n \to x$, if for any open set $U$ containing $x$,
+  there exists $N_0 \in \N$ such that
+  $x_n \in U$ for every $n \ge N_0$.
+\end{definition}
+
+\begin{theorem}
+  In a Hausdorff space, a convergent sequence has a
+  unique limit.
+\end{theorem}
+
+\begin{proof}
+  Assume otherwise that $x_n \to L_1$ and
+  $x_n \to L_2$ with $L_1 \ne L_2$. Then since our
+  space is Hausdorff, we can find
+  $U_{L_1}, U_{L_2}$ open such that
+  $L_1 \in U_{L_1}$, $L_2 \in U_{L_2}$ and
+  $U_{L_1} \cap U_{L_2} = \varnothing$. Since
+  $x_n \to L_1$, there exists $N_0 \in \N$ such
+  that $x_n \in U_{L_1}$ for all $n \ge N_0$.
+  Similarly we can find $N_0' \in \N$ with
+  $x_n \in U_{L_2}$ for all $n \ge N_0'$ since
+  $x_n \to L_2$. But then for $N = \max\{N_0, N_0'\}$,
+  we have $x_N \in U_{L_1} \cap U_{L_2}$,
+  a contradiction.
+\end{proof}
+
+\begin{theorem}
+  In a Hausdorff space, every compact set is closed.
+\end{theorem}
+
+\begin{proof}
+  Let $C \subseteq X$ be compact, and we show
+  that $C^c$ is open. So fix $y \in C^c$.
+  For any $x \in C$, since our space is Hausdorff,
+  we can find $U_x, U_y$ open such that
+  $x \in U_x$, $y \in U_y$ and $U_x \cap U_y = \varnothing$.
+  Now consider $\bigcup_{x \in C} U_x$. This is
+  an open cover of $C$, so we can find a finite
+  subcover $C \subseteq \bigcup_{i = 1}^n U_{x_i}$
+  since $C$ is compact. Then the finite intersection
+  $\bigcap_{i = 1}^n U_{y_i}$ is an open set contain
+  $y$, and it is disjoint from $C$ by construction
+  since $U_{x_i} \cap U_{y_i} = \varnothing$ for each $i$.
+  Now set $\widetilde{U}_y = \bigcap_{i = 1}^n U_{y_i}$, so that
+  \[
+    C^c \subseteq \bigcup_{y \in C^c} \widetilde{U}_y
+    \subseteq C^c.
+  \]
+  Thus $C^c = \bigcup_{y \in C^c} \widetilde{U}_y$,
+  which is open as the union of open sets, so
+  we conclude that $C$ is closed.
+\end{proof}
