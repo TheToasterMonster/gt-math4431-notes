@@ -1,0 +1,226 @@
+\chapter{Sept.~19 --- Miscellaneous Topics}
+
+\section{Local Compactness and One-Point Compactification}
+\begin{definition}
+  A map $f : X \to Y$ is called \emph{open}
+  if for every $U \subseteq X$ open, $f(U)$ is open.
+  A \emph{topological embedding} is an injective,
+  continuous, and open map.
+\end{definition}
+
+\begin{remark}
+  This ensures that $f$ with codomain restricted to
+  $f(U)$ is a homeomorphism.
+\end{remark}
+
+\begin{example}
+  Demanding only that $f$ is injective and continuous
+  is not enough.
+  Let $(X, \mathcal{T})$ be any topological space
+  and let $X_{\text{trivial}}$ be $X$ with the
+  trivial topology. Then the identity map
+  $\id : X \to X_{\text{trivial}}$ is injective,
+  continuous, but not open is general if $\mathcal{T}$
+  is not trivial. So this is
+  \emph{not} a topological embedding.
+\end{example}
+
+\begin{theorem}
+  If $X$ is Hausdorff and locally compact, then
+  $X^+ = X \cup \{\infty\}$ is Hausdorff.
+\end{theorem}
+
+\begin{proof}
+  Pick $y, y' \in X^+$ with $y \ne y'$. If $y, y' \in X$,
+  then since $X$ is Hausdorff, there are disjoint
+  open sets $U, U' \subseteq X$ with $y \in U$
+  and $y' \in U$. But then $U, U' \subseteq X^+$
+  are still open and disjoint in $X^+$ since the identity
+  map embeds $X$ into $X^+$. Thus $U, U'$ are
+  disjoint open sets separating $y, y'$.
+
+  Now assume without loss of generality that
+  $y' = \infty$. By local compactness, there is a
+  open set $U \subseteq X$ containing
+  $y$ with compact closure. Then observe that
+  $(\overline{U})^c \cup \{\infty\}$ is open in $X^+$
+  since $\overline{U}$ is compact. Since $U$ is
+  also open in $X^+$ and clearly disjoint from
+  $(\overline{U})^c \cup \{\infty\}$, we have
+  separated $y, \infty$.
+\end{proof}
+
+\section{Distance to a Closed Set}
+\begin{definition}
+  Let $(X, d)$ be a metric space. For $x \in X$
+  and $A \subseteq X$, the \emph{distance from $x$
+  to $A$} is
+  \[
+    d(x, A) = \inf\{d(x, a) : a \in A\}.
+  \]
+\end{definition}
+
+\begin{remark}
+  This infimum is achieved in $\R^n$, but not necessarily in a
+  more general metric space.
+\end{remark}
+
+\begin{prop}
+  For any $x \in \R^n$ and closed set $A \subseteq \R^n$, there
+  exists $a \in A$ with $d(x, A) = d(x, a)$.
+\end{prop}
+
+\begin{proof}
+  Pick $a_0 \in A$ and note that $d(x, a_0) < \infty$.
+  Then set $R = 2 d(x, a_0) > 0$. Consider
+  $\overline{B_R(x)} \cap A$, which is a closed
+  and bounded set containing $a_0$, hence compact by
+  Heine-Borel.
+  Now apply the compact case to $\overline{B_R(x)} \cap A$
+  to get $a_{\text{min}}$ with
+  $d(x, a_{\text{min}}) = d(x, \overline{B_R(x)} \cap A)$.
+  Now any $a \in A$ with
+  $a \notin \overline{B_R(x)}$ satisfies
+  \[
+    d(x, a) \ge R > d(x, a_0) \ge d(x, a_{\text{min}}),
+  \]
+  and hence it cannot be the minimum. Thus
+  we must have $d(x, a_{\text{min}}) = d(x, A)$.
+\end{proof}
+
+\begin{remark}
+  Define
+  \[
+    \ell^2(\N) = \left\{\{a_n\}_{n = 1}^\infty \subseteq \R : \sum_{n = 1}^\infty a_n^2 < \infty\right\}.
+  \]
+  This is an inner product space over $\R$, and in particular
+  we can induce a metric
+  \[
+    d(\{a_n\}, \{b_n\}) =
+    \sqrt{
+      \sum_{n = 1}^\infty |a_n - b_n|^2
+    }
+  \]
+  to turn $(X, d)$ into a complete metric space.
+  Also notice that $\{e_i\}_{i = 1}^\infty$, where
+  $e_i$ is the sequence with $1$ in the $i$th position
+  and $0$ everywhere else, is
+  an orthonormal basis for $\ell^2(\N)$.
+\end{remark}
+
+\begin{lemma}
+  Define the set
+  \[
+    A = \left\{\left(1 + \frac{1}{i}\right) e_i\right\}_{i = 1}^\infty.
+  \]
+  Then $d(\{0\}, A) = 1$. In particular, this is
+  an example of a metric space where the infimum
+  of the distance from a point to a closed set
+  is not achieved.
+\end{lemma}
+
+\begin{proof}
+  Observe that
+  \[
+    d\left(\{0\}, (1 + 1 / i) e_i\right) = 1 + \frac{1}{i},
+  \]
+  and so
+  \[
+    d(\{0\}, A) =
+    \inf\{
+      d(\{0\}, (1 + 1 / i) e_i : i \in \N
+    \}
+    = \inf\left\{1 + \frac{1}{i} : i \in \N\right\} = 1.
+  \]
+  In particular, this infimum is clearly not
+  achieved since $d(\{0\}, (1 + 1 / i) e_i) = 1 + 1 / i > 1$
+  for each $i \in \N$. Now
+  we show that $A$ is closed by showing that it
+  contains its limit points. For this, first observe that
+  $d(a, a') \ge 1$ for any $a, a' \in A$ with $a \ne a'$. To see this, we can compute that
+  \[
+    d\left((1 + 1 / i) e_i, (1 + 1 / j) e_j\right) =
+    \sqrt{
+      \left(1 + \frac{1}{i}\right)^2 + \left(1 + \frac{1}{j}\right)^2
+    } \ge \sqrt{2} \ge 1
+  \]
+  whenever $i \ne j$.
+  Now assume we have $\{a_n\} \subseteq A$ with
+  $a_n \to x$. In particular, $\{a_n\}$ must be
+  a Cauchy sequence, and so for $\epsilon = 1 / 2$,
+  there exists $N_0 \in \N$ such that for all
+  $n, m \ge N_0$, we have $d(a_n, a_m) < 1 / 2$.
+  But $d(a, a') \ge 1$, so the sequence must stabilize
+  after $N_0$, and hence $x = a_n$ for $n \ge N_0$.
+  In particular, $x \in A$, so we conclude that
+  $A$ is closed. This finishes the example.
+\end{proof}
+
+\section{Nested Intersections in Compact Hausdorff Spaces}
+
+\begin{prop}
+  Let $X$ be a compact Hausdorff space, and $Y_i \subseteq X$ be closed and connected for $i \in I$.
+  Assume the $\{Y_i\}$ are totally ordered,
+  i.e. $Y_i \subseteq Y_j$ or $Y_j \subseteq Y_i$ for
+  all $i, j \in I$.
+  Then $\bigcap_{i \in I} Y_i$ is connected.
+\end{prop}
+
+\begin{proof}
+  Let $U, V$ be a separation of
+  $Y = \bigcap_{i \in I} Y_i$. Then $Y = U \cup V$
+  and
+  $U, V$ are open in $Y$, disjoint, and nonempty.
+  In particular, we can find $U', V'$ open in $X$
+  such that $U = U' \cap Y$ and $V = V' \cap Y$.
+  However, $U', V'$ may no longer separate $Y$. This
+  is why we need the Hausdorff condition. Use the
+  next lemma to fix the proof from here, see more
+  details in Homework 4.
+\end{proof}
+
+\begin{lemma}
+  In a compact Hausdorff space, if $C_1, C_2$
+  are two compact disjoint sets, then there
+  exist $U_1, U_2$ open and disjoint such that
+  $C_1 \subseteq U_1, C_2 \subseteq U_2$
+  and $U_1 \cap U_2 = \varnothing$.
+\end{lemma}
+
+\begin{proof}
+  First we show this in the case where
+  $C_1 = \{x\}$ is a singleton and $C_2 = C$.
+  For all $y \in C$, consider the pair $x$ and $y$.
+  Then there exists $U_{x, y}, V_{x, y}$ open
+  such that $x \in U_{x, y}$, $y \in V_{x, y}$,
+  and $U_{x, y} \cap V_{x, y} = \varnothing$. Observe
+  that $\bigcup_{y \in C} V_{x, y}$ is an open cover
+  of $C$, so by compactness there exists
+  a finite subcover $C \subseteq V = \bigcup_{i = 1}^n V_{x, y_i}$.
+  Then $x \in U = \bigcap_{i = 1}^n U_{x, y_i}$,
+  which is open as a finite intersection of
+  open sets. Also each $U_{x, y_i}$ is disjoint
+  from $V_{x, y_i}$, so $U$ is disjoint from $V$.
+  Then $U_1 = U$ and $U_2 = V$ are the desired
+  open sets.
+
+  Now let $C_1, C_2$ be any two disjoint compact sets.
+  For all $x \in C_1$, there are open sets
+  $U_{x, C_2}, V_{x, C_2}$ such that $x \in U_{x, C_2}$,
+  $C_2 \subseteq V_{x, C_2}$, and $U_{x, C_2} \cap V_{x, C_2} = \varnothing$.
+  Then we make the same argument.
+  We have
+  \[
+    C_1 \subseteq \bigcup_{x \in C_1} U_{x, C_2},
+  \]
+  an open cover of $C_1$, so by compactness there
+  is a finite subcover
+  $C_1 \subseteq U_1 = \bigcup_{i = 1}^m U_{x_i, C_2}$.
+  Then
+  \[C_2 \subseteq U_2 = \bigcap_{i = 1}^m V_{x_i, C_2},\]
+  which is open as a finite intersection of
+  open sets. As before, $U_1 \cap U_2 = \varnothing$
+  since each $U_{x_i, C_2}$ is disjoint from
+  $V_{x_i, C_2}$. Thus we get a separation
+  by disjoint compact sets.
+\end{proof}
