@@ -1,0 +1,207 @@
+\chapter{Sept.~24 --- Product Spaces}
+
+\section{Product Spaces}
+\begin{definition}
+  For two sets $X, Y$, define their \emph{Cartesian product} as
+  \[
+    X \times Y = \{(x, y) \mid x \in X, y \in Y\}.
+  \]
+  Similarly we can define\footnote{One can also think of an element of the product as a function $I \to \bigcup_{i \in I} X_i$, where $f(i) \in X_i$.}
+  \[
+    \prod_{i \in I} X_i = \{(x) \mid (x)_i \in X_i\}.
+  \]
+  If each $X_i$ is a topological space
+  with topology $\mathcal{T}_i$, then we define
+  the following topologies on $\prod_{i \in I} X_i$:
+  \begin{itemize}
+    \item The \emph{box topology}: Take as a basis
+      sets of the form $\prod_{i \in I} U_i$
+      where $U_i \subseteq X_i$ are open sets.
+
+      Suppose $B_1, B_2$ are basis sets and $x \in B_1 \cap B_2$.
+      Then by definition $B_1 = \prod_{i \in I} U_i$ and
+      $B_2 \in \prod_{i \in I} V_i$, where
+      $U_i, V_i \subseteq X_i$ are open. Then
+      set $B_3 = \prod_{i \in I} (U_i \cap V_i)$.
+      Clearly $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$
+      is a basis element (each $U_i \cap V_i$ is
+      a finite intersection of open sets and thus
+      open), so this is a basis.
+    \item The \emph{product topology}:
+      Take as a subbasis the sets
+      $\pi_{i}^{-1}(U_i) \subseteq \prod_{i \in I} X_i$
+      for each $i \in I$
+      and $U_i \subseteq X_i$ open. Here
+      $\pi_{i} : \prod_{j \in I} X_j \to X_i$
+      is the projection onto the $i$th factor.
+
+      The subbasis sets here are of the form
+      $U_i \times \prod_{j \ne i} X_j$. The general
+      basis sets will be finite intersections of
+      these sets, i.e.
+      \[
+        U_{i_1} \times \dots \times U_{i_n}
+        \times \prod_{j \ne i_1, \dots, i_n} X_j.
+      \]
+      These are called the \emph{cylindrical sets}.
+      Think of this as having only finitely many
+      restrictions on the factors, whereas we get
+      to choose arbitrarily many restrictions with the
+      box topology.
+  \end{itemize}
+\end{definition}
+
+\begin{remark}
+  For finite products, the box and product
+  topologies coincide. They differ for infinite
+  products: The box topology is finer than the
+  product topology (so the box topology has
+  more open sets).
+\end{remark}
+
+\begin{example}
+  Consider the following product spaces:
+  \begin{itemize}
+    \item The power set $\mathcal{P}(X) = 2^X = \{0, 1\}^X$.
+      Think of the elements as functions
+      $X \to \{0, 1\}$, which pick whether or not
+      to include each element of $X$ in the
+      corresponding subset. Thus the power set
+      comes with a natural topology (box or
+      product) if $\{0, 1\}$
+      is given the discrete topology.
+    \item The space $\{0, 1\}^\N$ is the
+      Cantor set, if $\{0, 1\}$ is given the
+      discrete topology. The Cantor set with
+      the metric topology inherited from $\R$ is
+      homeomorphic to $\{0, 1\}^\N$ with the product
+      topology. Think of the sequence $\{x_n\} \subseteq \{0, 1\}^\N$
+      as choosing whether to pick the left or right
+      third at each step.
+    \item The space $[0, 1]^\N$ is called
+      \emph{Hilbert's cube}. Note that
+      $[0, 1] \times [0, 1]^\N \cong [0, 1]^\N$.
+      For a homeomorphism, simply shift the sequence
+      one to
+      the right, putting a $0$ in the first slot.
+      Then forget about the $0$.
+  \end{itemize}
+\end{example}
+
+\begin{remark}
+  Always assume $\prod_{i \in I} X_i$ is given
+  the product topology, unless otherwise specified.
+\end{remark}
+
+\section{Properties of Product Spaces}
+\begin{theorem}
+  Assume $(X_i, \mathcal{T}_i)_{i \in I}$ are each
+  $T_0$, each $T_1$, or each Hausdorff. Then the
+  product
+  $\prod_{i \in I} X_i$ is also $T_0$, $T_1$,
+  or Hausdorff, respectively.
+\end{theorem}
+
+\begin{proof}
+  We prove only the Hausdorff case. Let
+  $(x), (y) \in \prod_{i \in I} X_i$ be distinct.
+  As $(x) \ne (y)$, there is $i \in I$
+  with $x_i \ne y_i$, where $x_i, y_i \in X_i$.
+  Since $X_i$ is Hausdorff, there exist
+  $A, B \subseteq X_i$ open, disjoint
+  with $x_i \in A$ and $y_i \in B$.
+  Then set
+  \[
+    U = A \times \prod_{j \ne i} X_j \quad \text{and} \quad
+    V = B \times \prod_{j \ne i} X_j.
+  \]
+  These sets are open since they are cylindrical,
+  and clearly $(x) \in U$, $(y) \in V$ since
+  $x_i \in A$, $y_i \in B$. Also $U, V$ are
+  disjoint since their $i$th components $A, B$
+  are disjoint. So this is a separation of
+  $(x)$ and $(y)$ by disjoint, open sets, and
+  we conclude that $\prod_{i \in I} X_i$ is Hausdorff.
+\end{proof}
+
+\begin{corollary}
+  Assume $(X_i, \mathcal{T}_i)_{i \in I}$ are each
+  $T_0$, each $T_1$, or each Hausdorff. Then
+  $\prod_{i \in I} X_i$ with the
+  box topology is also $T_0$, $T_1$,
+  or Hausdorff, respectively.
+\end{corollary}
+
+\begin{proof}
+  The box topology is finer than the product topology.
+\end{proof}
+
+\begin{remark}
+  In the product topology, the
+  projections $\pi_i : \prod_{j \in I} X_j \to X_i$
+  are continuous, onto, and open.
+  The continuity and surjectivity of $\pi_i$ is
+  essentially by construction of the product topology.
+  To see that $\pi_i$ is open, consider a basis
+  element of $\prod_{j \in I} X_j$, which is of the form
+  \[
+    U = U_{i_1} \times \dots \times U_{i_n}
+    \times \prod_{j \ne i_1, \dots, i_n} X_j.
+  \]
+  Then $\pi_i(U)$ is either one of the
+  $U_{i}$ or one of the $X_i$, which are both open.
+\end{remark}
+
+\begin{theorem}[Universal property of the product topology]
+  The following diagram commutes:
+  \[
+    \begin{tikzcd}
+      Z \ar[r, "f_i"] \ar[dr, "f", swap, dashed] & X_i \\
+       & \prod_{i \in I} X_i \ar[u, "\pi_i"']
+    \end{tikzcd}
+  \]
+  In particular, there exists a unique continuous
+  map $f : Z \to \prod_{i \in I} X_i$ such that
+  $f_i = \pi \circ f$ for each $i \in I$.
+\end{theorem}
+
+\begin{proof}
+  Define $f : Z \to \prod_{i \in I} X_i$ on the
+  set theory level by $(f(z))_i = f_i(z)$. Now we
+  show the continuity of $f$. Fix a basis
+  element
+  \[
+    B = U_{i_1} \times \dots \times U_{i_n} \times
+    \prod_{j \ne i_1, \dots, i_n} X_j.
+  \]
+  Then we can write
+  \[
+    f^{-1}(B) = \{z \mid f(z) \in B\}.
+  \]
+  Now observe that $f(z) \in B = U_{i_1} \times \dots \times U_{i_n} \times \prod_{j \ne i_1, \dots, i_n} X_j$
+  is equivalent to
+  \[
+    z \in \bigcap_{k = 1}^n f_{i_k}^{-1}(U_{i_k}).
+  \]
+  Since $U_{i_k}$ is open in $X_{i_k}$ and
+  each $f_i$ is continuous, each
+  $f_{i_k}^{-1}(U_{i_k})$ is open in $Z$.
+  Then this is a finite intersection of open
+  sets in $Z$, hence open. Thus $f$ is continuous.
+\end{proof}
+
+\begin{remark}
+  If we had the box topology, this argument
+  would not work. In particular, the intersection
+  that we get could be infinite, which would
+  not necessarily be open in $Z$.
+\end{remark}
+
+\begin{remark}
+  This universal property formalizes the notion that
+  we define functions from products by defining
+  a function on each factor. Additionally, this
+  generalizes the result from multivariable calculus
+  that a vector-valued function is continuous
+  precisely when each component function is continuous.
+\end{remark}
