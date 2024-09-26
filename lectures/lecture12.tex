@@ -1,0 +1,91 @@
+\chapter{Sept.~26 --- Products and Topological Properties}
+
+\section{Connectedness and Path-Connectedness}
+\begin{theorem}
+  Assume that each $X_i$ is path-connected, then
+  $\prod_{i \in I} X_i$ is path-connected.
+\end{theorem}
+
+\begin{proof}
+  Fix $x, y \in \prod_{i \in I} X_i$, and define
+  $x_i = \pi_i(x)$ and $y_i = \pi_i(y)$.
+  Since $x_i, y_i \in X_i$ and $X_i$ is
+  path-connected, there exists
+  $\gamma_i : [0, 1] \to X_i$ continuous
+  such that $\gamma_i(0) = x_i$ and
+  $\gamma_i(1) = y_i$. By the universal
+  property of products, there exists
+  $\gamma : [0, 1] \to \prod_{i \in I} X_i$
+  continuous such that $\pi_i \circ \gamma = \gamma_i$.
+  This implies
+  \[
+    (\gamma(0))_i = \gamma_i(0) = x_i,
+  \]
+  so $\gamma(0) = x$. Similarly
+  $\gamma(1) = y$, so $\gamma$ is a path
+  from $x$ to $y$. This says that
+  $\prod_{i \in I} X_i$ is path-connected.
+\end{proof}
+
+\begin{theorem}
+  If $\{X_i\}$ are connected, then
+  $\prod_{i \in I} X_i$ is connected.
+\end{theorem}
+
+\begin{proof}
+  Suppose otherwise that $\prod_{i \in I} X_i$
+  is not connected, i.e. there exists a
+  separation of $\prod_{i \in I} X_i$.
+  So let $U, V$ be two disjoint, nonempty, open
+  subsets of $\prod_{i \in I} X_i$ such that
+  $U \cup V = \prod_{i \in I} X_i$.
+
+  First we claim that there exist
+  $x \in U$ and $y \in V$ such $x_i \ne y_i$
+  only at a single index $i$. To see this,
+  note that $U$ and $V$ contain basis elements
+  $U' \subseteq U$ and $V' \subseteq V$. Then
+  these basis elements look like
+  \[
+    U' = U_{i_1} \times \dots \times U_{i_n}
+    \times \prod_{j \ne i_1, \dots, i_n} X_j
+    \quad \text{and} \quad
+    V' = V_{j_1} \times \dots \times V_{j_m}
+    \times \prod_{k \ne j_1, \dots, j_m} X_k.
+  \]
+  Then clearly we may choose $x \in U'$ and
+  $y \in V'$ such that they differ in only
+  finitely many coordinates. Then we have
+  \[
+    x = (x_1, \dots, x_n, \dots)
+    \quad \text{and} \quad
+    y = (y_1, \dots, y_n, \dots),
+  \]
+  where $x_i = y_i$ for $i > n$.
+  Now consider $x_i, y_i$ for $1 \le i \le n$.
+  If $x_i = y_i$, then do nothing. Otherwise
+  if $x_i \ne y_i$, define
+  \[
+    y' = (x_1, \dots, x_{i-1}, y_i, x_{i+1}, \dots).
+  \]
+  Then $y' \in \prod_{i \in I} X_i = U \cup V$,
+  so either $y' \in U$ or $y' \in V$ since
+  $U \cap V = \varnothing$. If $y' \in V$,
+  continue with $y = y'$, and if $y' \in U$,
+  change $x = y'$. Do this for the finitely many
+  $1 \le i < n$, and we obtain
+  $x_i = y_i$ except for a single index $i$.
+  Assume without loss of generality that $x_1 \ne y_1$.
+
+  Now define a map $f : X_1 \to \prod_{i \in I} X_i$
+  by
+  $f(\widetilde{x}) = (\widetilde{x}, x_2, x_3, \dots)$.
+  Note that $f$ is continuous by the universal
+  property of products (the component maps
+  $X_1 \to X_i$ are either the identity if
+  $X_i = X_1$ or constant otherwise). Then
+  $f(X_1)$ is connected since $X_1$ is connected
+  and $f$ is continuous. But now $x \in f(X_1) \cap U$
+  and $y \in f(X_1) \cap V$, so
+  $U \cap V \ne \varnothing$. Contradiction.
+\end{proof}
