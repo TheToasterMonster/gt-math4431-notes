@@ -1,0 +1,168 @@
+\chapter{Oct.~1 --- Tychonoff's Theorem}
+
+\section{Revisiting the Cantor Set}
+
+\begin{prop}
+  We have the following properties of the Cantor set $C$:
+  \begin{enumerate}[(a)]
+    \item $C \ne \varnothing$,
+    \item $|C| = \aleph$,
+    \item $C$ is closed,
+    \item $C$ is compact,
+    \item and $C$ is nowhere dense.
+  \end{enumerate}
+\end{prop}
+
+\begin{proof}
+  This was done in Homework 3.
+\end{proof}
+
+\begin{prop}
+  We have $C \cong \{0, 1\}^\N$, where $\{0, 1\}$ has
+  the discrete topology.
+\end{prop}
+
+\begin{proof}
+  Observe that to obtain $x \in C = \bigcap_{n=1}^\infty C_n$,
+  at each step $I_n$ we must choose the left or right
+  part of the current subinterval.
+  So define the map $f : C \to \{0, 1\}^\N$ by
+  \[
+    (f(x))_i = \begin{cases}
+      0 & \text{if $x$ belongs to the left third}, \\
+      1 & \text{if $x$ belongs to the right third}.
+    \end{cases}
+  \]
+  For injectivity, observe that if $a, b \in C$
+  with $a \ne b$, then there exists some
+  $N \in \N$ such that $3^{-N} < |a - b|$.
+  In particular, this means that $a$ and $b$ cannot
+  be in the same subinterval in $I_N$, so they
+  must have taken different paths at some step. This
+  implies that $f(a) \ne f(b)$.
+  For surjectivity, given a string $\{0, 1\}^\N$,
+  take the intersection of subintervals encoded
+  by it. This intersection consists of a unique
+  point and is a subset of $C$, so map the string to
+  this point. So $f$ is bijective.
+
+  Now we show that $f$ is continuous. Let $U$
+  be an open set in $\{0, 1\}^\N$. Note that
+  we may assume $U$ is a basis element, i.e.
+  \[
+    U = U_{\alpha_1} \times \cdots \times U_{\alpha_n} \times \prod_{i \ne \alpha_1, \ldots, \alpha_n} \{0, 1\},
+  \]
+  where the $U_{\alpha_i} \subseteq \{0, 1\}$ are
+  open. Since there are only finitely
+  many $U_{\alpha_i}$, we may assume that
+  \[
+    U = U_1 \times \dots \times U_m \times \{0, 1\}^\N,
+  \]
+  where $U_i = \{0\}$ or $U_i = \{1\}$. The general
+  basis elements may be written as finite unions and
+  intersections of sets of this form. Thus observe
+  that $f^{-1}(U)$ is the subinterval obtained
+  fixing the path given by the $U_i$,
+  terminating at the $m$th step and taking all
+  remaining choices. This gives some
+  subinterval $C \cap I \subseteq C \cap I_{m + 1}$.
+  Note that the subintervals of $I_{m + 1}$
+  are separated by gaps of width $3^{-(n + 1)}$, so
+  we can find an open set $V \subseteq \R$ containing $I$,
+  disjoint from the other subintervals of $I_{m + 1}$.
+  Then $C \cap I = C \cap V$ is open in $C$, so
+  $f^{-1}(U)$ is open in $C$ and thus $f$ is
+  continuous.
+
+  Now $C$ is compact, $\{0, 1\}^\N$ is Hausdorff,
+  and $f$ is a continuous bijection,
+  so $f$ is a homeomorphism.
+\end{proof}
+
+\begin{prop}
+  For the Cantor set $C$, we have $C^\N \cong C$.
+\end{prop}
+
+\begin{proof}
+  This is a homework exercise. For the bijection,
+  first show that
+  $\N \times \N \cong \N$ (traverse $\N \times \N$
+  in diagonals). For continuity, note that an open set
+  in $C^\N$ has finitely many constraints, and an
+  open set in each component of $C^\N$ has finitely
+  many constraints. This is still finite many
+  constraints in total.
+\end{proof}
+
+\section{Tychonoff's Theorem}
+
+\begin{theorem}
+  Let $(X_i, \mathcal{T}_i)$ be a compact space
+  for each $i \in I$. Then the product
+  $\prod_{i \in I} X_i$ is compact.
+\end{theorem}
+
+\begin{corollary}[Heine-Borel]
+  A set $C \subseteq \R^n$ is compact if and only
+  if $C$ is closed and bounded.
+\end{corollary}
+
+\begin{proof}
+  $(\Rightarrow)$ This direction is easy. Immediately
+  $C$ is closed since $\R^n$ is Hausdorff. For
+  boundedness, cover $C$ by open balls of radius $R$
+  centered at the origin, then use compactness.
+
+  $(\Leftarrow)$ We previously showed that
+  $[a, b] \subseteq \R$ is compact. Since $C$ is
+  bounded, there is some box in $\R^n$ with
+  \[
+    C \subseteq \prod_{i=1}^n [a_i, b_i],
+  \]
+  which is compact by Tychonoff's theorem. Thus
+  $C$ is a closed subset of a compact set, so $C$ is
+  compact.
+\end{proof}
+
+\section{Set Theory and the Axiom of Choice}
+
+\begin{example}[Russell's paradox]
+  Define the set
+  \[
+    S = \{\text{all sets $R$} \mid \text{$R$ does not contain itself}\}.
+  \]
+  Then consider whether $S$ contains itself.
+  If $S \in S$, then $S$ cannot contain itself by
+  the definition of $S$. But
+  if $S \notin S$, then $S$ must contain itself
+  by the definition of $S$ again. Both
+  cases lead to contradictions.
+\end{example}
+
+\begin{remark}
+  The above paradox led to the creation of
+  the \emph{Zermelo-Fraenkel} ($\ZF$) axioms of set
+  theory. More commonly in mathematics, we use $\ZFC$
+  set theory, adding the \emph{axiom of choice} ($\AC$) to
+  $\ZF$.
+\end{remark}
+
+\begin{axiom}[Axiom of choice]
+  Let $X_i$ be a collection of nonempty sets. Then
+  there exists
+  a choice function $f : I \to \bigcup_{i \in I} X_i$
+  such that $f(i) \in X_i$ for all $i \in I$.
+\end{axiom}
+
+\begin{theorem}[P. Cohen]
+  The systems $\ZF \cup \AC$ and
+  $\ZF \cup \neg \AC$ are both sound, i.e.
+  they do not lead to contradictions. In other words,
+  the axiom of choice is independent of $\ZF$.
+\end{theorem}
+
+\begin{theorem}
+  Tychonoff's theorem is equivalent to the axiom of
+  choice, i.e.
+  they imply each other.
+\end{theorem}
