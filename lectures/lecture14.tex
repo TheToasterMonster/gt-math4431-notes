@@ -1,0 +1,205 @@
+\chapter{Oct.~3 --- Tychonoff's Theorem, Part 2}
+
+\section{Zorn's Lemma}
+
+\begin{definition}
+  A \emph{partially ordered set} is a set $X$ with
+  a relation $\le$ such that
+  \begin{enumerate}[(i)]
+    \item (reflexivity) $x \le x$ for all
+      $x \in X$,
+    \item (anti-symmetry) for all $x, y \in X$,
+      if $x \le y$ and $y \le x$, then $x = y$,
+    \item and (transitivity) for all $x, y, z \in X$,
+      if $x \le y$ and $y \le z$, then $x \le z$.
+  \end{enumerate}
+\end{definition}
+
+\begin{definition}
+  A \emph{chain} in a partial ordering is a
+  completely ordered subset.
+\end{definition}
+
+\begin{definition}
+  An \emph{upper bound} of a chain $C \subseteq X$ is
+  an element $u \in X$ such that $a \le u$
+  for every $a \in C$. A \emph{maximum}
+  of $X$ is an element $z \in X$ such that there
+  is no $x \in X$, $x \ne z$, with $x \le z$.
+\end{definition}
+
+\begin{lemma}[Zorn's lemma]
+  Let $(X, \le)$ be a partially ordered set.
+  If every chain in $X$ has an upper bound, then
+  $X$ attains a maximum.
+\end{lemma}
+
+\begin{remark}
+  Zorn's lemma is equivalent to the axiom of choice.
+  Assuming Zorn's lemma, consider the set of
+  partial choice functions on the index set $I$,
+  ordered by inclusion of their domains of
+  definition. Show an upper bound and obtain a full
+  choice function as a maximal element by Zorn's
+  lemma.
+\end{remark}
+
+\begin{remark}
+  When applying Zorn's lemma,
+  the partial ordering $\le$ is often taken to be
+  inclusion or containment of sets.\footnote{One can easily verify that this satisfies the properties of a partial order.} In this case,
+  taking the union over chains typically yields
+  an upper bound.\footnote{In many cases, one shows
+  that this is indeed an upper bound by projecting
+  to some element of the chain.}
+\end{remark}
+
+\begin{example}
+  Every vector space has a basis. Here a basis is a
+  maximal linearly independent set. Let $X$ be the
+  set of linearly independent sets, ordered by
+  inclusion. Argue that the union over a chain in
+  $X$ is again a linearly independent set and thus
+  an upper bound. Finish using Zorn's lemma.
+\end{example}
+
+\begin{example}
+  Every ring has maximal ideals. This can also be
+  shown via Zorn's lemma.
+\end{example}
+
+\section{Proof of Tychonoff's Theorem}
+
+\begin{remark}
+  Recall from Homework 4 the following problem:
+  A space $X$ is compact if and only if it has the
+  \emph{finite intersection property}, i.e. for every
+  collection $\{C_i\}_{i \in I}$ of closed sets
+  such that $\bigcap_{i \in I_\text{fin}} \ne \varnothing$
+  for every finite set $I_\text{fin} \subseteq I$,
+  we have $\bigcap_{i \in I} C_i \ne \varnothing$. This
+  is some description of compactness via closed
+  sets instead of open sets.
+  We will use this characterization of compactness
+  for the proof of Tychonoff's theorem.
+\end{remark}
+
+\begin{theorem}[Tychonoff]
+  Let $(X_i, \T_i)$ be compact for each $i \in I$.
+  Then $\prod_{i \in I} X_i$ is compact.
+\end{theorem}
+
+\begin{proof}
+  Let $\{C_\alpha\}_{\alpha \in J}$ be a collection
+  of closed subsets of $\prod_{i \in I} X_i$
+  such that for every finite subset
+  $J_\text{fin} \subseteq J$, we have
+  $\bigcap_{\alpha \in J_\text{fin}} C_\alpha \ne \varnothing$.
+  We then wish to show that $\bigcap_{\alpha \in J} C_\alpha \ne \varnothing$.
+
+  We say that a collection of sets of
+  $\prod_{i \in I} X_i$ has the FI property if
+  for every finite subcollection, the intersection is
+  nonempty. Let $S$ be the collection of all
+  FI-subcollections of the product space. Define
+  a partial order over $S$ by containment. We want
+  maximal elements in $S$, which we will find by
+  applying Zorn's lemma. Let $R$ be a chain in $S$,
+  and define $T = \bigcup_{r \in R} r$. Clearly
+  $r \le T$ for every $r \in R$, so it suffices
+  to show that $T$ satisfies FI. To do this, pick
+  $J_\text{fin}$, some finite set of indices for
+  elements of $T$. For each $\alpha \in J_\text{fin}$,
+  there exists $r_\alpha \in R$ such that
+  $T_\alpha \in r_\alpha$. Pick the largest
+  $r_\alpha$ out of the $\alpha \in J_\text{fin}$
+  (we can do this since $R$ is a chain and
+  $J_\text{fin}$ is finite, so e.g. run a sorting
+  algorithm). Let $r_\beta$ be this largest element.
+  Then $T_\alpha \in r_\beta$ for all
+  $\alpha \in J_\text{fin}$, and $r_\beta$ satisfies
+  FI. Thus we obtain
+  \[
+    \bigcap_{\alpha \in J_\text{fin}} T_\alpha
+    \ne \varnothing
+  \]
+  by the FI property of $r_\beta$. So $T$ also
+  satisfies FI, and thus $T$ is an upper bound
+  for $R$. Then by Zorn's lemma, there is
+  a maximum $M$ in the set $S$ of
+  FI-subcollections. We may assume
+  $M$ contains $\{C_\alpha\}_{\alpha \in J}$.
+
+  At this point, we make a few observations:
+  \begin{enumerate}[(i)]
+    \item If $\{S_j\}_{j = 1}^m \in M$, then
+      $\bigcap_{j = 1}^m S_j \in M$.
+
+      To see this, assume not. Then consider
+      $M \cup \{\bigcap_{j = 1}^m S_j\}$.
+      Any finite subset looks like
+      \[
+        m_1 \cap \cdots \cap m_k \cap S_{j_1} \cap \cdots \cap S_{j_\ell},
+      \]
+      which are all in $M$, so this intersection
+      is nonempty. Thus $M \cup \{\bigcap_{j = 1}^m S_j\}$
+      is a larger FI collection containing $M$,
+      which contradicts the maximality of $M$.
+    \item If $S \subseteq X$ such that
+      $S \cap m \ne \varnothing$ for every $m \in M$,
+      then $S \in M$.
+
+      Similarly assume not. Then consider
+      $M \cup \{S\}$. Any finite subset looks like
+      \[
+        m_1 \cap \cdots \cap m_k \cap S = S \cap \bigcap_{j = 1}^k m_j.
+      \]
+      By the previous observation,
+      $\bigcap_{j = 1}^k m_j \in M$, so
+      $S \cap \bigcap_{j = 1}^k m_j \ne \varnothing$.
+      Thus $M \cup \{S\}$ is a larger FI collection
+      containing $M$, which again contradicts the
+      maximality of $M$.
+  \end{enumerate}
+  Now consider the $M$ that contained
+  $\{C_\alpha\}_{\alpha \in J}$. For each $i \in I$,
+  consider $\{\pi_i(C_\alpha)\}_{\alpha \in J}$. Note
+  that $\pi_i(C_\alpha)$ need not be closed.
+  So look at the closure $\overline{\pi_i(C_\alpha)} \subseteq X_i$
+  instead. Then for any $J_\text{fin}$ finite,
+  \[
+    \bigcap_{\alpha \in J_\text{fin}} \overline{\pi_i(C_\alpha)}
+    \ne \varnothing
+  \]
+  because we have that
+  \[
+    \varnothing \ne \pi_i\left(\bigcap_{\alpha \in J_\text{fin}} C_\alpha\right)
+    \subseteq \bigcap_{\alpha \in J_\text{fin}} \overline{\pi_i(C_\alpha)}.
+  \]
+  Here we know $\bigcap_{\alpha \in J_\text{fin}} C_\alpha \ne \varnothing$
+  by the FI property of $M$. Then by the compactness
+  of the $X_i$, we have
+  \[
+    \bigcap_{\alpha \in J} \overline{\pi_i(C_\alpha)}
+    \ne \varnothing.
+  \]
+  So choose $y_i \in \bigcap_{\alpha \in J} \overline{\pi_i(C_\alpha)}$, and
+  set $y = (y_i)_{i \in I}$. Now we claim that
+  \[
+    y \in \bigcap_{\alpha \in J} C_\alpha
+    \subseteq \prod_{i \in I} X_i,
+  \]
+  which immediately implies Tychonoff's theorem.
+  To show this, we need the following facts:
+  \begin{enumerate}
+    \item For every $U \subseteq \prod_{i \in I} X_i$ open and
+      $T \in M$, we have $U \cap T \ne \varnothing$.
+    \item For every $i \in I$ and
+      $U_i \subseteq X_i$ open, we have
+      $\pi_i^{-1}(U_i) \in M$.
+  \end{enumerate}
+  We will finish the proof next class. Also, in
+  the above argument, a slight issue is that
+  we should work with all of $M$ instead of
+  just with $\{C_\alpha\}_{\alpha \in J}$.
+\end{proof}
