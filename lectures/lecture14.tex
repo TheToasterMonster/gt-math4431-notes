@@ -114,9 +114,9 @@
   $T_\alpha \in r_\alpha$. Pick the largest
   $r_\alpha$ out of the $\alpha \in J_\text{fin}$
   (we can do this since $R$ is a chain and
-  $J_\text{fin}$ is finite, so e.g. run a sorting
-  algorithm). Let $r_\beta$ be this largest element.
-  Then $T_\alpha \in r_\beta$ for all
+  $J_\text{fin}$ is finite, so we can run a sorting
+  algorithm, for instance). Let $r_\beta$ be this
+  largest element. Then $T_\alpha \in r_\beta$ for all
   $\alpha \in J_\text{fin}$, and $r_\beta$ satisfies
   FI. Thus we obtain
   \[
@@ -163,43 +163,35 @@
   \end{enumerate}
   Now consider the $M$ that contained
   $\{C_\alpha\}_{\alpha \in J}$. For each $i \in I$,
-  consider $\{\pi_i(C_\alpha)\}_{\alpha \in J}$. Note
-  that $\pi_i(C_\alpha)$ need not be closed.
-  So look at the closure $\overline{\pi_i(C_\alpha)} \subseteq X_i$
+  consider $\{\pi_i(m)\}_{m \in M}$. Note
+  that $\pi_i(m)$ need not be closed.
+  So look at the closures $\overline{\pi_i(m)} \subseteq X_i$
   instead. Then for any $J_\text{fin}$ finite,
   \[
-    \bigcap_{\alpha \in J_\text{fin}} \overline{\pi_i(C_\alpha)}
+    \bigcap_{j \in J_\text{fin}} \overline{\pi_i(m_j)}
     \ne \varnothing
   \]
   because we have that
   \[
-    \varnothing \ne \pi_i\left(\bigcap_{\alpha \in J_\text{fin}} C_\alpha\right)
-    \subseteq \bigcap_{\alpha \in J_\text{fin}} \overline{\pi_i(C_\alpha)}.
+    \varnothing \ne \pi_i\left(\bigcap_{j \in J_\text{fin}} m_j\right)
+    \subseteq \bigcap_{j \in J_\text{fin}} \overline{\pi_i(m_j)}.
   \]
-  Here we know $\bigcap_{\alpha \in J_\text{fin}} C_\alpha \ne \varnothing$
+  Here we know $\bigcap_{j \in J_\text{fin}} m_j \ne \varnothing$
   by the FI property of $M$. Then by the compactness
   of the $X_i$, we have
   \[
-    \bigcap_{\alpha \in J} \overline{\pi_i(C_\alpha)}
+    \bigcap_{j \in J} \overline{\pi_i(m_j)}
     \ne \varnothing.
   \]
-  So choose $y_i \in \bigcap_{\alpha \in J} \overline{\pi_i(C_\alpha)}$, and
-  set $y = (y_i)_{i \in I}$. Now we claim that
+  So choose $x_i \in \bigcap_{j \in J} \overline{\pi_i(m_j)}$, and
+  set $x = (y_i)_{i \in I}$. Now we claim that (note
+  that the $C_\alpha$ are already closed)
   \[
-    y \in \bigcap_{\alpha \in J} C_\alpha
+    x \in
+    \bigcap_{m \in M} \overline{m}
+    \subseteq \bigcap_{\alpha \in J} C_\alpha
     \subseteq \prod_{i \in I} X_i,
   \]
   which immediately implies Tychonoff's theorem.
-  To show this, we need the following facts:
-  \begin{enumerate}
-    \item For every $U \subseteq \prod_{i \in I} X_i$ open and
-      $T \in M$, we have $U \cap T \ne \varnothing$.
-    \item For every $i \in I$ and
-      $U_i \subseteq X_i$ open, we have
-      $\pi_i^{-1}(U_i) \in M$.
-  \end{enumerate}
-  We will finish the proof next class. Also, in
-  the above argument, a slight issue is that
-  we should work with all of $M$ instead of
-  just with $\{C_\alpha\}_{\alpha \in J}$.
+  We finish the proof of this claim next class.
 \end{proof}

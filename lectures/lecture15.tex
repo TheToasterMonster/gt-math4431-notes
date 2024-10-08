@@ -1,0 +1,112 @@
+\chapter{Oct.~8 --- Tychonoff's Theorem, Part 3}
+
+\section{Proof of Tychonoff's Theorem, Continued}
+\begin{theorem}[Tychonoff]
+  Let $(X_i, \T_i)$ be compact for each $i \in I$.
+  Then $\prod_{i \in I} X_i$ is compact.
+\end{theorem}
+
+\begin{proof}
+  We left off with the claim that
+  \[
+    x \in \bigcap_{m \in M} \overline{m}
+    \subseteq \bigcap_{\alpha \in J} C_\alpha
+    \subseteq \prod_{i \in I} X_i.
+  \]
+  To show this,
+  we will show that $x \in \overline{m}$ for every
+  $m \in M$. We need to show:
+  \begin{itemize}
+    \item For every open $U \subseteq \prod_{i \in I} X_i$ containing $x$ and
+      $m \in M$, we have $U \cap m \ne \varnothing$.
+
+      Pick $U$ a basis element (containing $x$), i.e.
+      \begin{align*}
+        U = U_{j_1} \times \cdots \times U_{j_n} \times
+        \prod_{k \ne j_1, \ldots, j_n} X_k
+        &= \left(U_{j_1} \times \prod_{r \ne j_1} X_r\right)
+        \cap \cdots \cap \left(U_{j_n} \times \prod_{r' \ne j_n} X_{r'}\right) \\
+        &= \pi_{j_1}^{-1}(U_{j_1}) \cap \cdots \cap \pi_{j_n}^{-1}(U_{j_n}).
+      \end{align*}
+      By property $(i)$ of $M$, it is enough to show
+      that $\prod_{j_\ell}^{-1} U_{j_\ell} \in M$ for
+      each $\ell$,
+      since this implies that $U \in M$, so that
+      $U \cap m \ne \varnothing$ for every $m \in M$
+      by the FI property of
+      $M$. Now consider $\pi_{j_\ell}^{-1}(U_{j_\ell})$.
+      By property $(ii)$ of $M$, it suffices to show
+      that
+      $\pi_{j_\ell}^{-1}(U_{j_\ell}) \cap m \ne \varnothing$
+      for every $m \in M$. This happens if
+      and only if $U_{j_\ell} \cap \pi_{j_\ell}(m) \ne \varnothing$, so it is enough to show this.
+      As $x \in U$, we have $x_{j_\ell} \in U_{j_\ell}$.
+      But also
+      \[
+        x_{j_\ell} \in \bigcap_{m \in M} \overline{\pi_{j_\ell}(m)},
+      \]
+      so $x_{j_\ell} \in \overline{\pi_{j_\ell}(m)}$.
+      Since $U_{j_\ell}$ is open and contains $x_{j_\ell}$,
+      this means that $U_{j_\ell} \cap \pi_{j_\ell}(m) \ne \varnothing$.
+  \end{itemize}
+  Thus $\bigcap_{\alpha \in J} \ne \varnothing$,
+  so $\prod_{i \in I} X_i$ has the finite intersection
+  property, i.e. $\prod_{i \in I} X_i$ is compact.
+\end{proof}
+
+\begin{remark}
+  If we have Tychonoff's theorem, why does Heine-Borel
+  not work for a product of infinitely many factors
+  $\R$? We run into issues with boundedness: It is
+  nontrivial to even define a metric on an infinite
+  product of metric spaces. An analogue of
+  Heine-Borel for infinite dimensions is the
+  Arzela-Ascoli theorem, which requires an additional
+  property on top of closedness and boundedness
+  (equicontinuity).
+\end{remark}
+
+\section{Quotient Spaces}
+
+\begin{definition}
+  A continuous and surjective function
+  $p : X \to Y$ is called
+  a \emph{quotient map} if $U \subseteq Y$ is
+  open if and only if $p^{-1}(U)$ is open.
+\end{definition}
+
+\begin{example}
+  If a continuous surjection $p$ is also an open
+  map, then $p$ is a quotient map.
+\end{example}
+
+\begin{definition}
+  An \emph{equivalence relation} on a set $X$ is a
+  relation $\sim$ which is
+  \begin{enumerate}[(i)]
+    \item (reflexivity) $x \sim x$ for all $x \in X$,
+    \item (symmetry) $x \sim y$ if and only if
+      $y \sim x$,
+    \item and (transitivity) if $x \sim y$ and
+      $y \sim z$, then $x \sim z$.
+  \end{enumerate}
+  Define the \emph{equivalence class} of $x \in X$
+  as $[x] = \{y \in X \mid y \sim x\}$, and
+  $X / {\sim}$ to be the set of equivalence classes.
+  There is a standard map $p : X \to X / {\sim}$
+  given by $x \mapsto [x]$.\footnote{Note that $p$ is surjective by construction. For any equivalence class, pick any member of it as a preimage.}
+\end{definition}
+
+\begin{definition}
+  We define the \emph{quotient topology} on $X / {\sim}$ by
+  $p : X \to X / {\sim}$ being a quotient map.
+\end{definition}
+
+\begin{example}
+  Consider the interval $X = [0, 1]$. Define $\sim$
+  via the
+  equivalence classes $[0] = \{0, 1\} = [1]$ and
+  $[x] = \{x\}$ for $x \ne 0, 1$. Then the resulting
+  quotient space $X / {\sim}$ is homeomorphic to
+  the circle.\footnote{This an example of \emph{gluing}.}
+\end{example}
