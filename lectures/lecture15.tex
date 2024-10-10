@@ -72,7 +72,7 @@
   A continuous and surjective function
   $p : X \to Y$ is called
   a \emph{quotient map} if $U \subseteq Y$ is
-  open if and only if $p^{-1}(U)$ is open.
+  open if and only if $p^{-1}(U) \subseteq X$ is open.
 \end{definition}
 
 \begin{example}
@@ -98,8 +98,10 @@
 \end{definition}
 
 \begin{definition}
-  We define the \emph{quotient topology} on $X / {\sim}$ by
-  $p : X \to X / {\sim}$ being a quotient map.
+  We define the \emph{quotient topology} on $X / {\sim}$ by giving it the smallest topology such that
+  $p : X \to X / {\sim}$ is a quotient map, i.e.
+  we define $U \subseteq X / {\sim}$ to be open if
+  $p^{-1}(U) \subseteq X$ is open.
 \end{definition}
 
 \begin{example}

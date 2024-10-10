@@ -1,0 +1,147 @@
+\chapter{Oct.~10 --- Quotient Spaces}
+
+\section{Examples of Quotient Spaces}
+
+\begin{example}[Line with two origins]
+  Take two copies of $\R$, i.e.
+  $X = \R \times \{0, 1\}$,
+  and define the equivalence relation
+  $(x, 0) \sim (x, 1)$ for all $x \ne 0$. Then
+  $X / {\sim}$ is not Hausdorff (consider
+  the points $x = (0, 0)$ and $y = (0, 1)$, any
+  neighborhoods around $x, y$ must intersect), even
+  though $X$ is.
+\end{example}
+
+\begin{remark}
+  The above example shows that the quotient of a
+  Hausdorff space need not be Hausdorff.
+\end{remark}
+
+\begin{example}[Cylinder]
+  Take a square in $\R^2$ and identify the
+  left and right sides (in the same direction). Then
+  the quotient space is homeomorphic to a cylinder.
+\end{example}
+
+\begin{example}[M\"obius strip]
+  Now take a square in $\R^2$ and identify the
+  left and right sides in opposite directions. The
+  resulting quotient space is still a 2D surface,
+  but it is not homeomorphic to a cylinder. In
+  particular, the M\"obius strip is not orientable.
+\end{example}
+
+\begin{example}[Torus]
+  Take a square in $\R^2$ and identify the
+  left and right sides, as well as the top and
+  bottom sides (both in the same direction). The
+  resulting quotient space is
+  homeomorphic to a torus. In particular, the
+  torus has no boundary.
+\end{example}
+
+\begin{example}[Klein bottle]
+  Take the square in $\R^2$, identify the left
+  and right (in the same direction), but identify
+  the top and bottom in opposite directions. This
+  quotient space is the Klein bottle, which cannot
+  be embedded in $\R^3$ (but can embed in $\R^4$). The
+  Klein bottle is also not orientable.
+\end{example}
+
+\begin{example}[Cone]
+  Take the square in $\R^2$, identify the left
+  and right sides (in the same direction), and
+  collapse the bottom side to a single point.
+  The quotient is a cone, which is homeomorphic
+  to a disk.
+\end{example}
+
+\begin{remark}
+  We can define the \emph{connected sum} $S_1 \con S_2$ of
+  two surfaces $S_1, S_2$ by
+  removing a disk from each surface, and then
+  gluing the boundaries of these removed disks
+  together.
+\end{remark}
+
+\section{Properties of Quotient Spaces}
+
+\begin{theorem}
+  Given a surjective map $p : X \to Y$,
+  the set of $U \subseteq Y$ such that
+  $p^{-1}(U)$ is open defines a topology on $Y$.
+\end{theorem}
+
+\begin{proof}
+  First, for $\varnothing \in Y$, we have
+  $p^{-1}(\varnothing) = \varnothing \in X$ is open,
+  so $\varnothing \in Y$ is open. Similarly,
+  $p^{-1}(Y) = X$ is open, so $Y$ is open.
+  Thus $\varnothing, Y$ are both open.
+
+  Now fix an arbitrary union $\bigcup_{\alpha \in I} U_{\alpha} \subseteq Y$ of open sets.
+  Then we have
+  \[
+    p^{-1}\left(\bigcup_{\alpha \in I} U_{\alpha}\right)
+    = \bigcup_{\alpha \in I} p^{-1}(U_{\alpha}).
+  \]
+  These sets are open in $X$ by assumption, so their
+  union is open as well. Thus
+  $\bigcup_{\alpha \in I} U_{\alpha}$ is also open.
+
+  Finally, consider a finite intersection
+  $\bigcap_{i = 1}^n U_i \subseteq Y$ of open sets.
+  Similarlly we see that
+  \[
+    p^{-1}\left(\bigcap_{i = 1}^n U_i\right)
+    = \bigcap_{i = 1}^n p^{-1}(U_i).
+  \]
+  Again these are open in $X$ by assumption, so their
+  finite intersection is open. So
+  $\bigcap_{i = 1}^n U_i$ is also open.
+\end{proof}
+
+\begin{corollary}
+  If $X$ is compact, then $X / {\sim}$ with
+  the quotient topology is compact.
+\end{corollary}
+
+\begin{proof}
+  We have $X / {\sim} = p(X)$, so $X / {\sim}$ is
+  the continuous image of a compact set.
+\end{proof}
+
+\begin{theorem}[Universal property of quotient spaces]
+  Let $X, Y$ be topological spaces and $\sim$ an
+  equivalence relation on $X$. Let $f : X \to Y$ be
+  a continuous map and
+  further suppose
+  that $f(x) = f(y)$ whenever $x \sim y$. Then
+  the following diagram commutes:
+  \[
+    \begin{tikzcd}
+      X \ar[r, "f"] & Y \\
+      X / {\sim} \ar[ur, "\widetilde{f}"', dashed] \ar[u, "p"] &
+    \end{tikzcd}
+  \]
+  i.e. there exists a unique function
+  $\widetilde{f} : X / {\sim} \to Y$
+  such that $f = \widetilde{f} \circ p$.
+\end{theorem}
+
+\begin{proof}
+  For $[x] \in X / {\sim}$, define
+  $\widetilde{f}([x]) = f(x)$. This is well-defined
+  by assumption since $f$ respects $\sim$. To
+  show that $\widetilde{f}$ is continuous, consider
+  an open set $U \subseteq Y$. Then
+  \[
+    \widetilde{f}^{-1}(U) = p(f^{-1}(U)),
+  \]
+  which is open since $f$ is continuous and
+  $p$ is a quotient map (notice $f^{-1}$
+  gives all of $[x]$ if it gives $x$).
+\end{proof}
+
