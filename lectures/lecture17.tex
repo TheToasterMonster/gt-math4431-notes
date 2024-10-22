@@ -1,0 +1,212 @@
+\chapter{Oct.~22 --- Urysohn Metrization}
+
+\section{More Properties of Quotient Spaces}
+Recall the universal property of the quotient space.
+The following is a corollary:
+
+\begin{corollary}
+  Assume $g : X \to Y$ is continuous, and define
+  $x \sim y$ if $g(x) = g(y)$. Then the following
+  diagram commutes:
+  \[
+    \begin{tikzcd}
+      X \ar[r, "g"] \ar[d, "\pi", swap] & Y \\
+      X / {\sim} \ar[ur, "\widetilde{g}"', dashed]
+    \end{tikzcd}
+  \]
+  i.e. there exists a unique continuous map
+  $\widetilde{g} : X / {\sim} \to Y$ such that
+  $g = \widetilde{g} \circ \pi$.
+\end{corollary}
+
+\begin{remark}
+  Note that in the above corollary, $\widetilde{g}$
+  is injective by construction.
+\end{remark}
+
+\section{More on Separation Axioms}
+
+\begin{remark}
+  For now we will assume all spaces are $T_1$, i.e.
+  every singleton is closed.
+\end{remark}
+
+\begin{definition}
+  A space is \emph{regular} if for every
+  $x \in X$ and $A \subseteq X$ closed with
+  $x \notin A$, there exists $U_x, V_A$
+  open such that $x \in U_x$, $A \subseteq V_A$,
+  and $U_x \cap V_A = \varnothing$.
+\end{definition}
+
+\begin{definition}
+  A space is \emph{normal} if for
+  every $A, B \subseteq X$ closed with $A \cap B = \varnothing$,
+  there exist $U_A, V_B$ open such that
+  $A \subseteq U_A$, $B \subseteq V_B$, and
+  $U_A \cap V_B = \varnothing$.
+\end{definition}
+
+\begin{remark}
+  Since we assume $T_1$, singletons are closed
+  and thus we can think of $x$ as the closed set
+  $\{x\}$. This says that normal is stronger than
+  regular. Similarly, we can set $A = \{y\}$, which
+  is closed by the $T_1$ condition.
+  This says that regular is stronger
+  than Hausdorff. All of these relationships are
+  strict.
+\end{remark}
+
+\begin{prop}
+  Every metric space is normal.
+\end{prop}
+
+\begin{proof}
+  Take $A, B \subseteq (X, d)$ closed with
+  $A \cap B = \varnothing$. Define $f : X \to \R$
+  by
+  \[
+    f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}.
+  \]
+  Recall from Homework 4 that
+  \begin{itemize}
+    \item if $d(x, A) = 0$ and $A$ is closed, then
+      $x \in A$,
+    \item and if $x \in A$, $B$ is closed, and
+      $A \cap B = \varnothing$, then
+      $d(x, B) > 0$.
+  \end{itemize}
+  So for all $x \in A$, we have
+  \[
+    f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}
+    = \frac{0}{d(x, B)} = 0
+  \]
+  since $d(x, A) = 0$ and
+  $d(x, B) > 0$. On the other hand,
+  if $x \in B$, then
+  \[
+    f(x) = \frac{d(x, A)}{d(x, A) + d(x, B)}
+    = \frac{d(x, A)}{d(x, A)} = 1
+  \]
+  since $d(x, B) = 0$ and $d(x, A) > 0$. Now note that
+  we actually have $f : X \to [0, 1]$, where
+  $f|_A \equiv 0$ and $f|_B \equiv 1$. Also note
+  that $f$ is continuous since $d(x, A)$ and $d(x, B)$
+  are continuous and $d(x, A)$ and $d(x, B)$ are
+  never simultaneously zero. So define
+  $U = f^{-1}([0, 1 / 4))$ and $V = f^{-1}((3 / 4, 1])$,
+  which are open since $f$ is continuous.
+  Then $A \subseteq U$ and $B \subseteq V$,
+  and $U \cap V = \varnothing$ since they are
+  preimages of disjoint sets.
+\end{proof}
+
+\section{Urysohn's Metrization Theorem}
+\begin{definition}
+  A space $X$ has \emph{locally countable basis}
+  if for every $x \in X$, there exists
+  a countable sequence of open neighborhoods
+  $\{U_n\}$, each with $x \in U_n$, such that
+  for any basis element $B$ containing $x$, there
+  exists $U_n$ such that $x \in U_n \subseteq B$. A
+  space $X$ has \emph{countable basis} if $X$ has
+  a countable basis.
+\end{definition}
+
+\begin{remark}
+  Metric spaces have locally countable bases, e.g.
+  take $U_n = B(x, 1 / n)$.
+\end{remark}
+
+\begin{remark}
+  A space with locally countable basis is
+  sometimes called \emph{first countable}, and a space
+  with countable basis (not local) is sometimes
+  called \emph{second countable}. Note that
+  $\R^n$ is second countable (for instance
+  take open balls with rational centers rational
+  radii).
+\end{remark}
+
+\begin{theorem}[Urysohn's metrization theorem]
+  If $X$ is a normal topological space with
+  countable basis, then $X$ is metrizable,
+  i.e. there exists a metric $d : X \times X \to \R$
+  such that the induced metric topology coincides
+  with the given topology on $X$.
+\end{theorem}
+
+\begin{lemma}[Urysohn's lemma]
+  Let $X$ be a normal topological space. Let
+  $A, B \subseteq X$ be closed with $A \cap B = \varnothing$.
+  Then there exists $f : X \to [0, 1]$ continuous
+  such that $f|_A \equiv 0$ and $f|_B \equiv 1$.\footnote{A function $f$ satisfying these properties is called an \emph{Urysohn function}.}
+\end{lemma}
+
+\begin{proof}
+  Define $P = \Q \cap [0, 1] = \{p_0, p_1, \dots\}$
+  such that $p_0 = 1$ and $p_0 = 0$ (note that
+  $P$ is countable, so we may enumerate it).
+  We want to find open sets $U_p \subseteq X$
+  for $p \in P$ such that $A \subseteq U_p$ and
+  \begin{enumerate}
+    \item $U_1 = U_{p_0} = B^c$,
+    \item and for all $p < q$ in $P$, we have
+      $\overline{U_p} \subseteq U_q$.
+  \end{enumerate}
+  We define these sets via induction. First
+  set $U_1 = U_{p_0} = B^c$ as a base case, which
+  is open since $B$ is closed and contains $A$
+  since $A \cap B = \varnothing$. Now
+  for the induction step, assume we have
+  $U_{p_0}, \dots, U_{p_n}$ open such that
+  $\overline{U_{p_i}} \subseteq U_{p_j}$
+  for $i < j$. Consider $p_{n + 1}$. We have
+  the following cases:
+  \begin{itemize}
+    \item Suppose $p_{n + 1} > p = \max\{p_0, \dots, p_n\}$.
+      In this case, note that
+      $\overline{U_p}$ and $B$ are disjoint
+      ($B$ is separated from $U_p$ by an open set,
+      so $B$ cannot intersect the closure of $U_p$).
+      Then normality guarantees open sets
+      $U \supseteq \overline{U_p}$ and
+      $V \supseteq B$ such that $U \cap V = \varnothing$.
+      Set $U_{p_{n + 1}} = U$.
+    \item Now suppose $p_{n + 1} < p = \min\{p_0, \dots, p_n\}$.
+      Here note that $U_p^c$ is closed, so
+      $A, U^c$ are closed and disjoint. Use the
+      same normality argument as above to find
+      $U_{p_{n + 1}}$.
+    \item Otherwise $p_i < p_{n + 1} < p_j$
+      for some $0 \le i, j \le n$ (we have finitely
+      many $p_k$ at each step, so we can order them
+      and find the right location for $p_{n + 1}$).
+      Then use the normality argument on
+      $\overline{U_{p_i}}$ and $U_{p_j}^c$.
+  \end{itemize}
+  After the induction, we obtain the countable
+  collection of open sets $U_p$ for $p \in P$.
+  Also for $p \in \Q \setminus P$, define
+  $U_p = \varnothing$
+  if $p < 0$ and $U_p = X$ if $p > 1$. This
+  defines $U_p$ for all $p \in \Q$. Now define
+  $f : X \to \R$ by
+  \[
+    f(x) = \inf\{p \in \Q \mid x \in U_p\}.
+  \]
+  First note that if $x \in A$, then
+  $x \in A \subseteq U_p$ for every $p \in P$,
+  so $f(x) = \inf\{p \in P\} = 0$.
+  On the other hand, if $x \in B$, then
+  $x \in B = U_1^c \subseteq U_p^c$ for every
+  $p \le 1$, i.e. $x \notin U_p$ for $p \le 1$.
+  But $x \in U_p = X$ for $p > 1$, so
+  $f(x) = \inf\{q \in \Q \mid q > 1\} = 1$.
+  So $f$ satisfies the desired properties of an
+  Urysohn function.
+
+  It only remains to show that $f$ is continuous,
+  which we will do next class.
+\end{proof}
