@@ -1,0 +1,106 @@
+\chapter{Oct.~24 --- Urysohn Metrization, Part 2}
+
+\section{Urysohn's Metrization Theorem, Continued}
+\begin{lemma}[Urysohn's lemma]
+  Let $X$ be a normal space, and $A, B \subseteq X$
+  closed and disjoint. Then there exists
+  a continuous map $f : X \to [0, 1]$ such that
+  $f|_A \equiv 0$ and $f|_B \equiv 1$.
+\end{lemma}
+
+\begin{proof}
+  We continue from last time. We had
+  open sets $U_p$ for $p \in P = \Q \cap [0, 1]$ and
+  $f : X \to \R$ given by
+  \[
+    f(x)  = \inf\{p \in P : x \in U_p\},
+  \]
+  and we must now show that $f$ is continuous. To
+  do this, fix $x \in X$ and let $\epsilon > 0$. We
+  must find an open set $U \ni x$ such that
+  $f(U) \subseteq (f(x) - \epsilon, f(x) + \epsilon)$.
+  Since $\Q$ is dense in $\R$, we can find
+  $r, s \in \Q$ such that
+  \[
+    f(x) - \epsilon < r < f(x) < s < f(x) + \epsilon.
+  \]
+  Set $V = U_s \setminus \overline{U_r}$, which
+  is open since $U_s$ is open and
+  $\overline{U_r}$ is closed. Note that $x \in U_s$
+  since $f(x) < s$. Now also
+  $x \notin \overline{U_r}$ since otherwise we have
+  $x \in \overline{U_r} \subseteq U_t$ for some
+  $r < t < f(x)$, which is impossible since this
+  implies $f(x) \le t < f(x)$. So we see that
+  $x \in V$. Now pick any $y \in V$, and we show that
+  \[
+    f(x) - \epsilon < r \le f(y) \le s < f(x) + \epsilon.
+  \]
+  Since $y \in V = U_s \setminus \overline{U_r}$,
+  we have $r \le f(y)$ since $y \notin \overline{U_r}$
+  and $f(y) \le s$ since $y \in U_s$. This
+  implies the desired inequality, so $V$ is
+  the desired open neighborhood containing $x$. Thus
+  $f$ is continuous.
+\end{proof}
+
+\begin{theorem}[Urysohn metrization theorem]
+  Let $X$ be a normal space which is
+  second-countable, i.e. $X$ has countable basis.
+  Then $X$ is metrizable.
+\end{theorem}
+
+\begin{remark}
+  The converse does not hold: Not all metric spaces
+  are second-countable (although most are).
+\end{remark}
+
+\begin{theorem}[Tietze extension theorem]
+  Let $X$ be a normal space, $A \subseteq X$
+  closed, and $f : A \to \R$ continuous. Then
+  one may extend $f$ to all of $X$ in a continuous
+  fashion (preserving the same bound as $f$ if $f$ is
+  bounded on $A$).
+\end{theorem}
+
+\begin{remark}
+  The Tietze extension theorem is a generalization
+  of Urysohn's lemma: For disjoint closed sets
+  $A, B \subseteq X$, define $f : A \cup B \to \R$
+  by $f|_A \equiv 0$ and $f|_B \equiv 1$.
+  Then Tietze extension defines $f$ on all of $X$.
+\end{remark}
+
+\begin{example}
+  Consider Hilbert's cube $X = [0, 1]^\N$, which
+  is compact by Tychonoff's theorem. We can define
+  a metric on $X$ by
+  $d_X(x, y) = \sum_{n = 1}^\infty 2^{-n} d(x_n, y_n)$,
+  where $d$ is any metric on $[0, 1]$. Note that $d$
+  is bounded since $d$ is continuous and
+  $[0, 1] \times [0, 1]$ is compact. To
+  see that $d_X$ is indeed a metric, note that:
+  \begin{enumerate}[(i)]
+    \item We clearly have $d_X(x, y) \ge 0$.
+      If $d_X(x, y) = 0$, then $d(x_n, y_n) = 0$
+      for every $n$, so $x = y$.
+    \item Symmetry is clear from the definition of
+      $d_X$.
+    \item For the triangle inequality, fix $x, y, z \in X$ and we have
+      \[
+        d_X(x, z) = \sum_{n = 1}^\infty 2^{-n} d(x_n, z_n)
+        \le \sum_{n = 1}^\infty 2^{-n} (d(x_n, y_n) + d(y_n, z_n)).
+      \]
+      Since $d_X(x, y)$ and $d_X(y, z)$ are finite,
+      the above series converges absolutely and thus
+      we can split the above series into the sum of
+      two separate series:
+      \[
+        d_X(x, z) \le \sum_{n = 1}^\infty 2^{-n} d(x_n, y_n) + \sum_{n = 1}^\infty 2^{-n} d(y_n, z_n)
+        = d_X(x, y) + d_X(y, z).
+      \]
+      This gives the triangle inequality.
+  \end{enumerate}
+  The proof of the Urysohn metrization theorem
+  will utilize this observation.
+\end{example}
