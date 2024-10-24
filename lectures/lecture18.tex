@@ -63,6 +63,10 @@
   bounded on $A$).
 \end{theorem}
 
+\begin{proof}
+  Prove this as an exercise. Use Urysohn's lemma.
+\end{proof}
+
 \begin{remark}
   The Tietze extension theorem is a generalization
   of Urysohn's lemma: For disjoint closed sets
@@ -91,10 +95,10 @@
         d_X(x, z) = \sum_{n = 1}^\infty 2^{-n} d(x_n, z_n)
         \le \sum_{n = 1}^\infty 2^{-n} (d(x_n, y_n) + d(y_n, z_n)).
       \]
-      Since $d_X(x, y)$ and $d_X(y, z)$ are finite,
+      Since $d_X(x, y)$ and $d_X(y, z)$ are finite ($d(x, y) \ge 0$ is bounded and $\sum_{n = 1}^\infty 2^{-n}$ converges),
       the above series converges absolutely and thus
       we can split the above series into the sum of
-      two separate series:
+      two series:
       \[
         d_X(x, z) \le \sum_{n = 1}^\infty 2^{-n} d(x_n, y_n) + \sum_{n = 1}^\infty 2^{-n} d(y_n, z_n)
         = d_X(x, y) + d_X(y, z).
