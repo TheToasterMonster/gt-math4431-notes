@@ -1,0 +1,157 @@
+\chapter{Oct.~29 --- Urysohn Metrization, Part 3}
+
+\section{Proof of Urysohn's Metrization Theorem}
+
+\begin{theorem}[Urysohn metrization theorem]
+  If a topological space $X$ is normal and second countable, i.e. it
+  has a countable basis, then
+  $X$ is metrizable.
+\end{theorem}
+
+\begin{proof}
+  The idea is to embed $X$ into the Hilbert cube
+  $[0, 1]^\N$ with the product topology. Note that
+  $[0, 1]^\N$ is metrizable, e.g. take the metric
+  \[
+    d(x, y) = \sum_{i = 1}^\infty \frac{1}{2^i} 
+    d_i(x_i, y_i),
+  \]
+  where $d_i$ is a metric on $[0, 1]$. We saw last
+  time that $d$ is a metric, and it also induces
+  the product topology (check this as an exercise,
+  we can throw away the tail since the series
+  converges).
+
+  Now we give the embedding. Since $X$ is second
+  countable, let $\{B_n\}_{n = 1}^\infty$ be a
+  basis for the topology on $X$. For each pair of
+  indices $n < m$ with $\overline{B_n} \subseteq B_m$,
+  note that $\overline{B_n} \cap B_m^c = \varnothing$.
+  Now $\overline{B_n}$ and $B_m^c$ are also both
+  closed, so by Urysohn's lemma, there exists a
+  continuous
+  function $g_{n, m} : X \to [0, 1]$ such that
+  $g_{n, m}(\overline{B_n}) = \{1\}$ and
+  $g_{n, m}(B_m^c) = \{0\}$. Now for any
+  $x \in X$, define its image by
+  \[
+    f(x) = (g_{n, m}(x))_{n, m \in \N, \overline{B_n} \subseteq B_m}.
+  \]
+  Note that these pairs $n, m$ exist since
+  there is some basis element $B_m$ which contains
+  $x$. Then $\{x\}$ is closed (we
+  assume $T_1$) and $B_m^c$ is closed, so by
+  normality there exists an open set $U_n$ containing
+  $x$ such that $\overline{U_n} \subseteq B_m^c$.
+  Then there exists a basis element $B_n \subseteq U_n$
+  containing $x$ with the same property.
+
+  Now we show that $f : X \to [0, 1]^\N$ is a
+  topological embedding. We show that:
+  \begin{enumerate}[(i)]
+    \item $f$ is injective: Assume
+      $x \ne y$, and we want to find a pair $n, m$
+      such that $g_{n, m}(x) \ne g_{n, m}(y)$.
+      Since we assume $X$ is $T_1$, normal implies
+      Hausdorff and thus
+      we can find disjoint open sets $U_x, U_y$
+      with $x \in U_x$ and $y \in U_y$. From this
+      we can find $V_x, V_y$ open such that
+      \[
+        x \in V_x \subseteq \overline{V_x} \subseteq U_x
+        \quad \text{and} \quad
+        y \in V_y \subseteq \overline{V_y} \subseteq U_y.
+      \]
+      We can get such sets by considering
+      $\{x\}$ and $U_x^c$ and using normality. Now
+      there exists a basis element $B_n$ such that
+      $x \in B_n \subseteq V_x$. Then by considering
+      $\{x\}$ and $B_n^c$,  using normality we can
+      find a basis element $B_m$ such that
+      \[
+        x \in B_m \subseteq \overline{B_m} \subseteq B_n.
+      \]
+      Then $g_{n, m}(x) = 1$ (we have
+      $x \in \overline{B_m}$) but $g_{n, m}(y) = 0$
+      (we have $y \notin B_n$),
+      so we get $f(x) \ne f(y)$.
+    \item $f$ is continuous: This is by the
+      universal property of product spaces since
+      each $g_{n, m}$ is continuous.
+    \item $f$ is open: Fix an open set $B \subseteq X$,
+      which we may assume is a basis
+      element, say $B = B_n$. Pick $x \in B$, and
+      consider
+      $f(x) \in [0, 1]^\N$. Since $[0, 1]^\N$
+      with the product topology is metrizable, we
+      want to show that
+      there exists $\epsilon > 0$ such that if
+      $d(f(x), z) < \epsilon$ then $z \in f(B)$.
+
+      Assume not, i.e. for every $\epsilon > 0$
+      there exists $z_\epsilon \in [0, 1]^\N$
+      such that $d(f(x), z_\epsilon) < \epsilon$
+      but $z_\epsilon \notin f(B)$. Recall that
+      $B = B_n$, so for each $m$ with
+      $\overline{B_n} \subseteq B_m$, we have
+      the function
+      $g_{n, m} : X \to [0, 1]$ such that
+      $g_{n, m}(\overline{B_n}) = \{1\}$. Setting
+      $\epsilon = 1 / n$, we can find
+      $z_n \in [0, 1]^\N$ such that
+      $d(f(x), z_n) < 1 / n$. As $[0, 1]^\N$ is
+      compact (by Tychonoff's theorem), there exists
+      a convergent subsequence $z_{n_k} \to z$, where
+      $z$ must satisfy $d(f(x), z) = 0$, i.e.
+      $f(x) = z$.
+      As $z_n \notin f(B)$, we have $z_n \in f(B)^c$,
+      and thus
+      \[
+        f(x) = z \in \overline{f(B)^c}
+        = (f(B)^\circ)^c.
+      \]
+      Since $x \in B$, we have
+      $f(x) \in f(B)$ by definition and so
+      \[
+        f(x) \in f(B) \cap (f(B)^\circ)^c,
+      \]
+      which implies that $f(x) \in \partial f(B)$.
+      Get a contradiction from this somehow.
+  \end{enumerate}
+  Then $f$ is a topological embedding, and so by
+  restricting $d$
+  we get a metric on $f(X)$ and thus on $X$.
+\end{proof}
+
+\begin{remark}
+  The idea in the previous proof is to generate
+  bump functions similar to
+  \[
+    f(x) =
+    \begin{cases}
+      \exp(-1 / (1 - x^2)^2) & \text{if } |x| < 1, \\
+      0 & \text{otherwise}
+    \end{cases}
+  \]
+  in analysis. Then the peaks roughly indicate where
+  the points in $X$ are.
+\end{remark}
+
+\section{Omissions in Point-Set Topology}
+Here are some topics we omitted but may be of
+interest:
+\begin{itemize}
+  \item More on metrization:
+    The Nagata-Smirnov and Bing metrization theorems.
+  \item Dimension theory: The \emph{topological dimension}
+    of a space, for instance we would expect that
+    the dimension of $\R^n$ is $n$. This is distinct
+    from the notion of \emph{Hausdorff dimension}.
+  \item Topological manifolds: We can cover
+    a space with an \emph{atlas} consisting
+    of of \emph{charts}
+    each homeomorphic to $\R^n$. The charts should
+    be compatible on their intersection, i.e.
+    $(f \circ g^{-1})|_{A \cap B} = \id$.
+  \item The Baire category theorem.
+\end{itemize}
