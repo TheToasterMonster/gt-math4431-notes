@@ -27,26 +27,30 @@
   basis for the topology on $X$. For each pair of
   indices $n < m$ with $\overline{B_n} \subseteq B_m$,
   note that $\overline{B_n} \cap B_m^c = \varnothing$.
-  Now $\overline{B_n}$ and $B_m^c$ are also both
-  closed, so by Urysohn's lemma, there exists a
+  Now $\overline{B_n}$ and $B_m^c$ are also
+  closed, so by Urysohn's lemma there exists a
   continuous
   function $g_{n, m} : X \to [0, 1]$ such that
   $g_{n, m}(\overline{B_n}) = \{1\}$ and
-  $g_{n, m}(B_m^c) = \{0\}$. Now for any
-  $x \in X$, define its image by
+  $g_{n, m}(B_m^c) = \{0\}$. Now define
+  $f : X \to f(X) \subseteq [0, 1]^\N$ (with the
+  subspace topology) by
   \[
     f(x) = (g_{n, m}(x))_{n, m \in \N, \overline{B_n} \subseteq B_m}.
   \]
   Note that these pairs $n, m$ exist since
   there is some basis element $B_m$ which contains
-  $x$. Then $\{x\}$ is closed (we
+  $x$. Also note that $f(X)$ is metrizable (simply
+  obtain a metric from $[0, 1]^\N$ by restricting
+  $d$).
+  Then $\{x\}$ is closed (we
   assume $T_1$) and $B_m^c$ is closed, so by
   normality there exists an open set $U_n$ containing
   $x$ such that $\overline{U_n} \subseteq B_m^c$.
   Then there exists a basis element $B_n \subseteq U_n$
   containing $x$ with the same property.
 
-  Now we show that $f : X \to [0, 1]^\N$ is a
+  Now we show that $f : X \to f(X)$ is a
   topological embedding. We show that:
   \begin{enumerate}[(i)]
     \item $f$ is injective: Assume
@@ -75,52 +79,45 @@
       $x \in \overline{B_m}$) but $g_{n, m}(y) = 0$
       (we have $y \notin B_n$),
       so we get $f(x) \ne f(y)$.
-    \item $f$ is continuous: This is by the
-      universal property of product spaces since
-      each $g_{n, m}$ is continuous.
-    \item $f$ is open: Fix an open set $B \subseteq X$,
-      which we may assume is a basis
-      element, say $B = B_n$. Pick $x \in B$, and
-      consider
-      $f(x) \in [0, 1]^\N$. Since $[0, 1]^\N$
-      with the product topology is metrizable, we
-      want to show that
-      there exists $\epsilon > 0$ such that if
-      $d(f(x), z) < \epsilon$ then $z \in f(B)$.
+    \item $f$ is continuous: The function
+      $f : X \to [0, 1]^\N$ is continuous by the
+      universal property of products since
+      each $g_{n, m}$ is continuous. Now
+      $f(X)$ has the subspace topology, so $f : X \to f(X)$
+      is continuous.
+    \item $f$ is open (on $f(X)$ with the subspace topology): Fix an open set $B \subseteq X$,
+      and we would like to show that
+      $f(B) \subseteq f(X) \subseteq [0, 1]^\N$.
+      Fix $y = f(x) \in f(B)$.
+      Since $f(X)$ is metrizable, it suffices
+      to find $\epsilon > 0$ such that whenever
+      $z \in f(X)$ and $d(z, y) < \epsilon)$, then
+      we have $z \in f(B)$.
 
-      Assume not, i.e. for every $\epsilon > 0$
-      there exists $z_\epsilon \in [0, 1]^\N$
-      such that $d(f(x), z_\epsilon) < \epsilon$
-      but $z_\epsilon \notin f(B)$. Recall that
-      $B = B_n$, so for each $m$ with
-      $\overline{B_n} \subseteq B_m$, we have
-      the function
-      $g_{n, m} : X \to [0, 1]$ such that
-      $g_{n, m}(\overline{B_n}) = \{1\}$. Setting
-      $\epsilon = 1 / n$, we can find
-      $z_n \in [0, 1]^\N$ such that
-      $d(f(x), z_n) < 1 / n$. As $[0, 1]^\N$ is
-      compact (by Tychonoff's theorem), there exists
-      a convergent subsequence $z_{n_k} \to z$, where
-      $z$ must satisfy $d(f(x), z) = 0$, i.e.
-      $f(x) = z$.
-      As $z_n \notin f(B)$, we have $z_n \in f(B)^c$,
-      and thus
-      \[
-        f(x) = z \in \overline{f(B)^c}
-        = (f(B)^\circ)^c.
-      \]
-      Since $x \in B$, we have
-      $f(x) \in f(B)$ by definition and so
-      \[
-        f(x) \in f(B) \cap (f(B)^\circ)^c,
-      \]
-      which implies that $f(x) \in \partial f(B)$.
-      Get a contradiction from this somehow.
+      Assume otherwise that this
+      does not hold, i.e. for every $\epsilon > 0$
+      there exists $z_\epsilon$ such that
+      $d(z_\epsilon, y) < \epsilon$ and $z_\epsilon \notin f(B)$.
+      Now set $\epsilon_n = 1 / n$, which gives a
+      sequence $z_n \in f(X) \subseteq [0, 1]^\N$.
+      Since $[0, 1]^\N$ is compact metric space,
+      it is sequentially compact, so there exists a
+      convergent subsequence $z_{n_k} \to z \in [0, 1]^\N$.
+      Since $d(z_{n_k}, y) < 1 / n_k \le 1 / k$ for
+      every $k$, so $d(z, y) = 0$, i.e. $z = y \in f(X)$.
+
+      Now let $z_n = f(w_n)$ for some point
+      $w_n \in X$, which is unique for each $z_n$
+      since $f$ is injective. Note that by
+      continuity and injectivity, we have
+      $w_n \to x$. Since
+      $z_n \notin f(B)$, we must have $w_n \notin B$.
+      Then $w_n \in B^c$ and $x$ is a limit point
+      of $B^c$, so we must have $x \in B^c$ since
+      $B^c$ is closed. Contradiction.
   \end{enumerate}
-  Then $f$ is a topological embedding, and so by
-  restricting $d$
-  we get a metric on $f(X)$ and thus on $X$.
+  Then $f$ is a topological embedding, and so the
+  metric on $f(X)$ gives a metric on $X$.
 \end{proof}
 
 \begin{remark}
@@ -135,6 +132,11 @@
   \]
   in analysis. Then the peaks roughly indicate where
   the points in $X$ are.
+\end{remark}
+
+\begin{remark}
+  Normality can sometimes be difficult to show, but
+  any compact Hausdorff space is normal.
 \end{remark}
 
 \section{Omissions in Point-Set Topology}

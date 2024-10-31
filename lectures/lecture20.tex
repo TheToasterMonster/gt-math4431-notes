@@ -1,0 +1,99 @@
+\chapter{Oct.~31 --- Algebraic Topology}
+
+\section{Introduction to Algebraic Topology}
+
+\begin{remark}
+  We previously showed, using connectedness, that
+  $\R$ cannot be homeomorphic to $\R^n$ for any
+  $n \ge 2$. How can we show that $\R^2$ and
+  $\R^3$ are not homeomorphic?
+
+  One attempt might be to use a similar idea and
+  try removing a line from $\R^2$, thus disconnecting
+  it. But the image of
+  a line need not still be a line (unlike a point, whose
+  image is always a point). For instance,
+  space-filling curves exist, so it is not obvious
+  that the image cannot also disconnect $\R^3$.
+
+  Another example is the cylinder and the M\"obius
+  strip. How can we show that these surfaces are
+  not homeomorphic? They are both of dimension $2$,
+  connected, compact, etc. One way in this case
+  is to consider normal maps, and show that the cylinder
+  is orientable whereas the M\"obius strip is not.
+
+  Algebraic topology provides new algebraic invariants
+  (e.g. the fundamental group)
+  that allow us to distinguish spaces in these cases.
+  Distinguishing these algebraic invariants is
+  often a much easier task.
+\end{remark}
+
+\section{Homotopy}
+\begin{definition}
+  Two maps $f, g : X \to Y$ are
+  \emph{homotopic} if there exists a \emph{homotopy}
+  $H : X \times [0, 1] \to Y$ which satisfies
+  $H(x, 0) = f(x)$ and $H(x, 1) = g(x)$ for all
+  $x \in X$.
+\end{definition}
+
+\begin{remark}
+  It is helpful to think of the parameter
+  $t \in [0, 1]$ as time, and we move from $f$ to $g$.
+\end{remark}
+
+\begin{example}
+  Here are some examples:
+  \begin{enumerate}
+    \item In $\R$, the maps $f(x) = x$ and
+      $g(x) = 0$ are homotopic. Define $H : \R \times [0, 1] \to \R$
+      by
+      \[
+        H(x, t) = (1 - t)f(x) + t g(x) = (1 - t)x.
+      \]
+      In fact, this method (linear interpolation) works for any continuous
+      $f : \R \to \R$, since $\R$ is
+      \emph{convex}.
+    \item If $Y$ is path-connected, then any
+      two constant maps $f_1, f_2 : X \to Y$ are
+      homotopic. By path-connectedness, there is a
+      curve $\gamma : [0, 1] \to Y$ with $\gamma(0) = f_1(x)$
+      and $\gamma(1) = f_2(x)$, then
+      \[
+        H(x, t) = \gamma(t)
+      \]
+      is a homotopy between $f_1$ and $f_2$.
+    \item Let $f : X \to X$ be the identity map,
+      which we will use to describe the shape of $X$.
+      Now we would like a \emph{skeleton} (like a
+      wireframe) $g : X \to Y \subseteq X$ such that
+      $g|_Y \equiv \id_Y$ and $g$ is homotopic
+      to $f$. Note that skeletons need not be unique
+      or homeormorphic
+      (consider a two-holed donut in $\R^2$).
+    \item A circle in $\R^2$ with a line segment
+      protruding from it is homotopic to a normal circle.
+      In some sense, the important feature of the
+      circle from the perspective of homotopy is
+      that it has a hole.
+  \end{enumerate}
+\end{example}
+
+\begin{remark}
+  Homotopy allows us to capture the idea of holes in
+  a space.
+\end{remark}
+
+\begin{definition}
+  Two spaces $X, Y$ are called \emph{homotopy equivalent}
+  if there are maps $f : X \to Y$ and
+  $g : Y \to X$ such that $f \circ g$ is homotopic
+  to $\id_Y$ and $g \circ f$ is homotopic to $\id_X$.
+\end{definition}
+
+\begin{remark}
+  Homotopy equivalence is a strictly weaker
+  (more general) notion than homeomorphism.
+\end{remark}
