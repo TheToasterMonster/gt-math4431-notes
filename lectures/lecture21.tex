@@ -1,0 +1,207 @@
+\chapter{Nov.~5 --- The Fundamental Group}
+
+\section{Homotopy}
+\begin{remark}
+  We will always write $I = [0, 1]$, so that a
+  homotopy is a map $H : X \times I \to Y$. We will
+  also write $f \sim g$ to indicate that $f$ and
+  $g$ are homotopic.
+\end{remark}
+
+\begin{remark}
+  Homotopy is an equivalence relation on the set of
+  continuous maps from $X$ to $Y$, and homotopy
+  equivalence is an equivalence relation on the set
+  of topological spaces.
+\end{remark}
+
+\begin{prop}
+  Let $S \subseteq \R^n$ be a convex set with
+  non-empty interior. Then $S$ is homotopic to the
+  closed $n$-dimensional ball $\overline{B^n}$.
+\end{prop}
+
+\begin{proof}
+  Since $S$ has non-empty interior, there exists
+  an open ball $B_r^n$ inside it. We may assume
+  $\overline{B_r^n}$ is contained inside $S$ (e.g. by
+  halving the radius). Denote the center of $\overline{B_r^n}$
+  by $x_0$. For any $y \in S$, by convexity the
+  entire line segment from $x_0$ to $y$ is contained
+  in $S$. Using this idea, we
+  define $H : S \times I \to S$ by
+  \[
+    H(y, t) =
+      x_0 + (y - x_0)g(y, t),
+  \]
+  where
+  \[
+    f(y) = \min\left\{\frac{r}{\|y - x_0\|}, 1\right\}
+    \quad\text{and}\quad
+    g(y, t) = \begin{cases}
+      1 + t(f(y) - 1) / f(y) & 0 \le t \le f(y), \\
+      f(y) & t \ge f(y).
+    \end{cases}
+  \]
+  Note that these
+  functions are continuous as a composition
+  of continuous maps. We can also verify
+  \[
+    H(y, 0) = x_0 + (y - x_0) g(y, 0) = x_0 + (y - x_0) =
+    y = \id_S(y)
+  \]
+  and
+  \[
+    H(y, 1) = x_0 + (y - x_0) g(y, 1)
+    = x_0 + (y - x_0) \min\left\{1, \frac{r}{\|y - x_0\|}\right\}.
+  \]
+  If the minimum is $1$, then $r \ge \|y - x_0\|$
+  and so $y \in \overline{B^n_r}$. Thus we get
+  \[
+    H(y, 1) = x_0 + (y - x_0) = y = \id_{\overline{B_r^n}}(y).
+  \]
+  Otherwise the minimum is $r / \|y - x_0\|$, so
+  we get
+  \[
+    H(y, 1) = x_0 + (y - x_0) \frac{r}{\|y - x_0\|} \in \overline{B^n_r}.
+  \]
+  So $H$ is a homotopy between $S$ and $\overline{B_r^n}$, as desired.
+\end{proof}
+
+\begin{remark}
+  A simpler way to show this is to argue using that
+  homotopy is an equivalence relation. Shrink both
+  $S$ and $\overline{B_r^n}$ to a point (both
+  are convex, so simply shrink along the line segment
+  $x_0 + (y - x_0)(1 - t)$), so they must be
+  homotopic to each other by transitivity.
+\end{remark}
+
+\begin{definition}
+  A space $X$ is called \emph{contractible} if
+  $\id_X \sim \text{constant}$.
+\end{definition}
+
+\begin{example}
+  The space $\R^n$ is contractible. Define
+  $H(x, t) = (1 - t) x$ as a homotopy to the origin.
+\end{example}
+
+\begin{theorem}
+  The unit circle $S^1 \subseteq \R^2$ is not
+  contractible.
+\end{theorem}
+
+\begin{remark}
+  This theorem
+  is actually quite hard to show, we will do
+  this eventually.
+\end{remark}
+
+\begin{remark}
+  This theorem also leads to a
+  proof of the \emph{Jordan curve theorem}, which
+  states that any simple closed curve in $\R^2$
+  divides the plane into two regions, one bounded
+  and one unbounded. The idea is to first
+  show that the
+  image of any such curve in is
+  homotopic to the circle (this itself is
+  difficult, and is what Jordan originally proved),
+  and then show the result only for the circle.
+\end{remark}
+
+\section{The Fundamental Group}
+\begin{remark}
+  We will be interested in homotopy of curves
+  $\gamma : [0, 1] \to X$.
+\end{remark}
+
+\begin{definition}
+  Given two curves $\gamma_1, \gamma_2 : [0, 1] \to X$
+  with $\gamma_1(1) = \gamma_2(0)$, their
+  \emph{concatenation} is
+  \[
+  \gamma_1 * \gamma_2(t) = \begin{cases}
+    \gamma_1(2t) & 0 \le t \le 1/2, \\
+    \gamma_2(2t - 1) & 1/2 \le t \le 1.
+  \end{cases}
+  \]
+\end{definition}
+
+\begin{definition}
+  For a space $X$, its \emph{fundamental group (with base point $x_0 \in X$)}
+  is
+  \[
+    \pi_1(X, x_0)
+    = \{\text{continuous curves $\gamma : I \to X$ such that $\gamma(0) = \gamma(1) = x_0$}\} / {\sim},
+  \]
+  where $\sim$ is the homotopy of curves preserving $x_0$. The
+  group operation on $\pi_1(X, x_0)$ is defined by
+  \[
+    [\gamma_1] * [\gamma_2] = [\gamma_1 * \gamma_2],
+  \]
+  where $[\gamma]$ denotes the equivalence class of
+  $\gamma$ under $\sim$.
+\end{definition}
+
+\begin{prop}
+  The group operation $*$ on $\pi_1(X, x_0)$ is well-defined.
+\end{prop}
+
+\begin{proof}
+  First we show that the group operation is well-defined.
+  Replace $\gamma_1$ with $\widetilde{\gamma_1}$
+  and $\gamma_2$ with $\widetilde{\gamma_2}$, where
+  $\gamma_1 \sim \widetilde{\gamma_1}$ with
+  homotopy $H_1$ and
+  $\gamma_2 \sim \widetilde{\gamma_2}$ with homotopy
+  $H_2$. We want
+  $\gamma_1 * \gamma_2 \sim \widetilde{\gamma_1} * \widetilde{\gamma_2}$.
+  Define $H(t, s)$ by
+  \[
+    H(t, s) =
+    \begin{cases}
+      H_1(t, 2s) * \gamma_2 & 0 \le s \le 1/2, \\
+      \widetilde{\gamma_1} * H_2(t, 2s - 1) & 1/2 \le s \le 1.
+    \end{cases}
+  \]
+  The idea is that we take the homotopy $H_1$ first
+  followed by the homotopy $H_2$. Note that
+  for $s \ne 1 / 2$, the map $H$ is a composition
+  of continuous maps, hence continuous. At
+  $s = 1 / 2$, we have
+  \[
+    H_1(t, 1) * \gamma_2 =
+    \widetilde{\gamma_1} * \gamma_2
+    = \widetilde{\gamma_1} * H_2(t, 0)
+  \]
+  since $H_1$ is a homotopy from $\gamma_1$ to
+  $\widetilde{\gamma_1}$ and $H_2$ is a homotopy
+  from $\gamma_2$ to $\widetilde{\gamma_2}$.
+  Now we check that
+  \[
+    H(t, 0) = H_1(t, 0) * \gamma_2
+    = \gamma_1 * \gamma_2 \quad \text{and} \quad
+    H(t, 1) = \widetilde{\gamma_1} * H_2(t, 1)
+    = \widetilde{\gamma_1} * \widetilde{\gamma_2}.
+  \]
+  So $H$ is a homotopy from $\gamma_1 * \gamma_2$
+  to $\widetilde{\gamma_1} * \widetilde{\gamma_2}$,
+  and the group operation on
+  $\pi_1(X, x_0)$ is well-defined.
+\end{proof}
+
+\begin{theorem}
+  The fundamental group $\pi_1(X, x_0)$ with the
+  operation $*$ is a group.
+\end{theorem}
+
+\begin{proof}
+  We have already shown that $*$ is well-defined,
+  so it suffices to show the group axioms.
+
+  The identity element is the constant
+  curve $e(t) = x_0$ for all $t \in [0, 1]$. We
+  will finish this next class.
+\end{proof}
