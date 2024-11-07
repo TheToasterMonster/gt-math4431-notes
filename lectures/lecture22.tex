@@ -1,0 +1,119 @@
+\chapter{Nov.~7 --- The Fundamental Group, Part 2}
+
+\section{The Fundamental Group is a Group}
+\begin{theorem}
+  The fundamental group $\pi_1(X, x_0)$ with the
+  operation $*$ is a group.
+\end{theorem}
+
+\begin{proof}
+  We have already shown that $*$ is well-defined,
+  so it suffices to check the group axioms. First
+  clearly the concatenation of loops is still a
+  loop, so we have closure under the group operation.
+
+  The identity element is the constant
+  curve $e(t) = x_0$ for all $t \in [0, 1]$. We
+  must check that
+  \[
+    [\gamma] * [e] = [\gamma] = [e] * [\gamma].
+  \]
+  for any $\gamma \in \pi_1(X, x_0)$. It suffices
+  to show $\gamma * e \sim \gamma$ and $e * \gamma \sim \gamma$.
+  For the former, take the homotopy
+  \[
+    H(t, s) = \gamma(\min\{t(1 + s), 1\}).
+  \]
+  Observe that we have
+  \begin{align*}
+    H(t, 0) = \gamma(\min\{t, 1\}) = \gamma(t), \quad
+    H(t, 1) = \gamma(\min\{2t, 1\}) = (\gamma * e)(t),
+  \end{align*}
+  and
+  \[
+    H(0, s) = \gamma(\min\{0, 1\}) = \gamma(0) = x_0, \quad
+    H(1, s) = \gamma(\min\{1(1 + s), 1\}) = \gamma(1) = x_0
+  .\]
+  Thus $H$ is a homotopy from $\gamma$ to $\gamma * e$,
+  so $\gamma \sim \gamma * e$. The proof that $e * \gamma \sim \gamma$
+  is similar.
+
+  Now we check associativity. Let
+  $\gamma_1, \gamma_2, \gamma_3 \in \pi_1(X, x_0)$, so
+  \[
+    ((\gamma_1 * \gamma_2) * \gamma_3)(t) =
+    \begin{cases}
+      (\gamma_1 * \gamma_2)(2t) & t \le 1/2 \\
+      \gamma_3(2t - 1) & t \ge 1 / 2
+    \end{cases} =
+    \begin{cases}
+      \gamma_1(4t) & t \le 1/4, \\
+      \gamma_2(4t - 1) & 1/4 \le t \le 1/2, \\
+      \gamma_3(2t - 1) & t \ge 1/2.
+    \end{cases}
+  \]
+  One can find a reparametrization
+  into $\gamma_1 * (\gamma_2 * \gamma_3)$,
+  which gives $(\gamma_1 * \gamma_2) * \gamma_3 \sim \gamma_1 * (\gamma_2 * \gamma_3)$.
+
+  Now we check for inverses. Given
+  $\gamma \in \pi_1(X, x_0)$, define
+  $\delta : I \to X$ such that
+  \[
+    \delta(t) = \gamma(1 - t).
+  \]
+  We will show that $\gamma * \delta \sim e$ and
+  $\delta * \gamma \sim e$. For the former, consider
+  the homotopy
+  \[
+    H(t, s) =
+    \begin{cases}
+      \gamma(t) & t \le s / 2, \\
+      \delta(1 - t) & s / 2 \le t \le s, \\
+      x_0 & t \ge s
+    \end{cases}
+  \]
+  from $e$ to $\gamma * \delta$, which is
+  continuous since $\gamma(t) = \delta(1 - t)$.
+  Thus $e \sim \gamma * \delta$. Note that we also
+  get $\delta * \gamma \sim e$ for free since
+  $\gamma(t) = \delta(1 - t)$, which lets us
+  repeat the same argment.
+  Thus $\pi_1(X, x_0)$ is a group.
+\end{proof}
+
+\section{Contractible Spaces and the Fundamental Group}
+
+\begin{lemma}
+  If $X$ is contractible, i.e. $\id_X$ is homotopic
+  to constant map, then $\pi_1(X, x_0) = \{e\}$.
+\end{lemma}
+
+\begin{proof}
+  Let $\gamma$ be a closed curve in $X$. Then
+  $\id_X \circ \gamma$ is a curve in $X$. As
+  $\id_X$ is homotopic to a constant map, say by
+  $H(x, s)$,
+  considering $H(\gamma(t), s)$ gives a homotopy
+  of curves from $\gamma$ to a constant map. So
+  $\gamma \sim e$, which means that
+  $\pi_1(X, x_0) = \{e\}$ since this holds for
+  every $\gamma \in \pi_1(X, x_0)$.
+\end{proof}
+
+\begin{remark}
+  If $X$ is contractible, then $X$ is path-connected.
+  For $x, y \in X$, contract both to a single common
+  point, then join those two paths to get a path from
+  $x$ to $y$.
+\end{remark}
+
+\begin{remark}
+  Since $\R$, $\R^n$, and even $[0, 1]^\N$ are
+  contractible, they have trivial fundamental groups.
+\end{remark}
+
+\begin{remark}
+  The $2$-sphere is not contractible but its
+  fundamental group is trivial.
+\end{remark}

@@ -120,7 +120,7 @@
 \begin{definition}
   Given two curves $\gamma_1, \gamma_2 : [0, 1] \to X$
   with $\gamma_1(1) = \gamma_2(0)$, their
-  \emph{concatenation} is
+  \emph{concatenation} is\footnote{The concatenation is continuous by the pasting lemma since $\gamma_1(1) = \gamma_2(0)$.}
   \[
   \gamma_1 * \gamma_2(t) = \begin{cases}
     \gamma_1(2t) & 0 \le t \le 1/2, \\
@@ -136,7 +136,8 @@
     \pi_1(X, x_0)
     = \{\text{continuous curves $\gamma : I \to X$ such that $\gamma(0) = \gamma(1) = x_0$}\} / {\sim},
   \]
-  where $\sim$ is the homotopy of curves preserving $x_0$. The
+  where $\sim$ is the homotopy of curves fixing
+  endpoints.\footnote{Another way to ensure the fixed endpoint condition is to consider maps $\gamma : \R / \Z \to X$ which hit $x_0$.} The
   group operation on $\pi_1(X, x_0)$ is defined by
   \[
     [\gamma_1] * [\gamma_2] = [\gamma_1 * \gamma_2],
@@ -150,7 +151,6 @@
 \end{prop}
 
 \begin{proof}
-  First we show that the group operation is well-defined.
   Replace $\gamma_1$ with $\widetilde{\gamma_1}$
   and $\gamma_2$ with $\widetilde{\gamma_2}$, where
   $\gamma_1 \sim \widetilde{\gamma_1}$ with
@@ -158,7 +158,7 @@
   $\gamma_2 \sim \widetilde{\gamma_2}$ with homotopy
   $H_2$. We want
   $\gamma_1 * \gamma_2 \sim \widetilde{\gamma_1} * \widetilde{\gamma_2}$.
-  Define $H(t, s)$ by
+  Define the homotopy $H : I \times I \to X$ by
   \[
     H(t, s) =
     \begin{cases}
@@ -190,18 +190,4 @@
   to $\widetilde{\gamma_1} * \widetilde{\gamma_2}$,
   and the group operation on
   $\pi_1(X, x_0)$ is well-defined.
-\end{proof}
-
-\begin{theorem}
-  The fundamental group $\pi_1(X, x_0)$ with the
-  operation $*$ is a group.
-\end{theorem}
-
-\begin{proof}
-  We have already shown that $*$ is well-defined,
-  so it suffices to show the group axioms.
-
-  The identity element is the constant
-  curve $e(t) = x_0$ for all $t \in [0, 1]$. We
-  will finish this next class.
 \end{proof}
