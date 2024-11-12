@@ -1,0 +1,221 @@
+\chapter{Nov.~12 --- hi}
+
+\section{Review Problems}
+
+\begin{exercise}
+  Let $X_i$ be topological spaces
+  and $Y_i \subseteq X_i$. Define the spaces
+  \begin{enumerate}[(i)]
+    \item $Y_{\text{sub}} = \prod_{i} Y_i \subseteq \prod_{i} X_i$ with the subspace topology,
+    \item and $Y_{\text{prod}} = \prod_{i} Y_i$, where
+      $Y_i \subseteq X_i$, with the product topology.
+  \end{enumerate}
+  Show that $Y_{\text{sub}}$ and $Y_{\text{prod}}$ are homeomorphic.
+\end{exercise}
+
+\begin{proof}
+  We construct a map $i : Y_{\text{sub}} \to Y_{\text{prod}}$.
+  First consider the identity map
+  $\id : \prod_{i} X_i \to \prod_{i} X_i$, and
+  its restriction ${\id}|_{Y_{\text{sub}}} : Y_{\text{sub}} \to \prod_{i} Y_i$.
+  Set $i = {\id}|_{Y_{\text{sub}}} : Y_{\text{sub}} \to Y_{\text{prod}}$.
+  Note that $i$ is still a bijection, since
+  $Y_{\text{sub}}$ and $Y_{\text{prod}}$ are the
+  same on a set-theoretic level and $i$ is the
+  identity map.
+
+  Now we show that $i$ is continuous. Let
+  $O \subseteq Y_{\text{prod}}$ be open,
+  which we may assume is a basis element:
+  \[
+    O = \prod_{i = 1}^n O_i \times \prod_{j \ne i} Y_j.
+  \]
+  Then we must show that
+  \[
+    i^{-1}(O) = \prod_{i = 1}^n O_i \times \prod_{j \ne i} Y_j \subseteq Y_{\text{sub}}
+  \]
+  is open in the subspace topology. It is enough to
+  show that there are open sets
+  $V_i \subseteq X_i$ for $1 \le i \le n$ such
+  that
+  \[
+    \prod_{i = 1}^n O_i \times \prod_{j \ne i} Y_j =
+    \left(\prod_{i = 1}^n V_i \times \prod_{j \ne i} X_j\right) \cap \prod_{i} Y_i.
+  \]
+  Now since each $Y_i$ in $Y_{\text{prod}}$ has
+  the subspace topology,
+  and since $O_i \subseteq Y_i$ is open in the
+  subspace topology, we have that
+  $O_i = V_i \cap Y_i$ for some open
+  set $V_i \subseteq X_i$. Thus $i$ is continuous.
+
+  Finally we show that $i^{-1}$ is continuous.
+  Let $O \subseteq Y_{\text{sub}}$, so that
+  \[
+    O = V \cap \prod_{i} Y_i,
+  \]
+  where $V \subseteq \prod_{i} X_i$ is open.
+  We may assume $V$ is a basis element, i.e.
+  \[
+    V = \prod_{i = 1}^m V_i \times \prod_{j \ne i} X_j.
+  \]
+  Then we see that
+  \[
+    (i^{-1})^{-1}(O) = O
+    = V \cap \prod_{i} Y_i
+    = \prod_{i = 1}^m (V_i \cap Y_i) \times \prod_{j \ne i} (X_j \cap Y_j)
+    = \prod_{i = 1}^m (V_i \cap Y_i) \times \prod_{j \ne i} Y_j.
+  \]
+  Now $V_i \cap Y_i$ is open in the subspace
+  topology on $Y_i$, so $O$ is a cylindrical set
+  and thus open. So $i^{-1}$ is continuous and
+  we conclude that $i$ is a homeomorphism.
+\end{proof}
+
+\begin{exercise}
+  Let $X = [0, 1]^\N$ with the product topology and
+  \[
+    E = \{\text{all sequences $\{a_n\}$ in $X$ such that $a_n \to 0$}\}
+  \]
+  Answer the following questions, with justification:
+  \begin{enumerate}[(i)]
+    \item Is $E$ closed?
+    \item Is $E$ open?
+    \item Is $E$ compact?
+  \end{enumerate}
+\end{exercise}
+
+\begin{proof}
+  $(i)$ No, $E$ is not closed. View $X$
+  as functions $f : \N \to [0, 1]$. Then consider
+  $\{f_k\}$ given by
+  \[
+    f_{k}(n) =
+    \begin{cases}
+      1 & \text{if $n \le k$} \\
+      0 & \text{if $n > k$}.
+    \end{cases}
+  \]
+  Each $f_k$ is eventually $0$, so $f_k(n) \to 0$
+  as $n \to \infty$ and thus $f_k \in E$.
+  But convergence in $X$ amounts to the
+  pointwise convergence, and $f_k(n) \to 1$ as
+  $k \to \infty$ for all $n$, so $f_k \to f \equiv 1$.
+  But $f$ does not converge to $0$, so $f \notin E$.
+  Thus $E$ does not contain its limit points,
+  so it is not closed.
+  
+  $(ii)$ No, $E$ is not open. Look at the complement,
+  and define $\{f_k\}$ by
+  \[
+    f_k(n) =
+    \begin{cases}
+      0 & \text{if $n \le k$} \\
+      1 & \text{if $n > k$}.
+    \end{cases}
+  \]
+  Each $f_k \in E^c$, but we
+  have $f_k \to f \equiv 0$, so $f \in E$, or
+  $f \notin E^c$. So $E^c$ is not closed, hence
+  $E$ is not open.
+
+  $(iii)$ No, $E$ is not compact. The interval
+  $[0, 1]$ is Hausdorff, so $[0, 1]^\N$ is Hausdorff
+  as a product of Hausdorff spaces. Compact
+  subsets of Hausdorff spaces are closed, but
+  $E$ is not closed by $(i)$.
+\end{proof}
+
+\begin{exercise}
+  Show that if $X$ is compact Hausdorff,
+  then $X$ is normal.
+\end{exercise}
+
+\begin{proof}
+  Fix closed sets $A, B \subseteq X$.
+  For every
+  $x \in A$ and $y \in B$, there
+  exist disjoint open sets
+  $U_{x, y}, V_{x, y}$
+  such that $x \in U_{x, y}$ and $y \in V_{x, y}$.
+  By fixing $x$ and varying $y$, we get a
+  collection $\{V_{x, y}\}_{y \in B}$ of open sets
+  that covers $B$. Since $B$ is closed and
+  $X$ is compact, $B$ is compact, hence there
+  exists a finite subcover. So for every $x \in A$,
+  there exists $y_1, \dots, y_{m(x)} \in B$
+  such that $B \subseteq \bigcup_{i = 1}^{m(x)} V_{x, y_i}$.
+  Now consider
+  \[
+    U_x' = \bigcap_{i = 1}^{m(x)} U_{x, y_i},
+  \]
+  which is open as a finite intersection of open sets.
+  Now $x \in U_x'$, so
+  $U_x' \cap B = \varnothing$ since $U_x' \cap V_{x, y_i} = \varnothing$.
+  Now consider an open cover of $A$ by $\bigcup_{x \in A} U_x'$.
+  As $A$ is closed and $X$ is compact,
+  $A$ is compact. Thus we can find $x_1, \dots, x_n$
+  such that
+  \[
+    A \subseteq \bigcup_{j = 1}^n U_{x_j}'.
+  \]
+  Now for each $1 \le j \le n$, the set $\bigcup_{i = 1}^{m(x_j)} V_{x_j, y_i}$
+  is open and contains $B$, so their intersection
+  over $j$ is open and disjoint
+  from any $U_{x_j}'$, and hence from
+  $\bigcup_{j = 1}^n U_{x_j}'$.
+\end{proof}
+
+\begin{exercise}
+  If $X$ is locally compact and Hausdorff, then
+  $X$ is regular.
+\end{exercise}
+
+\begin{proof}
+  Embed $X$ into its one-point compactification
+  $X^+$ by $i : X \to X^+$, which will be compact Hausdorff and thus
+  normal.
+  Let $A \subseteq X$ be closed and $p \notin A$.
+  Then $i(A^c)$ is open since $i$ is an embedding,
+  and so
+  \[
+  (i(A^c))^c = A \cup \{\infty\}
+  \]
+  is closed in $X^+$. Now $i(p) = p \in X \subseteq X^+$,
+  and $p \notin A \cup \{\infty\}$.
+  Since $X^+$ is normal, we can separate $p$
+  from $A \cup \{\infty\}$ with disjoint open sets.
+  Pull these sets back to $X$ to get disjoint open
+  sets in $X$ (open since $i$ is continuous, and
+  disjoint since they are preimages of disjoint
+  sets).
+\end{proof}
+
+\begin{exercise}[Stone-Cech compactification]
+  Let $X$ be a topological space and define
+  \[
+    \mathcal{F} = \{\text{continuous functions } f : X \to [0, 1]\}.
+  \]
+  For each $f \in \mathcal{F}$, define
+  $X_f = [0, 1]$. Define $Y = \prod_{f \in \mathcal{F}} X_f$
+  and the \emph{evaluation map} $e : X \to Y$ by
+  \[
+    e(x) = (f(x))_{f \in \mathcal{F}}.
+  \]
+  Note that $Y$ is compact by Tychonoff's theorem.
+  If $X$ is locally compact Hausdorff, then define
+  its \emph{Stone-Cech compactification} by
+  \[
+    \beta X = e(X).
+  \]
+  Then $e : X \to \beta X$ is a topological
+  embedding and $\beta X$ is compact in the
+  subspace topology of $Y$.
+\end{exercise}
+
+\begin{remark}
+  In a way, the one-point compactification is
+  smallest compactification of a space, while the
+  Stone-Cech
+  compactification is the largest compactification.
+\end{remark}
