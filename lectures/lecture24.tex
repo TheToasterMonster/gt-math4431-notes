@@ -1,0 +1,208 @@
+\chapter{Nov.~19 --- Fundamental Group, Part 3}
+
+\section{Simply-Connectedness}
+\begin{remark}
+  When working with the fundamental group, we
+  often assume that $X$ is path-connected. If this
+  is the case, the fundamental group is independent
+  of the basepoint $x_0$. This is because any
+  loop at another basepoint $y_0$ can be converted
+  to a loop at based at $x_0$ by concatenating with
+  a path from $x_0$ to $y_0$ and back, which exists
+  if we assume that $X$ is path-connected.
+  Thus we can just write $\pi_1(X)$.
+\end{remark}
+
+\begin{definition}
+  A space $X$ is \emph{simply-connected} if
+  $\pi_1(X) = 0$.
+\end{definition}
+
+\begin{remark}
+  There are simply-connected spaces
+  which are not contractible, e.g. $S^n$ for
+  $n \ge 2$, where
+  \[
+    S^n = \left\{(x_1, \dots, x_{n + 1}) \in \R^{n + 1} : \sum_{i = 1}^{n + 1} x_i^2 = 1\right\}.
+  \]
+  Any loop in $S^n$ can be contracted to a point,
+  e.g. the north pole, but all of $S^n$ cannot be.
+  Note that a loop into $S^n$ must miss at least
+  a single point, we can assume this is the south
+  pole. Then $S^n$ punctured at the south pole is
+  homeomorphic to a disk and thus contractible, so
+  we can contract loops.
+\end{remark}
+
+\begin{prop}
+  The circle $S^1$ is not simply-connected. In
+  particular, $\pi_1(S^1) = \Z$.
+\end{prop}
+
+\begin{remark}
+  The homotopy class of a loop in the fundamental
+  group measures its \emph{index} or
+  \emph{winding number} around a hole. This is
+  of use, for instance, in multivariable calculus
+  or complex analysis.
+\end{remark}
+
+\begin{remark}
+  If $\gamma : [0, 1] \to \C$ is a differentiable
+  curve, then we can compute the index via
+  \[
+    \oint_{\gamma} \frac{1}{z}\, dz
+    = 2\pi i \cdot \mathrm{Ind}(\gamma, 0)
+  \]
+  by the residue theorem. This method only works for
+  very nice curves $\gamma$ (namely differentiable).
+  The winding number can be calculated for much
+  more general continuous curves via the fundamental
+  group.
+\end{remark}
+
+\begin{example}
+  Consider the vector field $F$ on
+  $\R^2 \setminus \{0\}$ given by
+  \[
+    F(x, y) =
+    \left(-\frac{y}{x^2 + y^2}, \frac{x}{x^2 + y^2}\right).
+  \]
+  One can compute that
+  \[
+    \curl F = \frac{\partial F_1}{\partial y} - \frac{\partial F_2}{\partial x} = 0,
+  \]
+  so $F$ is \emph{locally conservative}. Recall that
+  $F$ is \emph{conservative} if $F = \nabla \phi$
+  for some potential function $\phi$, and in this
+  case the integral of $F$ along any closed loop is
+  $0$. One can check
+  that conservative implies locally conservative,
+  but the converse is not true. One can check that
+  \[
+    \int_{\gamma} F \cdot dr \ne 0
+  \]
+  where $\gamma(t) = (\cos t, \sin t)$ for
+  $t \in [0, 2\pi]$, so $F$ is not conservative.
+  The issue is that $F$ is not defined at the origin.
+  In vector analysis, \emph{Poincar\'e's lemma}
+  says that a locally conservative vector field is
+  globally conservative when its domain
+  is simply-connected.
+\end{example}
+
+\section{Applications of the Fundamental Group}
+\begin{definition}
+  A \emph{retract} of $X$ onto $A \subseteq X$ is a
+  map $r : A \to X$ such that $r(X) \subseteq A$
+  and $r|_A = \id_A$.
+\end{definition}
+
+\begin{remark}
+  Let $i : A \to X$ be the inclusion map. Then
+  we have the following diagram:
+  \[
+    \begin{tikzcd}
+      A \ar[r, "i"] \ar[rr, bend right=20, "\id_A", swap]& X \ar[r, "r"] & A
+    \end{tikzcd}
+  \]
+  i.e. we have $r \circ i = \id_A$. Note
+  that $r$ is a projection in the sense that
+  $r \circ r = r$.
+\end{remark}
+
+\begin{example}[Functoriality]
+  Let $X$ be a topological space and
+  $\pi_0(X)$ be the set of path-connected
+  components in $X$. We can view $\pi_0$ as a
+  map from the category of topological spaces to
+  the category of sets which sends
+  $X \mapsto \pi_0(X)$. Note that what makes
+  $\pi_0$ a \emph{functor} is the following
+  diagram:
+  \[
+    \begin{tikzcd}
+      X \ar[r, "f"] \ar[d, "\pi_0"'] & Y \ar[d, "\pi_0"] \\
+      \pi_0(X) \ar[r, "f_*"', dashed] & \pi_0(Y)
+    \end{tikzcd}
+  \]
+  i.e. a continuous map $f : X \to Y$ on topological
+  spaces
+  induces a function $f_* : \pi_0(X) \to \pi_0(Y)$
+  on sets. Furthermore, if $f$ is a homeomorphism,
+  then $f$ is a bijection (an isomorphism of sets).
+\end{example}
+
+\begin{remark}
+  The \emph{Galois group} of a field extension is
+  another example of a functor.
+\end{remark}
+
+\begin{example}
+  Note that if $f : X \to Y$ is continuous, then
+  $\gamma \mapsto f \circ \gamma$ is a map which
+  preserves the homotopy classes of loops. In
+  particular, $f$ induces a map $f_* : \pi_1(X) \to \pi_1(Y)$,
+  giving us:
+  \[
+    \begin{tikzcd}
+      X \ar[r, "f"] \ar[d, "\pi_1"'] & Y \ar[d, "\pi_1"] \\
+      \pi_1(X) \ar[r, "f_*"', dashed] & \pi_1(Y)
+    \end{tikzcd}
+  \]
+  Now recall the retract and inclusion maps.
+  We have the following diagram by using
+  functoriality twice:
+  \[
+    \begin{tikzcd}
+      A \ar[r, "i", swap] \ar[rr, bend left=20, "\id_A"] \ar[d, "\pi_1"'] & X \ar[d, "\pi_1"] \ar[r, "r", swap] & A \ar[d, "\pi_1"] \\
+      \pi_1(A) \ar[r, "i_*"', dashed, swap] \ar[rr, bend right=20, "\id_{\pi_1(A)}", dashed, swap] & \pi_1(X) \ar[r, "r_*", dashed] & \pi_1(A)
+    \end{tikzcd}
+  \]
+\end{example}
+
+\begin{theorem}[No retract]
+  There is no retract from the closed disk
+  $B^2$ to $S^1$.
+\end{theorem}
+
+\begin{proof}
+  Assume not, i.e. there exists a retract $r : B^2 \to S^1$.
+  Then we have the diagram:
+  \[
+    \begin{tikzcd}
+      S^1 \ar[r, "i"] \ar[d, "\pi_1"'] & B^2 \ar[d, "\pi_1"] \ar[r, "r"] & S^1 \ar[d, "\pi_1"] \\
+      \pi_1(S^1) = \Z \ar[r, "i_*"', dashed] & \pi_1(B^2) = 0 \ar[r, "r_*", swap, dashed] & \pi_1(S^1) = \Z
+    \end{tikzcd}
+  \]
+  Since $r \circ i = \id_S^1$, we must
+  have $(r \circ i)_* = \id_\Z$. But
+  $r_* \circ i_*$ factors through $0$, so it can
+  only have a single point in
+  the image since $i_*(\Z) = \{0\}$. This
+  says that $(r \circ i)_* \ne r_* \circ i_*$,
+  a contradiction.
+\end{proof}
+
+\begin{theorem}[Brouwer's fixed point theorem]
+  Any continuous map $f : B^2 \to B^2$ must
+  have a fixed point, i.e. there exists $x_0 \in B^2$
+  such that $f(x_0) = x_0$.
+\end{theorem}
+
+\begin{proof}
+  Assume not. Then we can define the
+  map $\widetilde{f} : B^2 \to S^1$ by sending
+  the $x$ to the intersection of the ray from
+  $f(x)$ to $x$ with $S^1$.\footnote{Note that we cannot defined $\widetilde{f}$ if there is some $x_0$ with $f(x_0) = x_0$. In this case, the ray is not well-defined.} One can show that
+  $\widetilde{f}$ is continuous, and that
+  $\widetilde{f}|_{S^1}$ is the identity. So
+  $\widetilde{f}$ is a retract from $B^2$ to $S^1$.
+  This cannot happen by the previous no retract
+  theorem, in contradiction.
+\end{proof}
+
+\begin{remark}
+  The same result immediately follows for any
+  shape homotopic to the disk $B^2$.
+\end{remark}
