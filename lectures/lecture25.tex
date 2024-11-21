@@ -1,0 +1,174 @@
+\chapter{Nov.~21 --- Fundamental Group of the Circle}
+
+\section{More on Functors}
+\begin{example}
+  Let $X, Y$ be topological spaces and
+  $f : X \to Y$ be a continuous map.
+  The \emph{forgetful functor} from the category
+  of topological spaces $\mathsf{Top}$
+  to the category of sets $\mathsf{Set}$
+  is the one which maps $X, Y$ as topological
+  spaces to $X, Y$ as sets and $f$ as a continuous map
+  to $f$ as a just a function. Essentially
+  this functor forgets the topological structure.
+\end{example}
+
+\begin{remark}
+  Recall that a map $f : X \to Y$ in
+  $\mathsf{Top}$ induces a map
+  $f_* : \pi_1(X) \to \pi_1(Y)$ in $\mathsf{Grp}$.
+\end{remark}
+
+\begin{prop}
+  Let $X, Y$ be topological spaces and
+  $f : X \to Y$ be a continuous map. Then
+  the induced map $f_* : \pi_1(X) \to \pi_1(Y)$
+  is a group homomorphism, i.e.
+  \[
+    f_*([\gamma] * [\delta])
+    = f_*([\gamma]) * f_*([\delta])
+  \]
+\end{prop}
+
+\begin{proof}
+  Consider $\gamma, \delta$ as curves.
+  Then applying $f$ on each part of
+  $\gamma * \delta : [0, 1] \to X$ gives
+  \[
+    (f \circ \gamma) * (f \circ \delta)
+    = f \circ (\gamma * \delta)
+    : [0, 1] \to Y.
+  \]
+  To move to the fundamental group, we must
+  take equivalence classes. This gives
+  \[
+    [f \circ \gamma] * [f \circ \delta]
+    = [(f \circ \gamma) * (f \circ \delta)]
+    = [f \circ (\gamma * \delta)],
+  \]
+  where the first equality follows from the
+  definition of the group operation in $\pi_1$.
+  Now if we define the induced
+  map via $f_*([\gamma]) = [f \circ \gamma]$,
+  the above equality reads
+  $f_*([\gamma]) * f_*([\delta]) = f_*([\gamma] * [\delta])$.
+\end{proof}
+
+\begin{theorem}[Borsuk-Ulam]
+  For any continuous function $f : S^2 \to \R^2$,
+  there exist two antipodal points
+  $x, -x \in S^2$ such that $f(x) = f(-x)$.
+\end{theorem}
+
+\begin{proof}
+  Assume not. Then we can define a map
+  $g : S^2 \to \R^2$ by
+  \[
+    g(x) = f(x) - f(-x)
+  \]
+  which is never zero. Since $g(x) \ne 0$, we can
+  define $h : S^2 \to S^1$ by
+  \[
+    h(x) = \frac{g(x)}{\|g(x)\|}.
+  \]
+  The idea now is we have a composition
+  $S^1 \to S^2 \to S^1$ and we can argue as in the
+  no retract theorem.
+\end{proof}
+
+\section{Fundamental Group of the Circle}
+
+\begin{remark}
+  To move towards finding the fundamental group of
+  $S^1$, one can consider \emph{covering spaces}.
+  Consider $\R$ realized as a line winding
+  around in a circle above $S^1$, and consider
+  the projection onto $S^1$. Note that although the
+  basepoint $x_0 \in S^1$ has infinitely many
+  preimages, once we fix a preimage, then
+  the projection is a local homeomorphism.
+  One can locally follow movements in $S^1$
+  by moving in $\R$.
+
+  In particular, curves in $S^1$ lift uniquely
+  to curves
+  in $\R$. Furthermore, homotopies of loops in $S^1$
+  also lift to homotopies fixing endpoints in $\R$.
+  This allows
+  us to distinguish between homotopy classes
+  of loops in $S^1$ by looking at where the
+  corresponding curves end in $\R$. One can also
+  easily see in this way that $\pi_1(S^1)$ is
+  abelian, since concatenating loops in this
+  fashion in $\R$ is commutative.
+
+  With some more technicalities, one can show
+  that $\pi_1(S^1) = \Z$. Read more in Munkres
+  or Hatcher.
+\end{remark}
+
+\begin{example}
+  Recall that the $2$-torus
+  $\mathbb{T}^2 = S^1 \times S^1$ was by
+  constructed by gluing the opposite sides of a
+  square. One can show in general that
+  if $X \times Y$ is given the product topology, then
+  \[
+    \pi_1(X \times Y) \cong \pi_1(X) \times \pi_1(Y).
+  \]
+  This then tells us that
+  the fundamental group of the torus is
+  \[
+    \pi_1(\mathbb{T}^2) = \pi_1(S^1 \times S^1)
+    = \pi_1(S^1) \times \pi_1(S^1) = \Z \times \Z.
+  \]
+  The generators are precisely the loops going
+  around the two circles in the torus. In particular,
+  these loops are from different
+  components in the fundamental group, so
+  they cannot be in the same homotopy class.
+  This calculation
+  also shows that the fundamental group of the
+  torus is abelian.
+\end{example}
+
+\begin{example}
+  Note that a cylinder $C$ is homotopy equivalent
+  to a circle, so $\pi_1(C) = \pi_1(S^1) = \Z$.
+  One can also think about the cylinder as
+  $C = S^1 \times I$. Since $\pi_1(I) = 0$, we have
+  \[
+    \pi_1(C) = \pi_1(S^1 \times I) = \pi_1(S^1) \times \pi_1(I) = \Z \times \{0\} \cong \Z.
+  \]
+\end{example}
+
+\begin{example}
+  Consider the M\"obius strip $M$. Note that
+  although $M$ is not homeomorphic to either the
+  circle or the cylinder, it is homotopy equivalent
+  to the circle. Consider squashing the
+  fundamental polygon (square) of the M\"obius strip
+  to the circle in the center.
+  Thus $\pi_1(M) = \pi_1(S^1) = \Z$.
+\end{example}
+
+\section{Projective Spaces}
+\begin{definition}
+  The \emph{projective space} $\mathbb{RP}^n$ is
+  the space of lines through the origin in
+  $\R^{n + 1}$, i.e.
+  \[
+    \mathbb{RP}^n = (\R^{n + 1} \setminus \{0\}) / {\sim},
+  \]
+  where the relation $\sim$ is defined
+  by $x \sim cx$ for some nonzero $c \in \R$.
+\end{definition}
+
+\begin{remark}
+  The fundamental group of
+  $\mathbb{RP}^n$ is $\Z/2\Z$ for $n \ge 2$.
+  This is because repeating a curve in this
+  space is essentially
+  the same as negating it by the above equivalence
+  relation.
+\end{remark}
