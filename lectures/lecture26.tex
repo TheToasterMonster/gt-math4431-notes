@@ -1,0 +1,174 @@
+\chapter{Nov.~26 --- The Van Kampen Theorem}
+
+\section{The Borsuk-Ulam Theorem}
+
+\begin{theorem}[Borsuk-Ulam]
+  For any continuous function $f : S^2 \to \R^2$,
+  there exist two antipodal points
+  $x, -x \in S^2$ such that $f(x) = f(-x)$.
+\end{theorem}
+
+\begin{proof}
+  Assume not, so that $f(x) - f(-x) \ne 0$ for all $x \in S^2$.
+  Then we can define a map
+  $g : S^2 \to S^1$ by
+  \[
+    g(x) = \frac{f(x) - f(-x)}{\|f(x) - f(-x)\|}.
+  \]
+  Note that $g(-x) = -g(x)$. Consider the
+  equator in $S^2$, which is homeomorphic to $S^1$.
+  By considering the restriction to the
+  equator we obtain a closed loop
+  $g|_{S^1} : S^1 \to S^1$. Fix $p \in S^1$. Then
+  $g(p)$ and $g(-p)$ are antipodal points in $S^1$
+  by the observation. By connectedness,
+  $g(S^1)$ contains the entire arc between
+  $g(p)$ and $g(-p)$. Also by the reflection property,
+  moving past $g(-p)$ along this arc to $g(p)$ must
+  complete the entire loop.\footnote{In particular, the arc between $g(p)$ and $g(-p)$ completely determines the continued arc from $g(-p)$ to $g(p)$.} In particular,
+  $g(S^1) = S^1$ and so $g(S^1)$ is a
+  non-nullhomotopic loop in $S^1$.
+
+  However, $S^2$ is simply connected,\footnote{Even simpler, since we are specifically working with the equator, it suffices to consider the upper hemisphere which is contractible. This allows us to avoid the need for the computation $\pi_1(S^2) = 0$.} so
+  there is a homotopy from the equator
+  $S^1 \subseteq S^2$ to a constant loop, and
+  composing this homotopy with $g$ gives a homotopy
+  from $g(S^1)$ to a constant loop.
+  Contradiction.
+\end{proof}
+
+\begin{remark}
+  The Borsuk-Ulam theorem holds more generally for
+  continuous maps $f : S^{2n} \to \R^{2n}$.
+\end{remark}
+
+\section{The Van Kampen Theorem}
+
+\begin{example}
+  Consider the \emph{wedge sum} $S^1 \lor S^1$,
+  which we form by fixing a single point in each
+  copy of $S^1$ and identifying the pair. Let $\alpha, \beta$
+  be the loops obtained by traversing each copy of
+  $S^1$ once. Then any loop in
+  $S^1 \lor S^1$ can be written as a word in
+  $\{\alpha, \beta, \alpha^{-1}, \beta^{-1}\}$, e.g.
+  \[
+    \alpha^{-1} * \beta * \beta * \alpha.
+  \]
+  This is an example of an element of the
+  free group on $\alpha, \beta$. In particular,
+  $\pi_1(S^1 \lor S^1) = F_2 = \Z * \Z$.
+\end{example}
+
+\begin{definition}
+  The \emph{free group} on $n$ generators
+  $x_1, \dots, x_n$, denoted $F_n$, is the collection
+  of finite words on $x_1^{\pm 1}, \dots, x_n^{\pm 1}$
+  with the operation of concatenation, where
+  words are identified up to relaxation, i.e.
+  \[
+    x_k^{\alpha_1} x_k^{\alpha_2} = x_k^{\alpha_1 + \alpha_2}
+  \]
+  for a fixed $k$ and $\alpha_1, \alpha_2 \in \{\pm 1\}$.
+\end{definition}
+
+\begin{remark}
+  In general, the free groups
+  are not abelian when there is more than one
+  generator.
+\end{remark}
+
+\begin{definition}
+  The \emph{free product} of groups $G, H$, denoted
+  $G * H$, is the free group on their generators,
+  modulo the relations of the generators within
+  $G$ and $H$.
+\end{definition}
+
+\begin{theorem}[Van Kampen]
+  Let $A, B$ be path-connected topological spaces
+  and suppose that $A \cap B$ is also path-connected.
+  Then if $X = A \cup B$ and $x_0 \in A \cap B$,
+  we have
+  \[
+    \pi_1(X, x_0) = 
+    \pi_1(A, x_0) *_{\pi_1(A \cap B, x_0)} \pi_1(B, x_0)
+  \]
+  where the above product is the
+  \emph{almalgamated free product}.
+\end{theorem}
+
+\begin{example}
+  Recall the space $S^1 \lor S^1$. If
+  $A, B \subseteq S^1 \cap S^1$ are the
+  two circles, then note that
+  $A \cap B$ consists of a single point, and
+  thus $\pi_1(A \cap B) = 0$. Thus
+  we simply have $\pi_1(S^1 \lor S^1) = \Z * \Z$.
+\end{example}
+
+\begin{example}
+  Let $A, B$ be path-connected with
+  $A \cap B$ path-connected, and let $X = A \cup B$.
+  Let
+  \begin{align*}
+    \pi_1(A)
+    &= \langle u_1, \dots, u_k \mid \alpha_1, \dots, \alpha_\ell\rangle, \\
+    \pi_1(B)
+    &= \langle v_1, \dots, v_m \mid \beta_1, \dots, \beta_n\rangle, \\
+    \pi_1(A \cap B)
+    &= \langle w_1, \dots, w_r \mid \gamma_1, \dots, \gamma_q\rangle.
+  \end{align*}
+  Note that by functoriality, the inclusinos
+  $I : A \cap B \to A$ and $J : A \cap B \to B$
+  induce homomorphisms
+  $I_* : \pi_1(A \cap B) \to \pi_1(A)$ and
+  $J_* : \pi_1(A \cap B) \to \pi_1(B)$. Then
+  the van Kampen theorem asserts that
+  \[
+    \pi_1(X)
+    = \langle u_1, \dots, u_k, v_1, \dots, v_m \mid
+    \alpha_1, \dots, \alpha_\ell, \beta_1, \dots, \beta_n,
+    I_*(w_1) J_*^{-1}(w_1), \dots, I_*(w_r) H_*^{-1}(w_r)\rangle.
+  \]
+  In particular, we are identifying
+  $I_*(w_i)$ and $J_*(w_i)$ since they represent
+  the same loop in $A \cap B$.
+\end{example}
+
+\begin{example}
+  Recall that $\pi_1(\mathbb{T}^2) = \Z \times \Z$.
+  We can also compute this via the van Kampen theorem.
+  Consider the fundamental polygon of
+  $\mathbb{T}^2$,
+  let $B$ be an interior circle contained in the
+  square and
+  $A = \mathbb{T}^2 \setminus B$. Then $B$ is
+  simply-connected, so $\pi_1(B) = 0$. On the
+  other hand, $A$ is homotopic to the
+  boundary of the square, which is homeomorphic to
+  $S^1 \lor S^1$. Thus $\pi_1(A) = \Z * \Z$ from
+  the previous example.
+
+  Now notice that the intersection $A \cap B$ is
+  a circle, and thus $I_*(A \cap B) = \alpha \beta \alpha^{-1} \beta^{-1}$,
+  where $\alpha, \beta$ are curves
+  represent the sides of the square. Thus by
+  the van Kampen theorem, we see that
+  \[
+    \pi_1(X) = (\Z * \Z) / {\langle \alpha \beta \alpha^{-1} \beta^{-1}\rangle} = \Z \times \Z,
+  \]
+  since the relation $\alpha \beta = \beta \alpha$
+  lets us collect the like terms together, forming
+  two copies of $\Z$.
+\end{example}
+
+\begin{remark}
+  The van Kampen theorem yields a relatively
+  easy proof of the \emph{Nielson-Schreier theorem},
+  which says that any subgroup of a free group is
+  also free. The idea is to realize the free group
+  as the fundamental group of a \emph{bouquet}
+  (wedge sum) of circles, and compute the subgroup
+  via van Kampen.
+\end{remark}

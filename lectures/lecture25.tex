@@ -54,30 +54,6 @@
   $f_*([\gamma]) * f_*([\delta]) = f_*([\gamma] * [\delta])$.
 \end{proof}
 
-\begin{theorem}[Borsuk-Ulam]
-  For any continuous function $f : S^2 \to \R^2$,
-  there exist two antipodal points
-  $x, -x \in S^2$ such that $f(x) = f(-x)$.
-\end{theorem}
-
-\begin{proof}
-  Assume not. Then we can define a map
-  $g : S^2 \to \R^2$ by
-  \[
-    g(x) = f(x) - f(-x)
-  \]
-  which is never zero. Since $g(x) \ne 0$, we can
-  define $h : S^2 \to S^1$ by
-  \[
-    h(x) = \frac{g(x)}{\|g(x)\|}.
-  \]
-  The idea now is that by looking at the equator
-  of $S^2$, we obtain a nontrivial composition
-  $S^1 \to S^2 \to S^1$. Thus we can argue for
-  a contradiction as in the
-  no retract theorem since $\pi_1(S^2) = 0$.
-\end{proof}
-
 \section{Fundamental Group of the Circle}
 
 \begin{remark}
