@@ -1,0 +1,138 @@
+\chapter{Dec.~3 --- Final Exam Review}
+
+\section{Review Problems}
+
+\begin{exercise}
+  Let $h : S^1 \to S^1$ be continuous and homotopic
+  to a constant map. Prove that there exists
+  a point $x \in S^1$ such that
+  $\measuredangle(x, h(x)) = 90^\circ$.\footnote{Here $\measuredangle(x, y)$ is the \emph{signed angle}, measured with respect to the center of the circle.}
+\end{exercise}
+
+\begin{proof}
+  If $h(x) = c$ is constant, simply take $x$ to be
+  $c$ rotated by $90^\circ$ in either direction.
+
+  So assume $h$ is non-constant. Define a
+  map $f : S^1 \to S^1$ by
+  $f(x) = \measuredangle(x, h(x))$, which is
+  continuous. We claim that $f$ must change
+  signs. To see this, suppose otherwise that
+  $f$ is always positive or always negative. In
+  this case, $h(x)$ is always on the same side
+  of $x$ and thus completes a full loop around
+  $S^1$ as $x$ travels around $S^1$. This
+  implies that $h$ is not nullhomotopic, a
+  contradiction. Thus $f$ must change signs.
+
+  So there exists a point $x$ such that
+  $\measuredangle(x, h(x)) = 0$. Argue now via dot
+  products.
+\end{proof}
+
+\begin{exercise}
+  Let $f : \R^2 \to \R^2$ be continuous and
+  $\|f(p) - p\| < 1 / 2$. Show that $f$ is surjective.
+\end{exercise}
+
+\begin{proof}
+  Assume not, so there exists $p_0$ such that
+  $f(x) \ne p_0$ for any $x \in \R^2$. Then define
+  $r : \R^2 \to S^1$ by
+  \[
+    r(x) = \frac{f(x) - p_0}{\|f(x) - p_0\|},
+  \]
+  which is continuous. In particular,
+  consider $r|_{S^1 + p_0} : S^1 \to S^1$ and notice
+  that the image of the points
+  \[p_0 + (\pm 1 / \sqrt{2}, \pm 1 / \sqrt{2})\]
+  under $f$ lie within a ball of radius
+  $1 / 2$ centered at $p_0$. In particular, the
+  image of these points under $r$ cannot leave
+  their respective quadrants, so $r|_{S^1 + p_0}$
+  is not nullhomotopic on $S^1$. Viewing this
+  $S^1$ as lying in $\R^2$ and looking at
+  the disk it encloses, we get a contradiction
+  to the no-retract theorem.
+\end{proof}
+
+\begin{exercise}
+  Consider $S^1 = \{z \in \C : |z| = 1\}$, and
+  define $z_1 \sim z_2$ if
+  $z_1 / z_2 = e^{2\pi i x}$ for some
+  $x \in \Q$.
+  \begin{enumerate*}[(1)]
+    \item Is $S^1 / {\sim}$ Hausdorff?
+    \item Is $S^1 / {\sim}$ compact?
+  \end{enumerate*}
+\end{exercise}
+
+\begin{proof}
+  (1) No. Take $[x_0] \ne [y_0] \in S^1 / {\sim}$,
+  and consider open sets $U, V$ containing
+  $[x_0], [y_0]$ in the quotient.
+  Let $q$ be the
+  quotient map, and fix $x \in q^{-1}(U)$.
+  Note that this implies $x + \Q \in q^{-1}(U)$. Now
+  $q^{-1}(V)$ is open, so $(x + \Q) \cap q^{-1}(V) \ne \varnothing$.
+  This implies that $[x] \in q(q^{-1}(V)) = V$.
+  So $[x] \in U \cap V$.
+
+  (2) Yes, we see that $S^1 / {\sim}$ is a quotient of
+  a compact space, hence it must be compact.
+\end{proof}
+
+\begin{remark}
+  This equivalence relation is called the
+  \emph{Vitali equivalence relation}, and is
+  used in measure theory to construct a
+  non-Lebesgue measurable set.
+\end{remark}
+
+\begin{exercise}
+  Consider $\Q \subseteq \R$, and its
+  one-point compactification $\Q^+$. Is $\Q^+$ a
+  subspace of $\R$?
+\end{exercise}
+
+\begin{proof}
+  One way to proceed is to show that $\Q^+$ is not
+  Hausdorff and thus cannot be a subspace of $\R$.
+\end{proof}
+
+\begin{exercise}
+  Consider $\R^2$ and define
+  $(x_1, y_1) \sim (x_2, y_2)$ if
+  $y_1 - x_1 = y_2 - x_2$. What
+  is $\R^2 / {\sim}$?
+\end{exercise}
+
+\begin{proof}
+  The quotient is homeomorphic $\R$ with the metric
+  topology. Take the
+  map $f : \R^2 / {\sim} \to \R$ given by
+  \[
+    [(x, y)] \mapsto y - x.
+  \]
+  Note that $(x, y) \mapsto y - x$ is continuous
+  on $\R^2$ and respects $\sim$, so it descends
+  to the map $f$ on the quotient. For surjectivity,
+  simply not that for any $y \in \R$, we
+  have $f([(0, y)]) = y$. For injectivity, suppose
+  \[
+    f([(x, y)]) = f([(z, w)]).
+  \]
+  Then $y - x = w - z$, so $[(x, y)] = [(z, w)]$
+  as required. To see that the inverse is
+  continuous, let $U$ be open in $\R^2 / {\sim}$.
+  If $[(x_1, y_1)] \in U$, then the whole equivalence
+  class of $(x_1, y_1)$ in $\R^2$ is contained
+  in the open set $q^{-1}(U)$, where $q$ is
+  the quotient map. So $q^{-1}(U)$ contains
+  the entire line $y = x + (y_1 - x_1)$, and
+  in particular a strip around it. Finish and show
+  that $f^{-1}$ is continuous as an exercise.
+
+  Then $f$ is a homeomorphism, so
+  $\R^2 / {\sim}$ and $\R$ are homeomorphic.
+\end{proof}
